@@ -1,7 +1,6 @@
 import SwiftUI
 
 extension View {
-  /// Simulate shining a light on the northwest edge of a view.
   /// Light shadow on the northwest edge, dark shadow on the southeast edge.
   ///   - parameters:
   ///     - radius: The size of the shadow
