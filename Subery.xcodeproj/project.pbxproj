@@ -14,15 +14,17 @@
 		763B358A29FE4A6D005B3A56 /* SuberyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B358929FE4A6D005B3A56 /* SuberyTests.swift */; };
 		763B359429FE4A6D005B3A56 /* SuberyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B359329FE4A6D005B3A56 /* SuberyUITests.swift */; };
 		763B359629FE4A6D005B3A56 /* SuberyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B359529FE4A6D005B3A56 /* SuberyUITestsLaunchTests.swift */; };
-		763B35B829FE53F7005B3A56 /* NeuButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35B129FE53F7005B3A56 /* NeuButtonStyle.swift */; };
-		763B35B929FE53F7005B3A56 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35B229FE53F7005B3A56 /* Color.swift */; };
-		763B35BA29FE53F7005B3A56 /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35B329FE53F7005B3A56 /* RGB.swift */; };
-		763B35BB29FE53F7005B3A56 /* Neumorphism+ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35B429FE53F7005B3A56 /* Neumorphism+ViewExtension.swift */; };
-		763B35BC29FE53F7005B3A56 /* ColorCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35B529FE53F7005B3A56 /* ColorCircle.swift */; };
-		763B35BD29FE53F7005B3A56 /* BevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35B629FE53F7005B3A56 /* BevelView.swift */; };
 		763B35C129FF47F8005B3A56 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 763B35C029FF47F8005B3A56 /* ComposableArchitecture */; };
-		763B35C429FF4813005B3A56 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35C329FF4813005B3A56 /* Spacing.swift */; };
-		763B35C629FF4890005B3A56 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35C529FF4890005B3A56 /* Theme.swift */; };
+		763B35D729FF4B12005B3A56 /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35CE29FF4B12005B3A56 /* RGB.swift */; };
+		763B35D829FF4B12005B3A56 /* NeuButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D029FF4B12005B3A56 /* NeuButtonStyle.swift */; };
+		763B35D929FF4B12005B3A56 /* ColorCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D129FF4B12005B3A56 /* ColorCircle.swift */; };
+		763B35DA29FF4B12005B3A56 /* BevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D229FF4B12005B3A56 /* BevelView.swift */; };
+		763B35DB29FF4B12005B3A56 /* Neumorphism+ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D329FF4B12005B3A56 /* Neumorphism+ViewExtension.swift */; };
+		763B35DC29FF4B12005B3A56 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D429FF4B12005B3A56 /* Color.swift */; };
+		763B35DD29FF4B12005B3A56 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D529FF4B12005B3A56 /* Spacing.swift */; };
+		763B35DE29FF4B12005B3A56 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D629FF4B12005B3A56 /* Theme.swift */; };
+		763B35E029FF4B8B005B3A56 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35DF29FF4B8B005B3A56 /* AppState.swift */; };
+		763B35E429FF4ECC005B3A56 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35E329FF4ECC005B3A56 /* LandingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,14 +55,16 @@
 		763B358F29FE4A6D005B3A56 /* SuberyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuberyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		763B359329FE4A6D005B3A56 /* SuberyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuberyUITests.swift; sourceTree = "<group>"; };
 		763B359529FE4A6D005B3A56 /* SuberyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuberyUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		763B35B129FE53F7005B3A56 /* NeuButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeuButtonStyle.swift; sourceTree = "<group>"; };
-		763B35B229FE53F7005B3A56 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = Neumorphism/Color.swift; sourceTree = "<group>"; };
-		763B35B329FE53F7005B3A56 /* RGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGB.swift; sourceTree = "<group>"; };
-		763B35B429FE53F7005B3A56 /* Neumorphism+ViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Neumorphism+ViewExtension.swift"; sourceTree = "<group>"; };
-		763B35B529FE53F7005B3A56 /* ColorCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCircle.swift; sourceTree = "<group>"; };
-		763B35B629FE53F7005B3A56 /* BevelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BevelView.swift; sourceTree = "<group>"; };
-		763B35C329FF4813005B3A56 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
-		763B35C529FF4890005B3A56 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		763B35CE29FF4B12005B3A56 /* RGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGB.swift; sourceTree = "<group>"; };
+		763B35D029FF4B12005B3A56 /* NeuButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeuButtonStyle.swift; sourceTree = "<group>"; };
+		763B35D129FF4B12005B3A56 /* ColorCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCircle.swift; sourceTree = "<group>"; };
+		763B35D229FF4B12005B3A56 /* BevelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BevelView.swift; sourceTree = "<group>"; };
+		763B35D329FF4B12005B3A56 /* Neumorphism+ViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Neumorphism+ViewExtension.swift"; sourceTree = "<group>"; };
+		763B35D429FF4B12005B3A56 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		763B35D529FF4B12005B3A56 /* Spacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
+		763B35D629FF4B12005B3A56 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		763B35DF29FF4B8B005B3A56 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		763B35E329FF4ECC005B3A56 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,9 +116,10 @@
 		763B357729FE4A6C005B3A56 /* Subery */ = {
 			isa = PBXGroup;
 			children = (
-				763B35C229FF4803005B3A56 /* Design System */,
+				763B35CC29FF4B12005B3A56 /* Design */,
+				763B35E129FF4B90005B3A56 /* Domain */,
+				763B35E229FF4EBE005B3A56 /* Sections */,
 				763B357829FE4A6C005B3A56 /* SuberyApp.swift */,
-				763B357A29FE4A6C005B3A56 /* ContentView.swift */,
 				763B357C29FE4A6D005B3A56 /* Assets.xcassets */,
 				763B357E29FE4A6D005B3A56 /* Preview Content */,
 			);
@@ -146,35 +151,68 @@
 			path = SuberyUITests;
 			sourceTree = "<group>";
 		};
-		763B35BE29FF46DE005B3A56 /* Neumorphism */ = {
+		763B35CC29FF4B12005B3A56 /* Design */ = {
 			isa = PBXGroup;
 			children = (
-				763B35B329FE53F7005B3A56 /* RGB.swift */,
-				763B35B429FE53F7005B3A56 /* Neumorphism+ViewExtension.swift */,
-				763B35C929FF4AAA005B3A56 /* Components */,
+				763B35CD29FF4B12005B3A56 /* Neumorphism */,
+				763B35D529FF4B12005B3A56 /* Spacing.swift */,
+				763B35D629FF4B12005B3A56 /* Theme.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		763B35CD29FF4B12005B3A56 /* Neumorphism */ = {
+			isa = PBXGroup;
+			children = (
+				763B35CE29FF4B12005B3A56 /* RGB.swift */,
+				763B35CF29FF4B12005B3A56 /* Components */,
+				763B35D329FF4B12005B3A56 /* Neumorphism+ViewExtension.swift */,
+				763B35D429FF4B12005B3A56 /* Color.swift */,
 			);
 			path = Neumorphism;
 			sourceTree = "<group>";
 		};
-		763B35C229FF4803005B3A56 /* Design System */ = {
+		763B35CF29FF4B12005B3A56 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				763B35BE29FF46DE005B3A56 /* Neumorphism */,
-				763B35C529FF4890005B3A56 /* Theme.swift */,
-				763B35C329FF4813005B3A56 /* Spacing.swift */,
-				763B35B229FE53F7005B3A56 /* Color.swift */,
-			);
-			path = "Design System";
-			sourceTree = "<group>";
-		};
-		763B35C929FF4AAA005B3A56 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				763B35B629FE53F7005B3A56 /* BevelView.swift */,
-				763B35B129FE53F7005B3A56 /* NeuButtonStyle.swift */,
-				763B35B529FE53F7005B3A56 /* ColorCircle.swift */,
+				763B35D029FF4B12005B3A56 /* NeuButtonStyle.swift */,
+				763B35D129FF4B12005B3A56 /* ColorCircle.swift */,
+				763B35D229FF4B12005B3A56 /* BevelView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		763B35E129FF4B90005B3A56 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				763B35DF29FF4B8B005B3A56 /* AppState.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		763B35E229FF4EBE005B3A56 /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				763B357A29FE4A6C005B3A56 /* ContentView.swift */,
+				763B35E529FF5930005B3A56 /* Landing */,
+				763B35E72A00F390005B3A56 /* TrackView */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
+		763B35E529FF5930005B3A56 /* Landing */ = {
+			isa = PBXGroup;
+			children = (
+				763B35E329FF4ECC005B3A56 /* LandingView.swift */,
+			);
+			path = Landing;
+			sourceTree = "<group>";
+		};
+		763B35E72A00F390005B3A56 /* TrackView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TrackView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,16 +351,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				763B35B829FE53F7005B3A56 /* NeuButtonStyle.swift in Sources */,
-				763B35BD29FE53F7005B3A56 /* BevelView.swift in Sources */,
-				763B35C429FF4813005B3A56 /* Spacing.swift in Sources */,
+				763B35E429FF4ECC005B3A56 /* LandingView.swift in Sources */,
+				763B35D829FF4B12005B3A56 /* NeuButtonStyle.swift in Sources */,
+				763B35DB29FF4B12005B3A56 /* Neumorphism+ViewExtension.swift in Sources */,
+				763B35DD29FF4B12005B3A56 /* Spacing.swift in Sources */,
+				763B35D729FF4B12005B3A56 /* RGB.swift in Sources */,
+				763B35D929FF4B12005B3A56 /* ColorCircle.swift in Sources */,
+				763B35E029FF4B8B005B3A56 /* AppState.swift in Sources */,
+				763B35DA29FF4B12005B3A56 /* BevelView.swift in Sources */,
+				763B35DC29FF4B12005B3A56 /* Color.swift in Sources */,
+				763B35DE29FF4B12005B3A56 /* Theme.swift in Sources */,
 				763B357B29FE4A6C005B3A56 /* ContentView.swift in Sources */,
-				763B35BB29FE53F7005B3A56 /* Neumorphism+ViewExtension.swift in Sources */,
-				763B35BA29FE53F7005B3A56 /* RGB.swift in Sources */,
-				763B35BC29FE53F7005B3A56 /* ColorCircle.swift in Sources */,
-				763B35C629FF4890005B3A56 /* Theme.swift in Sources */,
 				763B357929FE4A6C005B3A56 /* SuberyApp.swift in Sources */,
-				763B35B929FE53F7005B3A56 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,7 +449,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -463,7 +503,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -488,6 +528,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -516,6 +557,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

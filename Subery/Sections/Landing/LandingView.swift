@@ -1,18 +1,19 @@
 //
-//  ContentView.swift
+//  LandingView.swift
 //  Subery
 //
-//  Created by yu wang on 2023/4/30.
+//  Created by yu wang on 2023/5/1.
 //
 
 import SwiftUI
+import ComposableArchitecture
 
-struct ContentView: View {
+struct LandingView: View {
+  let store: StoreOf<AppState>
+
   var body: some View {
-    ZStack {
-      LinearBackgroundView()
-
-      HStack {
+    HStack {
+      WithViewStore(self.store, observe: { $0 }) { viewStore in
         VStack(alignment: .leading, spacing: 12) {
           Text("All Your Subscriptions, Simplified.")
             .font(.title)
@@ -26,8 +27,9 @@ struct ContentView: View {
 
           Button(
             action: {
-
-            }, label: {
+              viewStore.send(.landingControlButtonTapped)
+            },
+            label: {
               Text("Take Control Now")
                 .font(.headline)
             }
@@ -41,22 +43,13 @@ struct ContentView: View {
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct LandingView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
-  }
-}
-
-
-struct LinearBackgroundView: View {
-  var body: some View {
-    ZStack {
-      LinearGradient(
-        gradient: Gradient(colors: [Color.black, Color.accentColor]),
-        startPoint: .bottomLeading,
-        endPoint: .topTrailing
+    LandingView(
+      store: Store(
+        initialState: AppState.State(),
+        reducer: AppState()
       )
-      .edgesIgnoringSafeArea(.all)
-    }
+    )
   }
 }
