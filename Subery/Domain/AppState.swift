@@ -11,18 +11,33 @@ import ComposableArchitecture
 struct AppState: ReducerProtocol {
 
   struct State: Equatable {
+    // Landing
     var isLandingActive: Bool = true
+    // TrackView
+    @BindingState var serviceName: String = ""
+    var isTrackSheetPresented: Bool = false
   }
 
-  enum Action: Equatable {
+  enum Action: BindableAction, Equatable {
     case landingControlButtonTapped
+    case binding(BindingAction<State>)
+    case setTrackSheetPresented(isPresented: Bool)
   }
 
-  func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
-    switch action {
-    case .landingControlButtonTapped:
-      state.isLandingActive = false
-      return .none
+  var body: some ReducerProtocol<State, Action> {
+    BindingReducer()
+    Reduce { state, action in
+      switch action {
+      case .binding:
+        return .none
+      case .landingControlButtonTapped:
+        state.isLandingActive = false
+        state.isTrackSheetPresented = true
+        return .none
+      case .setTrackSheetPresented(let isPresented):
+        state.isTrackSheetPresented = isPresented
+        return .none
+      }
     }
   }
 }

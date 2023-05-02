@@ -25,6 +25,9 @@
 		763B35DE29FF4B12005B3A56 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D629FF4B12005B3A56 /* Theme.swift */; };
 		763B35E029FF4B8B005B3A56 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35DF29FF4B8B005B3A56 /* AppState.swift */; };
 		763B35E429FF4ECC005B3A56 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35E329FF4ECC005B3A56 /* LandingView.swift */; };
+		763B35EB2A00FA57005B3A56 /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35EA2A00FA57005B3A56 /* TrackView.swift */; };
+		76A75F832A0113A50076DB70 /* GradientNoiseBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */; };
+		76A75F852A01146A0076DB70 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,9 @@
 		763B35D629FF4B12005B3A56 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		763B35DF29FF4B8B005B3A56 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		763B35E329FF4ECC005B3A56 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		763B35EA2A00FA57005B3A56 /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
+		76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientNoiseBackground.swift; sourceTree = "<group>"; };
+		76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,8 +161,11 @@
 			isa = PBXGroup;
 			children = (
 				763B35CD29FF4B12005B3A56 /* Neumorphism */,
+				763B35D429FF4B12005B3A56 /* Color.swift */,
 				763B35D529FF4B12005B3A56 /* Spacing.swift */,
 				763B35D629FF4B12005B3A56 /* Theme.swift */,
+				76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */,
+				76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */,
 			);
 			path = Design;
 			sourceTree = "<group>";
@@ -164,10 +173,9 @@
 		763B35CD29FF4B12005B3A56 /* Neumorphism */ = {
 			isa = PBXGroup;
 			children = (
-				763B35CE29FF4B12005B3A56 /* RGB.swift */,
 				763B35CF29FF4B12005B3A56 /* Components */,
+				763B35CE29FF4B12005B3A56 /* RGB.swift */,
 				763B35D329FF4B12005B3A56 /* Neumorphism+ViewExtension.swift */,
-				763B35D429FF4B12005B3A56 /* Color.swift */,
 			);
 			path = Neumorphism;
 			sourceTree = "<group>";
@@ -211,6 +219,7 @@
 		763B35E72A00F390005B3A56 /* TrackView */ = {
 			isa = PBXGroup;
 			children = (
+				763B35EA2A00FA57005B3A56 /* TrackView.swift */,
 			);
 			path = TrackView;
 			sourceTree = "<group>";
@@ -352,7 +361,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				763B35E429FF4ECC005B3A56 /* LandingView.swift in Sources */,
+				76A75F852A01146A0076DB70 /* GradientBackgroundView.swift in Sources */,
 				763B35D829FF4B12005B3A56 /* NeuButtonStyle.swift in Sources */,
+				763B35EB2A00FA57005B3A56 /* TrackView.swift in Sources */,
 				763B35DB29FF4B12005B3A56 /* Neumorphism+ViewExtension.swift in Sources */,
 				763B35DD29FF4B12005B3A56 /* Spacing.swift in Sources */,
 				763B35D729FF4B12005B3A56 /* RGB.swift in Sources */,
@@ -362,6 +373,7 @@
 				763B35DC29FF4B12005B3A56 /* Color.swift in Sources */,
 				763B35DE29FF4B12005B3A56 /* Theme.swift in Sources */,
 				763B357B29FE4A6C005B3A56 /* ContentView.swift in Sources */,
+				76A75F832A0113A50076DB70 /* GradientNoiseBackground.swift in Sources */,
 				763B357929FE4A6C005B3A56 /* SuberyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

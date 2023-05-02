@@ -12,34 +12,42 @@ struct LandingView: View {
   let store: StoreOf<AppState>
 
   var body: some View {
-    HStack {
-      WithViewStore(self.store, observe: { $0 }) { viewStore in
-        VStack(alignment: .leading, spacing: 12) {
-          Text("All Your Subscriptions, Simplified.")
-            .font(.title)
-            .bold()
-            .foregroundColor(.white)
+    WithViewStore(self.store, observe: { $0 }) { viewStore in
+      VStack(alignment: .leading, spacing: Theme.spacing.md) {
+        Spacer()
 
-          Text("Keep track of all your monthly and annual subscriptions in one place. Never miss another renewal date or get surprised by unexpected fees again.")
-            .font(.body)
-            .foregroundColor(.lightGray)
-            .padding(.bottom, 32)
+        Text("All Your Subscriptions, Simplified.")
+          .font(.title)
+          .bold()
+          .foregroundColor(.white)
 
-          Button(
-            action: {
-              viewStore.send(.landingControlButtonTapped)
-            },
-            label: {
-              Text("Take Control Now")
-                .font(.headline)
-            }
-          )
-          .buttonStyle(NeuButtonStyle())
+        Text("Keep track of all your monthly and annual subscriptions in one place. Never miss another renewal date or get surprised by unexpected fees again.")
+          .font(.body)
+          .foregroundColor(.lightGray)
+          .padding(.bottom, 32)
 
-        }
+        Button(
+          action: {
+            viewStore.send(.landingControlButtonTapped)
+          },
+          label: {
+            Text("Take Control Now")
+              .font(.headline)
+          }
+        )
+        .buttonStyle(NeuButtonStyle())
+        Spacer()
       }
-      .padding()
+      .fullScreenCover(
+        isPresented: viewStore.binding(
+          get: \.isTrackSheetPresented,
+          send: AppState.Action.setTrackSheetPresented(isPresented:)
+        )
+      ) {
+        TrackView(store: store)
+      }
     }
+    .padding(.horizontal, Theme.spacing.sm)
   }
 }
 
@@ -51,5 +59,6 @@ struct LandingView_Previews: PreviewProvider {
         reducer: AppState()
       )
     )
+    .background(GradientBackgroundView())
   }
 }

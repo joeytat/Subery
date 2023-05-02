@@ -12,28 +12,12 @@ struct ContentView: View {
   let store: StoreOf<AppState>
 
   var body: some View {
-    NavigationView {
-      ZStack {
-        LinearBackgroundView()
-        LandingView(store: store)
-      }
+    WithViewStore(store, observe: { $0 }) { viewStore in
+      LandingView(store: store)
     }
+    .background(GradientBackgroundView())
   }
 }
-
-struct LinearBackgroundView: View {
-  var body: some View {
-    ZStack {
-      LinearGradient(
-        gradient: Gradient(colors: [Color.black, Color.accentColor]),
-        startPoint: .bottomLeading,
-        endPoint: .topTrailing
-      )
-      .edgesIgnoringSafeArea(.all)
-    }
-  }
-}
-
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
@@ -45,4 +29,3 @@ struct ContentView_Previews: PreviewProvider {
     )
   }
 }
-

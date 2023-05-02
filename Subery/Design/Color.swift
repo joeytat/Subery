@@ -14,6 +14,7 @@ extension Color {
   static let highlight = Color("Highlight")
   static let shadow = Color("Shadow")
   static let lightGray = Color("LightGray")
+  static let dark = Color("Dark")
 }
 
 extension Color {

@@ -12,12 +12,15 @@ import ComposableArchitecture
 struct SuberyApp: App {
   var body: some Scene {
     WindowGroup {
-      ContentView(
-        store: Store(
-          initialState: AppState.State(),
-          reducer: AppState()
+      NavigationView {
+        ContentView(
+          store: Store(
+            initialState: AppState.State(),
+            reducer: AppState()
+          )
         )
-      )
+      }
+      .navigationViewStyle(.stack)
     }
   }
 }
