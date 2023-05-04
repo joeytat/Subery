@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		762203132A03B9C60078CAE3 /* StatusBarHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762203122A03B9C60078CAE3 /* StatusBarHostingController.swift */; };
 		763B357929FE4A6C005B3A56 /* SuberyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B357829FE4A6C005B3A56 /* SuberyApp.swift */; };
 		763B357B29FE4A6C005B3A56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B357A29FE4A6C005B3A56 /* ContentView.swift */; };
 		763B357D29FE4A6D005B3A56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 763B357C29FE4A6D005B3A56 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		762203122A03B9C60078CAE3 /* StatusBarHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarHostingController.swift; sourceTree = "<group>"; };
 		763B357529FE4A6C005B3A56 /* Subery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Subery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		763B357829FE4A6C005B3A56 /* SuberyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuberyApp.swift; sourceTree = "<group>"; };
 		763B357A29FE4A6C005B3A56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */,
 				76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */,
 				76A75F872A0360E40076DB70 /* CustomSheet.swift */,
+				762203122A03B9C60078CAE3 /* StatusBarHostingController.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				763B357B29FE4A6C005B3A56 /* ContentView.swift in Sources */,
 				76A75F832A0113A50076DB70 /* GradientNoiseBackground.swift in Sources */,
 				763B357929FE4A6C005B3A56 /* SuberyApp.swift in Sources */,
+				762203132A03B9C60078CAE3 /* StatusBarHostingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +554,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -579,6 +584,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
