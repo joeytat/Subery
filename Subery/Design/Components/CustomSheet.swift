@@ -12,8 +12,8 @@ struct CustomSheet<Content: View>: View {
   let content: () -> Content
 
   var body: some View {
-    if isPresented {
-      ZStack {
+    ZStack {
+      if isPresented {
         GradientNoiseBackground()
           .edgesIgnoringSafeArea(.all)
           .onTapGesture {
@@ -23,12 +23,10 @@ struct CustomSheet<Content: View>: View {
           }
 
         content()
-          .transition(.opacity.combined(with: .move(edge: .bottom)))
-          .animation(.easeInOut(duration: 0.3), value: isPresented)
       }
-    } else {
-      EmptyView()
     }
+    .opacity(isPresented ? 1 : 0)
+    .animation(.easeInOut(duration: 0.3), value: isPresented)
   }
 }
 
