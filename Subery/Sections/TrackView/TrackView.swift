@@ -22,13 +22,10 @@ struct TrackView: View {
           .padding()
           .background(Color.white)
           .cornerRadius(10)
-
-        Spacer()
       }
       .padding(.horizontal, Theme.spacing.sm)
       .padding(.vertical, Theme.spacing.lg)
     }
-    .background(GradientNoiseBackground())
   }
 }
 

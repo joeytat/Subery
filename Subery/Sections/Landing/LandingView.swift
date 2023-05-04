@@ -38,16 +38,17 @@ struct LandingView: View {
         .buttonStyle(NeuButtonStyle())
         Spacer()
       }
-      .fullScreenCover(
+      .padding(.horizontal, Theme.spacing.sm)
+      .customSheet(
         isPresented: viewStore.binding(
           get: \.isTrackSheetPresented,
           send: AppState.Action.setTrackSheetPresented(isPresented:)
-        )
-      ) {
-        TrackView(store: store)
-      }
+        ),
+        content: {
+          TrackView(store: store)
+        }
+      )
     }
-    .padding(.horizontal, Theme.spacing.sm)
   }
 }
 

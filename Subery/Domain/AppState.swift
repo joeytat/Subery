@@ -38,6 +38,6 @@ struct AppState: ReducerProtocol {
         state.isTrackSheetPresented = isPresented
         return .none
       }
-    }
+    }._printChanges()
   }
 }

@@ -28,6 +28,7 @@
 		763B35EB2A00FA57005B3A56 /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35EA2A00FA57005B3A56 /* TrackView.swift */; };
 		76A75F832A0113A50076DB70 /* GradientNoiseBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */; };
 		76A75F852A01146A0076DB70 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */; };
+		76A75F882A0360E40076DB70 /* CustomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F872A0360E40076DB70 /* CustomSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		763B35EA2A00FA57005B3A56 /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
 		76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientNoiseBackground.swift; sourceTree = "<group>"; };
 		76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
+		76A75F872A0360E40076DB70 /* CustomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,12 +162,11 @@
 		763B35CC29FF4B12005B3A56 /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				76A75F862A0360D60076DB70 /* Components */,
 				763B35CD29FF4B12005B3A56 /* Neumorphism */,
 				763B35D429FF4B12005B3A56 /* Color.swift */,
 				763B35D529FF4B12005B3A56 /* Spacing.swift */,
 				763B35D629FF4B12005B3A56 /* Theme.swift */,
-				76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */,
-				76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */,
 			);
 			path = Design;
 			sourceTree = "<group>";
@@ -222,6 +223,16 @@
 				763B35EA2A00FA57005B3A56 /* TrackView.swift */,
 			);
 			path = TrackView;
+			sourceTree = "<group>";
+		};
+		76A75F862A0360D60076DB70 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */,
+				76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */,
+				76A75F872A0360E40076DB70 /* CustomSheet.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,6 +371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76A75F882A0360E40076DB70 /* CustomSheet.swift in Sources */,
 				763B35E429FF4ECC005B3A56 /* LandingView.swift in Sources */,
 				76A75F852A01146A0076DB70 /* GradientBackgroundView.swift in Sources */,
 				763B35D829FF4B12005B3A56 /* NeuButtonStyle.swift in Sources */,
