@@ -23,6 +23,7 @@ struct TrackView: View {
                 .foregroundColor(.white)
 
               TextField("Apple Music", text: viewStore.binding(\.$serviceName))
+                .font(.body)
                 .padding()
                 .background(Color.white)
                 .cornerRadius(10)
@@ -42,6 +43,46 @@ struct TrackView: View {
               .padding()
               .background(Color.white)
               .cornerRadius(10)
+            }
+
+            HStack(spacing: Theme.spacing.lg) {
+              VStack(alignment: .leading) {
+                Text("Start at")
+                  .font(.headline)
+                  .foregroundColor(.white)
+
+                TextField(Date().format(), text: viewStore.binding(\.$serviceStartAt))
+                  .font(.body)
+                  .padding()
+                  .background(Color.white)
+                  .cornerRadius(10)
+                  .onTapGesture { viewStore.send(.binding(.set(\.$isServiceDateStartPickerPresented, true))) }
+                  .sheet(isPresented: viewStore.binding(\.$isServiceDateStartPickerPresented)) {
+                    DatePickerView(
+                      date: viewStore.binding(\.$serviceStartAtDate),
+                      showingDatePicker: viewStore.binding(\.$isServiceDateStartPickerPresented)
+                    )
+                  }
+              }
+
+              VStack(alignment: .leading) {
+                Text("End at")
+                  .font(.headline)
+                  .foregroundColor(.white)
+
+                TextField(Date().format(), text: viewStore.binding(\.$serviceEndAt))
+                  .font(.body)
+                  .padding()
+                  .background(Color.white)
+                  .cornerRadius(10)
+                  .onTapGesture { viewStore.send(.binding(.set(\.$isServiceDateEndPickerPresented, true))) }
+                  .sheet(isPresented: viewStore.binding(\.$isServiceDateEndPickerPresented)) {
+                    DatePickerView(
+                      date: viewStore.binding(\.$serviceEndAtDate),
+                      showingDatePicker: viewStore.binding(\.$isServiceDateEndPickerPresented)
+                    )
+                  }
+              }
             }
           }
           .padding(.horizontal, Theme.spacing.sm)
