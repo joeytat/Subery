@@ -13,10 +13,10 @@ struct TrackView: View {
   let store: StoreOf<AppState>
 
   var body: some View {
-    WithViewStore(store, observe: { $0 }) { viewStore in
-      GeometryReader { geometry in
-        ScrollView {
-          VStack(alignment: .leading, spacing: Theme.spacing.lg) {
+    GradientNoiseBackground().overlay {
+      WithViewStore(store, observe: { $0 }) { viewStore in
+        VStack(alignment: .leading, spacing: Theme.spacing.lg) {
+          Form {
             VStack(alignment: .leading) {
               Text("Service Name")
                 .font(.headline)
@@ -85,17 +85,15 @@ struct TrackView: View {
               }
             }
           }
+          .monospacedDigit()
+          .formStyle(.columns)
           .padding(.horizontal, Theme.spacing.sm)
           .padding(.vertical, Theme.spacing.lg)
-          .offset(y: geometry.size.height / 4)
         }
       }
     }
-    .modifier(AdaptiveKeyboardPadding())
   }
 }
-
-
 
 struct TrackView_Previews: PreviewProvider {
   static var previews: some View {
@@ -128,45 +126,5 @@ struct TextFieldWithPrefix: View {
         .keyboardType(keyboardType)
         .font(.body)
     }
-  }
-}
-
-struct AdaptiveKeyboardPadding: ViewModifier {
-  @State private var keyboardPadding: CGFloat = 0
-
-  func body(content: Content) -> some View {
-    content
-      .padding(.bottom, keyboardPadding)
-      .onAppear(perform: addKeyboardObservers)
-      .onDisappear(perform: removeKeyboardObservers)
-  }
-
-  private func addKeyboardObservers() {
-    NotificationCenter.default.addObserver(
-      forName: UIResponder.keyboardWillShowNotification,
-      object: nil,
-      queue: .main
-    ) { notification in
-      let keyWindow = UIApplication.shared.connectedScenes
-        .filter { $0.activationState == .foregroundActive }
-        .compactMap { $0 as? UIWindowScene }
-        .flatMap { $0.windows }
-        .first { $0.isKeyWindow }
-      let bottomInset = keyWindow?.safeAreaInsets.bottom ?? 0
-      keyboardPadding = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? 0 - bottomInset
-    }
-
-    NotificationCenter.default.addObserver(
-      forName: UIResponder.keyboardWillHideNotification,
-      object: nil,
-      queue: .main
-    ) { _ in
-      keyboardPadding = 0
-    }
-  }
-
-  private func removeKeyboardObservers() {
-    NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-    NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
   }
 }
