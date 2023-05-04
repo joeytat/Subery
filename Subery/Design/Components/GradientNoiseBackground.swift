@@ -14,30 +14,35 @@ struct GradientNoiseBackground: View {
 
   var body: some View {
     ZStack {
-      Color.dark
+      LinearGradient(
+        gradient: Gradient(colors: [Color.black, Color.accentColor]),
+        startPoint: .bottomLeading,
+        endPoint: .topTrailing
+      )
       .ignoresSafeArea()
-//
-//      ForEach(0..<Int(UIScreen.main.bounds.width / noiseSpacing), id: \.self) { x in
-//        ForEach(0..<Int(UIScreen.main.bounds.height / noiseSpacing), id: \.self) { y in
-//          NoiseRectangle(delay: Double(y) * 0.05)
-//            .frame(width: noiseSize, height: noiseSize)
-//            .position(x: CGFloat(x) * noiseSpacing, y: CGFloat(y) * noiseSpacing)
-//        }
-//        .ignoresSafeArea()
-//      }
-//      .ignoresSafeArea()
+
+      GeometryReader { geometry in
+        ForEach(0..<Int(geometry.size.width / noiseSpacing), id: \.self) { x in
+          ForEach(0..<Int(geometry.size.height / noiseSpacing), id: \.self) { y in
+            NoiseRectangle(delay: Double(y) * 0.05)
+              .frame(width: noiseSize, height: noiseSize)
+              .position(x: CGFloat(x) * noiseSpacing, y: CGFloat(y) * noiseSpacing)
+          }
+          .ignoresSafeArea()
+        }
+        .ignoresSafeArea()
+      }
     }
   }
 }
 
 struct NoiseRectangle: View {
   let delay: Double
-  @State private var opacity: Double = 0.1
+  @State private var opacity: Double = 0
 
   var body: some View {
     Rectangle()
       .fill(Color.gray.opacity(opacity))
-      .southEastShadow()
       .onAppear {
         withAnimation(Animation.linear(duration: 2)
           .repeatForever(autoreverses: true)
