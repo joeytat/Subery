@@ -13,9 +13,10 @@ struct ContentView: View {
 
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
-      LandingView(store: store)
+      GradientBackgroundView().overlay {
+        LandingView(store: store)
+      }
     }
-    .background(GradientBackgroundView())
   }
 }
 

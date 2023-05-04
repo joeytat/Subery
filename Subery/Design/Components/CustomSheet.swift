@@ -16,11 +16,6 @@ struct CustomSheet<Content: View>: View {
       if isPresented {
         GradientNoiseBackground()
           .edgesIgnoringSafeArea(.all)
-          .onTapGesture {
-            withAnimation {
-              isPresented = false
-            }
-          }
 
         content()
       }
