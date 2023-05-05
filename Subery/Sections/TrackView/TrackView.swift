@@ -11,7 +11,6 @@ import Combine
 
 struct TrackView: View {
   let store: StoreOf<AppState>
-
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
       GradientNoiseBackground().overlay {
@@ -54,12 +53,32 @@ struct TrackView: View {
         .font(.headline)
         .foregroundColor(.white)
 
-      TextFieldWithPrefix(
-        prefix: "$",
-        placeholder: "6.00",
-        keyboardType: .numberPad,
-        text: viewStore.binding(\.$servicePrice)
-      )
+      HStack {
+        TextFieldWithPrefix(
+          prefix: "$",
+          placeholder: "6.00",
+          keyboardType: .numberPad,
+          text: viewStore.binding(\.$servicePrice)
+        )
+        Dropdown(label: {
+          HStack {
+            Text(viewStore.serviceRenewalFrequency.rawValue)
+              .foregroundColor(.primary)
+            Image(systemName: "chevron.down")
+              .foregroundColor(Color.lightGray)
+          }
+        }) {
+          ForEach(AppState.State.RenewalFrequency.allCases, id: \.self) { option in
+            Button(action: {
+              viewStore.send(.setRenewalFrequency(option))
+            }) {
+              Text(option.rawValue)
+                .background(Color.white)
+                .foregroundColor(.primary)
+            }
+          }
+        }
+      }
       .padding()
       .background(Color.white)
       .cornerRadius(10)

@@ -10,6 +10,7 @@
 		762203132A03B9C60078CAE3 /* StatusBarHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762203122A03B9C60078CAE3 /* StatusBarHostingController.swift */; };
 		762203152A03CEAA0078CAE3 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762203142A03CEAA0078CAE3 /* DatePickerView.swift */; };
 		762203182A03D3B10078CAE3 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762203172A03D3B10078CAE3 /* Date+.swift */; };
+		7622031C2A04B7D20078CAE3 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622031B2A04B7D20078CAE3 /* Dropdown.swift */; };
 		763B357929FE4A6C005B3A56 /* SuberyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B357829FE4A6C005B3A56 /* SuberyApp.swift */; };
 		763B357B29FE4A6C005B3A56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B357A29FE4A6C005B3A56 /* ContentView.swift */; };
 		763B357D29FE4A6D005B3A56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 763B357C29FE4A6D005B3A56 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 		762203122A03B9C60078CAE3 /* StatusBarHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarHostingController.swift; sourceTree = "<group>"; };
 		762203142A03CEAA0078CAE3 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		762203172A03D3B10078CAE3 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		7622031B2A04B7D20078CAE3 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		763B357529FE4A6C005B3A56 /* Subery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Subery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		763B357829FE4A6C005B3A56 /* SuberyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuberyApp.swift; sourceTree = "<group>"; };
 		763B357A29FE4A6C005B3A56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				76A75F872A0360E40076DB70 /* CustomSheet.swift */,
 				762203122A03B9C60078CAE3 /* StatusBarHostingController.swift */,
 				762203142A03CEAA0078CAE3 /* DatePickerView.swift */,
+				7622031B2A04B7D20078CAE3 /* Dropdown.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				763B357B29FE4A6C005B3A56 /* ContentView.swift in Sources */,
 				76A75F832A0113A50076DB70 /* GradientNoiseBackground.swift in Sources */,
 				763B357929FE4A6C005B3A56 /* SuberyApp.swift in Sources */,
+				7622031C2A04B7D20078CAE3 /* Dropdown.swift in Sources */,
 				762203132A03B9C60078CAE3 /* StatusBarHostingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,12 +12,12 @@ struct AppState: ReducerProtocol {
     // Track
     @BindingState var serviceName: String = ""
     @BindingState var servicePrice: String = ""
-    enum RenewalFrequency {
-      case yearly
-      case quartly
-      case monthly
+    enum RenewalFrequency: String, CaseIterable {
+      case yearly = "Yearly"
+      case quarterly = "Quarterly"
+      case monthly = "Monthly"
     }
-    var serviceRenewalFrequency: RenewalFrequency?
+    var serviceRenewalFrequency: RenewalFrequency = .monthly
     @BindingState var serviceStartAt: String = ""
     @BindingState var serviceStartAtDate: Date = Date()
     @BindingState var isServiceDateStartPickerPresented: Bool = false
@@ -29,12 +29,16 @@ struct AppState: ReducerProtocol {
 
   enum Action: BindableAction, Equatable {
     case binding(BindingAction<State>)
+    case setRenewalFrequency(State.RenewalFrequency)
   }
 
   var body: some ReducerProtocol<State, Action> {
     BindingReducer()
     Reduce { state, action in
       switch action {
+      case .setRenewalFrequency(let renewalFrequency):
+        state.serviceRenewalFrequency = renewalFrequency
+        return .none
       case .binding(\.$isServiceDateStartPickerPresented):
         if !state.isServiceDateStartPickerPresented {
           state.serviceStartAt = state.serviceStartAtDate.startOfDay().format()
