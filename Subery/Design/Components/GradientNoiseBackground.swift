@@ -10,12 +10,12 @@ import SwiftUI
 
 struct GradientNoiseBackground: View {
   let noiseSize: CGFloat = 4
-  let noiseSpacing: CGFloat = 35
+  let noiseSpacing: CGFloat = 30
 
   var body: some View {
     ZStack {
       LinearGradient(
-        gradient: Gradient(colors: [Color.black, Color.theme]),
+        gradient: Gradient(colors: [Color.dark, Color.theme]),
         startPoint: .bottomLeading,
         endPoint: .topTrailing
       )
@@ -28,10 +28,10 @@ struct GradientNoiseBackground: View {
               .frame(width: noiseSize, height: noiseSize)
               .position(x: CGFloat(x) * noiseSpacing, y: CGFloat(y) * noiseSpacing)
           }
-          .ignoresSafeArea()
         }
-        .ignoresSafeArea()
+        .padding(.horizontal)
       }
+      .edgesIgnoringSafeArea([.horizontal, .bottom])
     }
   }
 }
@@ -47,7 +47,7 @@ struct NoiseRectangle: View {
         withAnimation(Animation.linear(duration: 2)
           .repeatForever(autoreverses: true)
           .delay(delay)) {
-            opacity = 0.15
+            opacity = 0.2
           }
       }
   }
