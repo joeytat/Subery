@@ -26,29 +26,18 @@ struct LandingView: View {
           .foregroundColor(.lightGray)
           .padding(.bottom, 32)
 
-        Button(
-          action: {
-            viewStore.send(.landingControlButtonTapped)
-          },
-          label: {
-            Text("Take Control Now")
-              .font(.headline)
-          }
-        )
-        .buttonStyle(NeuButtonStyle())
+        NavigationLink(destination: TrackView(store: store)) {
+          Text("Take Control Now")
+            .font(.headline)
+            .foregroundColor(Color.dark)
+            .bevelStyle()
+        }
+
         Spacer()
       }
       .padding(.horizontal, Theme.spacing.sm)
-      .customSheet(
-        isPresented: viewStore.binding(
-          get: \.isTrackSheetPresented,
-          send: AppState.Action.setTrackSheetPresented(isPresented:)
-        ),
-        content: {
-          TrackView(store: store)
-        }
-      )
     }
+    .toolbarColorScheme(.light, for: .navigationBar)
   }
 }
 

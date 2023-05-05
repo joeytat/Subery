@@ -13,77 +13,17 @@ struct TrackView: View {
   let store: StoreOf<AppState>
 
   var body: some View {
-    GradientNoiseBackground().overlay {
-      WithViewStore(store, observe: { $0 }) { viewStore in
+    WithViewStore(store, observe: { $0 }) { viewStore in
+      GradientNoiseBackground().overlay {
         VStack(alignment: .leading, spacing: Theme.spacing.lg) {
           Form {
-            VStack(alignment: .leading) {
-              Text("Service Name")
-                .font(.headline)
-                .foregroundColor(.white)
-
-              TextField("Apple Music", text: viewStore.binding(\.$serviceName))
-                .font(.body)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(10)
-            }
-
-            VStack(alignment: .leading) {
-              Text("Price")
-                .font(.headline)
-                .foregroundColor(.white)
-
-              TextFieldWithPrefix(
-                prefix: "$",
-                placeholder: "6.00",
-                keyboardType: .numberPad,
-                text: viewStore.binding(\.$servicePrice)
-              )
-              .padding()
-              .background(Color.white)
-              .cornerRadius(10)
-            }
-
+            serviceName(viewStore)
+            servicePrice(viewStore)
             HStack(spacing: Theme.spacing.lg) {
-              VStack(alignment: .leading) {
-                Text("Start at")
-                  .font(.headline)
-                  .foregroundColor(.white)
-
-                TextField(Date().format(), text: viewStore.binding(\.$serviceStartAt))
-                  .font(.body)
-                  .padding()
-                  .background(Color.white)
-                  .cornerRadius(10)
-                  .onTapGesture { viewStore.send(.binding(.set(\.$isServiceDateStartPickerPresented, true))) }
-                  .sheet(isPresented: viewStore.binding(\.$isServiceDateStartPickerPresented)) {
-                    DatePickerView(
-                      date: viewStore.binding(\.$serviceStartAtDate),
-                      showingDatePicker: viewStore.binding(\.$isServiceDateStartPickerPresented)
-                    )
-                  }
-              }
-
-              VStack(alignment: .leading) {
-                Text("End at")
-                  .font(.headline)
-                  .foregroundColor(.white)
-
-                TextField(Date().format(), text: viewStore.binding(\.$serviceEndAt))
-                  .font(.body)
-                  .padding()
-                  .background(Color.white)
-                  .cornerRadius(10)
-                  .onTapGesture { viewStore.send(.binding(.set(\.$isServiceDateEndPickerPresented, true))) }
-                  .sheet(isPresented: viewStore.binding(\.$isServiceDateEndPickerPresented)) {
-                    DatePickerView(
-                      date: viewStore.binding(\.$serviceEndAtDate),
-                      showingDatePicker: viewStore.binding(\.$isServiceDateEndPickerPresented)
-                    )
-                  }
-              }
+              serviceStartAt(viewStore)
+              serviceEndAt(viewStore)
             }
+            Spacer()
           }
           .monospacedDigit()
           .formStyle(.columns)
@@ -91,6 +31,80 @@ struct TrackView: View {
           .padding(.vertical, Theme.spacing.lg)
         }
       }
+    }
+  }
+
+  private func serviceName(_ viewStore: ViewStoreOf<AppState>) -> some View {
+    VStack(alignment: .leading) {
+      Text("Service Name")
+        .font(.headline)
+        .foregroundColor(.white)
+
+      TextField("Apple Music", text: viewStore.binding(\.$serviceName))
+        .font(.body)
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+    }
+  }
+
+  private func servicePrice(_ viewStore: ViewStoreOf<AppState>) -> some View {
+    VStack(alignment: .leading) {
+      Text("Price")
+        .font(.headline)
+        .foregroundColor(.white)
+
+      TextFieldWithPrefix(
+        prefix: "$",
+        placeholder: "6.00",
+        keyboardType: .numberPad,
+        text: viewStore.binding(\.$servicePrice)
+      )
+      .padding()
+      .background(Color.white)
+      .cornerRadius(10)
+    }
+  }
+
+  private func serviceStartAt(_ viewStore: ViewStoreOf<AppState>) -> some View {
+    VStack(alignment: .leading) {
+      Text("Start at")
+        .font(.headline)
+        .foregroundColor(.white)
+
+      TextField(Date().format(), text: viewStore.binding(\.$serviceStartAt))
+        .font(.body)
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .onTapGesture { viewStore.send(.binding(.set(\.$isServiceDateStartPickerPresented, true))) }
+        .sheet(isPresented: viewStore.binding(\.$isServiceDateStartPickerPresented)) {
+          DatePickerView(
+            date: viewStore.binding(\.$serviceStartAtDate),
+            showingDatePicker: viewStore.binding(\.$isServiceDateStartPickerPresented)
+          )
+        }
+    }
+  }
+
+  private func serviceEndAt(_ viewStore: ViewStoreOf<AppState>) -> some View {
+    VStack(alignment: .leading) {
+      Text("End at")
+        .font(.headline)
+        .foregroundColor(.white)
+
+      TextField(Date().format(), text: viewStore.binding(\.$serviceEndAt))
+        .font(.body)
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .onTapGesture { viewStore.send(.binding(.set(\.$isServiceDateEndPickerPresented, true))) }
+        .sheet(isPresented: viewStore.binding(\.$isServiceDateEndPickerPresented)) {
+          DatePickerView(
+            date: viewStore.binding(\.$serviceEndAtDate),
+            showingDatePicker: viewStore.binding(\.$isServiceDateEndPickerPresented)
+          )
+        }
     }
   }
 }

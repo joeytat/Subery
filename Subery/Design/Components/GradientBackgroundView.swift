@@ -10,7 +10,7 @@ import SwiftUI
 struct GradientBackgroundView: View {
   var body: some View {
     LinearGradient(
-      gradient: Gradient(colors: [Color.black, Color.accentColor]),
+      gradient: Gradient(colors: [Color.black, Color.theme]),
       startPoint: .bottomLeading,
       endPoint: .topTrailing
     )

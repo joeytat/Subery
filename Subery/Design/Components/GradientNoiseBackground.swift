@@ -15,7 +15,7 @@ struct GradientNoiseBackground: View {
   var body: some View {
     ZStack {
       LinearGradient(
-        gradient: Gradient(colors: [Color.black, Color.accentColor]),
+        gradient: Gradient(colors: [Color.black, Color.theme]),
         startPoint: .bottomLeading,
         endPoint: .topTrailing
       )

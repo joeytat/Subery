@@ -9,11 +9,7 @@ import Foundation
 import ComposableArchitecture
 struct AppState: ReducerProtocol {
   struct State: Equatable {
-    // Landing
-    var isLandingActive: Bool = true
-    // TrackView
-    var isTrackSheetPresented: Bool = false
-
+    // Track
     @BindingState var serviceName: String = ""
     @BindingState var servicePrice: String = ""
     enum RenewalFrequency {
@@ -32,22 +28,13 @@ struct AppState: ReducerProtocol {
   }
 
   enum Action: BindableAction, Equatable {
-    case landingControlButtonTapped
     case binding(BindingAction<State>)
-    case setTrackSheetPresented(isPresented: Bool)
   }
 
   var body: some ReducerProtocol<State, Action> {
     BindingReducer()
     Reduce { state, action in
       switch action {
-      case .landingControlButtonTapped:
-        state.isLandingActive = false
-        state.isTrackSheetPresented = true
-        return .none
-      case .setTrackSheetPresented(let isPresented):
-        state.isTrackSheetPresented = isPresented
-        return .none
       case .binding(\.$isServiceDateStartPickerPresented):
         if !state.isServiceDateStartPickerPresented {
           state.serviceStartAt = state.serviceStartAtDate.startOfDay().format()

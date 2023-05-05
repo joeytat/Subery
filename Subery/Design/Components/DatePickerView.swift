@@ -14,10 +14,15 @@ struct DatePickerView: View {
   var body: some View {
     NavigationView {
       VStack {
-        DatePicker("Select a date", selection: $date, displayedComponents: [.date])
-          .datePickerStyle(GraphicalDatePickerStyle())
-          .labelsHidden()
-          .padding()
+        DatePicker(
+          "Select a date",
+          selection: $date,
+          displayedComponents: [.date]
+        )
+        .datePickerStyle(GraphicalDatePickerStyle())
+        .labelsHidden()
+        .padding()
+        .tint(Color.theme)
         Spacer()
       }
       .navigationTitle("Date Picker")
@@ -26,11 +31,13 @@ struct DatePickerView: View {
           Button("Cancel") {
             showingDatePicker = false
           }
+          .foregroundColor(Color.theme)
         }
         ToolbarItem(placement: .confirmationAction) {
           Button("Done") {
             showingDatePicker = false
           }
+          .foregroundColor(Color.theme)
         }
       }
     }

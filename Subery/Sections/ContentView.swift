@@ -12,11 +12,14 @@ struct ContentView: View {
   let store: StoreOf<AppState>
 
   var body: some View {
-    WithViewStore(store, observe: { $0 }) { viewStore in
-      GradientBackgroundView().overlay {
-        LandingView(store: store)
+    NavigationStack {
+      WithViewStore(store, observe: { $0 }) { viewStore in
+        GradientBackgroundView().overlay {
+          LandingView(store: store)
+        }
       }
     }
+    .preferredColorScheme(.light)
   }
 }
 
@@ -24,7 +27,7 @@ struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView(
       store: Store(
-        initialState: AppState.State(isLandingActive: true),
+        initialState: AppState.State(),
         reducer: AppState()
       )
     )
