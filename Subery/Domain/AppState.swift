@@ -10,6 +10,9 @@ import ComposableArchitecture
 struct AppState: ReducerProtocol {
   struct State: Equatable {
     // Track
+    var placeholderService: SubscriptionServicePreset = State.popularSubscriptions.randomElement()!
+    var serviceSuggestions: IdentifiedArrayOf<SubscriptionServicePreset> = []
+
     @BindingState var serviceName: String = ""
     @BindingState var servicePrice: String = ""
     enum RenewalFrequency: String, CaseIterable {
@@ -18,6 +21,7 @@ struct AppState: ReducerProtocol {
       case monthly = "Monthly"
     }
     var serviceRenewalFrequency: RenewalFrequency = .monthly
+
     @BindingState var serviceStartAt: String = ""
     @BindingState var serviceStartAtDate: Date = Date()
     @BindingState var isServiceDateStartPickerPresented: Bool = false
@@ -25,6 +29,8 @@ struct AppState: ReducerProtocol {
     @BindingState var serviceEndAt: String = ""
     @BindingState var serviceEndAtDate: Date = Date()
     @BindingState var isServiceDateEndPickerPresented: Bool = false
+
+    @BindingState var serviceCategory: String = ""
   }
 
   enum Action: BindableAction, Equatable {
@@ -38,6 +44,16 @@ struct AppState: ReducerProtocol {
       switch action {
       case .setRenewalFrequency(let renewalFrequency):
         state.serviceRenewalFrequency = renewalFrequency
+        return .none
+      case .binding(\.$serviceName):
+        if !state.serviceName.isEmpty {
+          state.serviceSuggestions = IdentifiedArray(
+            uniqueElements: State.popularSubscriptions
+              .filter { $0.name.lowercased().starts(with: state.serviceName.lowercased()) }
+          )
+        } else {
+          state.serviceSuggestions = []
+        }
         return .none
       case .binding(\.$isServiceDateStartPickerPresented):
         if !state.isServiceDateStartPickerPresented {
@@ -67,5 +83,94 @@ struct AppState: ReducerProtocol {
         return .none
       }
     }._printChanges()
+  }
+}
+
+extension AppState.State {
+  struct SubscriptionServicePreset: Identifiable, Equatable  {
+    var id: String { name }
+    let name: String
+    let category: SubscriptionCategory
+  }
+
+  enum SubscriptionCategory: String, CaseIterable {
+    case videoStreaming = "Video Streaming"
+    case musicStreaming = "Music Streaming"
+    case news = "News"
+    case magazines = "Magazines"
+    case productivity = "Productivity"
+    case cloudStorage = "Cloud Storage"
+    case fitness = "Fitness"
+    case gaming = "Gaming"
+    case education = "Education"
+    case socialMedia = "Social Media"
+    case dating = "Dating"
+    case finance = "Finance"
+    case software = "Software"
+    case developerTools = "Developer Tools"
+    case security = "Security"
+    case vpn = "VPN"
+    case webHosting = "Web Hosting"
+    case ecommerce = "eCommerce"
+  }
+
+  static var popularSubscriptions: [SubscriptionServicePreset] {
+    let raw: [String: SubscriptionCategory] = [
+      "Netflix": .videoStreaming,
+      "Hulu": .videoStreaming,
+      "Disney+": .videoStreaming,
+      "Spotify": .musicStreaming,
+      "Apple Music": .musicStreaming,
+      "Tidal": .musicStreaming,
+      "New York Times": .news,
+      "The Wall Street Journal": .news,
+      "The Guardian": .news,
+      "National Geographic": .magazines,
+      "The Economist": .magazines,
+      "Time Magazine": .magazines,
+      "Evernote": .productivity,
+      "Notion": .productivity,
+      "Todoist": .productivity,
+      "Dropbox": .cloudStorage,
+      "Google Drive": .cloudStorage,
+      "Microsoft OneDrive": .cloudStorage,
+      "Peloton": .fitness,
+      "MyFitnessPal": .fitness,
+      "Strava": .fitness,
+      "Xbox Game Pass": .gaming,
+      "PlayStation Now": .gaming,
+      "Nintendo Switch Online": .gaming,
+      "Udemy": .education,
+      "Coursera": .education,
+      "Skillshare": .education,
+      "Facebook": .socialMedia,
+      "Twitter": .socialMedia,
+      "Instagram": .socialMedia,
+      "Tinder": .dating,
+      "Bumble": .dating,
+      "Hinge": .dating,
+      "Mint": .finance,
+      "QuickBooks": .finance,
+      "Personal Capital": .finance,
+      "Microsoft 365": .software,
+      "Adobe Creative Cloud": .software,
+      "AutoCAD": .software,
+      "GitHub": .developerTools,
+      "GitLab": .developerTools,
+      "Bitbucket": .developerTools,
+      "Norton": .security,
+      "McAfee": .security,
+      "Malwarebytes": .security,
+      "NordVPN": .vpn,
+      "ExpressVPN": .vpn,
+      "Surfshark": .vpn,
+      "Bluehost": .webHosting,
+      "HostGator": .webHosting,
+      "SiteGround": .webHosting,
+      "Shopify": .ecommerce,
+      "BigCommerce": .ecommerce,
+      "WooCommerce": .ecommerce
+    ]
+    return raw.map { SubscriptionServicePreset(name: $0.key, category: $0.value) }
   }
 }

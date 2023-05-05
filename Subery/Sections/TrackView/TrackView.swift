@@ -11,16 +11,20 @@ import Combine
 
 struct TrackView: View {
   let store: StoreOf<AppState>
+
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
       GradientNoiseBackground().overlay {
         VStack(alignment: .leading, spacing: Theme.spacing.lg) {
           Form {
-            serviceName(viewStore)
-            servicePrice(viewStore)
-            HStack(spacing: Theme.spacing.lg) {
-              serviceStartAt(viewStore)
-              serviceEndAt(viewStore)
+            VStack(spacing: Theme.spacing.xl) {
+              serviceName(viewStore)
+              serviceCategory(viewStore)
+              servicePrice(viewStore)
+              HStack(spacing: Theme.spacing.lg) {
+                serviceStartAt(viewStore)
+                serviceEndAt(viewStore)
+              }
             }
             Spacer()
           }
@@ -35,15 +39,37 @@ struct TrackView: View {
 
   private func serviceName(_ viewStore: ViewStoreOf<AppState>) -> some View {
     VStack(alignment: .leading) {
-      Text("Service Name")
+      Text("Name")
         .font(.headline)
         .foregroundColor(.white)
 
-      TextField("Apple Music", text: viewStore.binding(\.$serviceName))
-        .font(.body)
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
+      VStack(spacing: 0) {
+        TextField(viewStore.placeholderService.name, text: viewStore.binding(\.$serviceName))
+          .font(.body)
+          .padding()
+        if !viewStore.state.serviceSuggestions.isEmpty {
+          ScrollView {
+            VStack {
+              ForEach(viewStore.serviceSuggestions) { service in
+                VStack(alignment: .leading) {
+                  Divider()
+                  Text(service.name)
+                    .font(.callout)
+                    .foregroundColor(Color.lightGray)
+                    .frame(height: 40)
+                }
+              }
+            }
+          }
+          .frame(maxHeight: CGFloat.minimum(40 * CGFloat(viewStore.serviceSuggestions.count), 120))
+          .padding(.horizontal)
+          .transition(.slide)
+          .animation(.spring(), value: viewStore.state.serviceSuggestions)
+        }
+      }
+      .padding(.bottom, viewStore.state.serviceSuggestions.isEmpty ? 0 : Theme.spacing.sm)
+      .background(Color.white)
+      .cornerRadius(10)
     }
   }
 
@@ -124,6 +150,23 @@ struct TrackView: View {
             showingDatePicker: viewStore.binding(\.$isServiceDateEndPickerPresented)
           )
         }
+    }
+  }
+
+  private func serviceCategory(_ viewStore: ViewStoreOf<AppState>) -> some View {
+    VStack(alignment: .leading) {
+      Text("Category")
+        .font(.headline)
+        .foregroundColor(.white)
+
+      TextField(
+        viewStore.placeholderService.category.rawValue,
+        text: viewStore.binding(\.$serviceCategory)
+      )
+      .font(.body)
+      .padding()
+      .background(Color.white)
+      .cornerRadius(10)
     }
   }
 }
