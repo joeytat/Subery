@@ -39,7 +39,7 @@ struct TrackView: View {
 
   private func serviceName(_ viewStore: ViewStoreOf<AppState>) -> some View {
     VStack(alignment: .leading) {
-      Text("Name")
+      Text("App / Service Name")
         .font(.headline)
         .foregroundColor(.white)
 
@@ -47,30 +47,38 @@ struct TrackView: View {
         TextField(viewStore.placeholderService.name, text: viewStore.binding(\.$serviceName))
           .font(.body)
           .padding()
+
         if !viewStore.state.serviceSuggestions.isEmpty {
-          ScrollView {
-            VStack {
-              ForEach(viewStore.serviceSuggestions) { service in
-                VStack(alignment: .leading) {
-                  Divider()
-                  Text(service.name)
-                    .font(.callout)
-                    .foregroundColor(Color.lightGray)
-                    .frame(height: 40)
-                }
-              }
-            }
-          }
-          .frame(maxHeight: CGFloat.minimum(40 * CGFloat(viewStore.serviceSuggestions.count), 120))
-          .padding(.horizontal)
-          .transition(.slide)
-          .animation(.spring(), value: viewStore.state.serviceSuggestions)
+          serviceSuggestion(viewStore)
         }
       }
       .padding(.bottom, viewStore.state.serviceSuggestions.isEmpty ? 0 : Theme.spacing.sm)
       .background(Color.white)
       .cornerRadius(10)
     }
+  }
+
+  private func serviceSuggestion(_ viewStore: ViewStoreOf<AppState>) -> some View {
+    ScrollView {
+      VStack {
+        ForEach(viewStore.serviceSuggestions) { service in
+          VStack(alignment: .leading) {
+            Divider()
+            Text(service.name)
+              .font(.callout)
+              .foregroundColor(Color.lightGray)
+              .frame(height: 40)
+              .onTapGesture {
+                viewStore.send(.binding(.set(\.$serviceName, service.name)))
+              }
+          }
+        }
+      }
+    }
+    .frame(maxHeight: CGFloat.minimum(40 * CGFloat(viewStore.serviceSuggestions.count), 120))
+    .padding(.horizontal)
+    .transition(.slide)
+    .animation(.spring(), value: viewStore.state.serviceSuggestions)
   }
 
   private func servicePrice(_ viewStore: ViewStoreOf<AppState>) -> some View {
@@ -193,7 +201,7 @@ struct TextFieldWithPrefix: View {
   @Binding var text: String
 
   var body: some View {
-    HStack {
+    HStack(spacing: Theme.spacing.sm) {
       Text(prefix)
         .foregroundColor(.gray.opacity(0.5))
         .font(.body)

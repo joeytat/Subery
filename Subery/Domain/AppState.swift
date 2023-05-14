@@ -47,10 +47,17 @@ struct AppState: ReducerProtocol {
         return .none
       case .binding(\.$serviceName):
         if !state.serviceName.isEmpty {
-          state.serviceSuggestions = IdentifiedArray(
+          let suggestionsResult: IdentifiedArrayOf<AppState.State.SubscriptionServicePreset> = IdentifiedArray(
             uniqueElements: State.popularSubscriptions
               .filter { $0.name.lowercased().starts(with: state.serviceName.lowercased()) }
           )
+          if suggestionsResult.count == 1,
+             let firstPreset = suggestionsResult.first,
+             firstPreset.name == state.serviceName {
+            state.serviceSuggestions = []
+          } else {
+            state.serviceSuggestions = suggestionsResult
+          }
         } else {
           state.serviceSuggestions = []
         }
