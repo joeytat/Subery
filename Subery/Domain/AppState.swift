@@ -14,6 +14,7 @@ struct AppState: ReducerProtocol {
     var serviceSuggestions: IdentifiedArrayOf<SubscriptionServicePreset> = []
 
     @BindingState var serviceName: String = ""
+    @BindingState var serviceCategory: String = ""
     @BindingState var servicePrice: String = ""
     enum RenewalFrequency: String, CaseIterable {
       case yearly = "Yearly"
@@ -30,7 +31,6 @@ struct AppState: ReducerProtocol {
     @BindingState var serviceEndAtDate: Date = Date()
     @BindingState var isServiceDateEndPickerPresented: Bool = false
 
-    @BindingState var serviceCategory: String = ""
   }
 
   enum Action: BindableAction, Equatable {
@@ -55,6 +55,7 @@ struct AppState: ReducerProtocol {
              let firstPreset = suggestionsResult.first,
              firstPreset.name == state.serviceName {
             state.serviceSuggestions = []
+            state.serviceCategory = firstPreset.category.rawValue
           } else {
             state.serviceSuggestions = suggestionsResult
           }
