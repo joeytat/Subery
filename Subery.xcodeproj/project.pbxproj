@@ -30,6 +30,7 @@
 		763B35E029FF4B8B005B3A56 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35DF29FF4B8B005B3A56 /* AppState.swift */; };
 		763B35E429FF4ECC005B3A56 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35E329FF4ECC005B3A56 /* LandingView.swift */; };
 		763B35EB2A00FA57005B3A56 /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35EA2A00FA57005B3A56 /* TrackView.swift */; };
+		7692E15E2A11037A005AEA7D /* Number+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7692E15D2A11037A005AEA7D /* Number+.swift */; };
 		76A75F832A0113A50076DB70 /* GradientNoiseBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */; };
 		76A75F852A01146A0076DB70 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */; };
 		76A75F882A0360E40076DB70 /* CustomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F872A0360E40076DB70 /* CustomSheet.swift */; };
@@ -78,6 +79,7 @@
 		763B35DF29FF4B8B005B3A56 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		763B35E329FF4ECC005B3A56 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		763B35EA2A00FA57005B3A56 /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
+		7692E15D2A11037A005AEA7D /* Number+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+.swift"; sourceTree = "<group>"; };
 		76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientNoiseBackground.swift; sourceTree = "<group>"; };
 		76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 		76A75F872A0360E40076DB70 /* CustomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSheet.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				762203172A03D3B10078CAE3 /* Date+.swift */,
+				7692E15D2A11037A005AEA7D /* Number+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				763B35DB29FF4B12005B3A56 /* Neumorphism+ViewExtension.swift in Sources */,
 				763B35DD29FF4B12005B3A56 /* Spacing.swift in Sources */,
 				763B35D729FF4B12005B3A56 /* RGB.swift in Sources */,
+				7692E15E2A11037A005AEA7D /* Number+.swift in Sources */,
 				763B35D929FF4B12005B3A56 /* ColorCircle.swift in Sources */,
 				763B35E029FF4B8B005B3A56 /* AppState.swift in Sources */,
 				763B35DA29FF4B12005B3A56 /* BevelView.swift in Sources */,

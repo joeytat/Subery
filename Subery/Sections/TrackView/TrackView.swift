@@ -88,8 +88,9 @@ struct TrackView: View {
         .foregroundColor(.white)
 
       HStack {
-        TextFieldWithPrefix(
+        PriceTextField(
           prefix: "$",
+          suffix: viewStore.servicePricePerMonth,
           placeholder: "6.00",
           keyboardType: .numberPad,
           text: viewStore.binding(\.$servicePrice)
@@ -193,22 +194,46 @@ struct TrackView_Previews: PreviewProvider {
 }
 
 
-struct TextFieldWithPrefix: View {
+struct PriceTextField: View {
   let prefix: String
+  let suffix: String
   let placeholder: String
   let keyboardType: UIKeyboardType
 
   @Binding var text: String
 
   var body: some View {
-    HStack(spacing: Theme.spacing.sm) {
+    HStack(alignment: .firstTextBaseline, spacing: Theme.spacing.sm) {
       Text(prefix)
         .foregroundColor(.gray.opacity(0.5))
         .font(.body)
 
       TextField(placeholder, text: $text)
         .keyboardType(keyboardType)
-        .font(.body)
+        .padding(.trailing, suffixWidth() + 8)
+        .overlay(
+          Text(suffix)
+            .foregroundColor(.gray.opacity(0.5))
+            .font(.body)
+            .offset(x: max(0, textWidth() + Theme.spacing.sm)),
+          alignment: .leading
+        )
     }
+  }
+
+  private func textWidth() -> CGFloat {
+    let font = UIFont.preferredFont(forTextStyle: .body)
+    let string = NSString(string: text.isEmpty ? placeholder : text)
+    let attributes = [NSAttributedString.Key.font: font]
+    let size = string.size(withAttributes: attributes)
+    return size.width
+  }
+
+  private func suffixWidth() -> CGFloat {
+    let font = UIFont.preferredFont(forTextStyle: .body)
+    let string = NSString(string: suffix)
+    let attributes = [NSAttributedString.Key.font: font]
+    let size = string.size(withAttributes: attributes)
+    return size.width
   }
 }

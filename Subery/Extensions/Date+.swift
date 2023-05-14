@@ -23,4 +23,10 @@ extension Date {
     let calendar = Calendar.current
     return calendar.startOfDay(for: self)
   }
+
+  func nextMonth() -> Date {
+    let calendar = Calendar.current
+    return calendar.date(byAdding: .month, value: 1, to: self)!
+  }
+
 }

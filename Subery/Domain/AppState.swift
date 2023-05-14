@@ -16,6 +16,7 @@ struct AppState: ReducerProtocol {
     @BindingState var serviceName: String = ""
     @BindingState var serviceCategory: String = ""
     @BindingState var servicePrice: String = ""
+    @BindingState var servicePricePerMonth: String = ""
     enum RenewalFrequency: String, CaseIterable {
       case yearly = "Yearly"
       case quarterly = "Quarterly"
@@ -42,9 +43,6 @@ struct AppState: ReducerProtocol {
     BindingReducer()
     Reduce { state, action in
       switch action {
-      case .setRenewalFrequency(let renewalFrequency):
-        state.serviceRenewalFrequency = renewalFrequency
-        return .none
       case .binding(\.$serviceName):
         if !state.serviceName.isEmpty {
           let suggestionsResult: IdentifiedArrayOf<AppState.State.SubscriptionServicePreset> = IdentifiedArray(
@@ -81,10 +79,32 @@ struct AppState: ReducerProtocol {
         return .none
       case .binding(\.$servicePrice):
         let numberStr = state.servicePrice.filter { $0.isNumber }
-        if let deformattedPriceValue = Float(numberStr) {
+        if let deformattedPriceValue = Float(numberStr)?.roundedToDecimalPlaces() {
           state.servicePrice = deformattedPriceValue.formatted()
+          switch state.serviceRenewalFrequency {
+          case .monthly:
+            state.servicePricePerMonth = ""
+          case .quarterly:
+            state.servicePricePerMonth = "(\((deformattedPriceValue / 4).roundedToDecimalPlaces())/month)"
+          case .yearly:
+            state.servicePricePerMonth = "(\((deformattedPriceValue / 12).roundedToDecimalPlaces())/month)"
+          }
         } else {
           state.servicePrice = Float(state.servicePrice)?.formatted() ?? ""
+        }
+        return .none
+      case .setRenewalFrequency(let renewalFrequency):
+        state.serviceRenewalFrequency = renewalFrequency
+        let numberStr = state.servicePrice.filter { $0.isNumber }
+        if let deformattedPriceValue = Float(numberStr) {
+          switch state.serviceRenewalFrequency {
+          case .monthly:
+            state.servicePricePerMonth = ""
+          case .quarterly:
+            state.servicePricePerMonth = "(\((deformattedPriceValue / 4).roundedToDecimalPlaces())/month)"
+          case .yearly:
+            state.servicePricePerMonth = "(\((deformattedPriceValue / 12).roundedToDecimalPlaces())/month)"
+          }
         }
         return .none
       case .binding:
