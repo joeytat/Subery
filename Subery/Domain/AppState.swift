@@ -7,6 +7,8 @@
 
 import Foundation
 import ComposableArchitecture
+import SwiftUI
+
 struct AppState: ReducerProtocol {
   struct State: Equatable {
     // Track
@@ -32,6 +34,7 @@ struct AppState: ReducerProtocol {
     @BindingState var serviceEndAtDate: Date = Date()
     @BindingState var isServiceDateEndPickerPresented: Bool = false
 
+    @BindingState var serviceFocusedInput: TrackView.FormInput?
   }
 
   enum Action: BindableAction, Equatable {

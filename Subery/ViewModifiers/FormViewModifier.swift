@@ -22,6 +22,21 @@ extension View {
 }
 
 
+struct FormInputModifier: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(.body)
+      .padding()
+  }
+}
+
+extension View {
+  func formInput() -> some View {
+    self.modifier(FormInputModifier())
+  }
+}
+
+
 struct FormContainerModifier: ViewModifier {
   func body(content: Content) -> some View {
     content

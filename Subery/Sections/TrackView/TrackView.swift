@@ -10,7 +10,16 @@ import ComposableArchitecture
 import Combine
 
 struct TrackView: View {
+  enum FormInput: String, Hashable {
+    case name
+    case category
+    case price
+    case startAt
+    case endAt
+  }
+
   let store: StoreOf<AppState>
+  @FocusState var focusedField: FormInput?
 
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
@@ -55,9 +64,9 @@ struct TrackView: View {
 
       VStack(spacing: 0) {
         TextField(viewStore.placeholderService.name, text: viewStore.binding(\.$serviceName))
-          .foregroundColor(Color.white)
-          .font(.body)
-          .padding()
+          .formInput()
+          .focused($focusedField, equals: .name)
+          .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
 
         if !viewStore.state.serviceSuggestions.isEmpty {
           serviceSuggestion(viewStore)
@@ -102,8 +111,11 @@ struct TrackView: View {
           suffix: viewStore.servicePricePerMonth,
           placeholder: "6.00",
           keyboardType: .numberPad,
-          text: viewStore.binding(\.$servicePrice)
+          text: viewStore.binding(\.$servicePrice),
+          focusState: $focusedField
         )
+        .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
+
         Dropdown(label: {
           HStack {
             Text(viewStore.serviceRenewalFrequency.rawValue)
@@ -117,8 +129,7 @@ struct TrackView: View {
               viewStore.send(.setRenewalFrequency(option))
             }) {
               Text(option.rawValue)
-                .background(Color.white)
-                .foregroundColor(.primary)
+                .formLabel()
             }
           }
         }
@@ -134,10 +145,8 @@ struct TrackView: View {
         .formLabel()
 
       TextField(Date().format(), text: viewStore.binding(\.$serviceStartAt))
-        .font(.body)
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
+        .formInput()
+        .focused($focusedField, equals: .startAt)
         .onTapGesture { viewStore.send(.binding(.set(\.$isServiceDateStartPickerPresented, true))) }
         .sheet(isPresented: viewStore.binding(\.$isServiceDateStartPickerPresented)) {
           DatePickerView(
@@ -145,6 +154,8 @@ struct TrackView: View {
             showingDatePicker: viewStore.binding(\.$isServiceDateStartPickerPresented)
           )
         }
+        .formContainer()
+        .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
     }
   }
 
@@ -154,10 +165,8 @@ struct TrackView: View {
         .formLabel()
 
       TextField(Date().format(), text: viewStore.binding(\.$serviceEndAt))
-        .font(.body)
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
+        .formInput()
+        .focused($focusedField, equals: .endAt)
         .onTapGesture { viewStore.send(.binding(.set(\.$isServiceDateEndPickerPresented, true))) }
         .sheet(isPresented: viewStore.binding(\.$isServiceDateEndPickerPresented)) {
           DatePickerView(
@@ -165,6 +174,8 @@ struct TrackView: View {
             showingDatePicker: viewStore.binding(\.$isServiceDateEndPickerPresented)
           )
         }
+        .formContainer()
+        .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
     }
   }
 
@@ -177,9 +188,10 @@ struct TrackView: View {
         viewStore.placeholderService.category.rawValue,
         text: viewStore.binding(\.$serviceCategory)
       )
-      .font(.body)
-      .padding()
+      .focused($focusedField, equals: .category)
+      .formInput()
       .formContainer()
+      .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
     }
   }
 }
@@ -197,7 +209,6 @@ struct TrackView_Previews: PreviewProvider {
   }
 }
 
-
 struct PriceTextField: View {
   let prefix: String
   let suffix: String
@@ -205,6 +216,7 @@ struct PriceTextField: View {
   let keyboardType: UIKeyboardType
 
   @Binding var text: String
+  var focusState: FocusState<TrackView.FormInput?>.Binding
 
   var body: some View {
     HStack(alignment: .firstTextBaseline, spacing: Theme.spacing.sm) {
@@ -213,6 +225,7 @@ struct PriceTextField: View {
         .font(.body)
 
       TextField(placeholder, text: $text)
+        .font(.body)
         .keyboardType(keyboardType)
         .padding(.trailing, suffixWidth() + 8)
         .overlay(
@@ -222,6 +235,7 @@ struct PriceTextField: View {
             .offset(x: max(0, textWidth() + Theme.spacing.sm)),
           alignment: .leading
         )
+        .focused(focusState, equals: .price)
     }
   }
 
@@ -241,3 +255,16 @@ struct PriceTextField: View {
     return size.width
   }
 }
+
+
+extension View {
+  func synchronize<Value>(
+    _ first: Binding<Value>,
+    _ second: FocusState<Value>.Binding
+  ) -> some View {
+    self
+      .onChange(of: first.wrappedValue) { second.wrappedValue = $0 }
+      .onChange(of: second.wrappedValue) { first.wrappedValue = $0 }
+  }
+}
+
