@@ -31,6 +31,7 @@
 		763B35E429FF4ECC005B3A56 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35E329FF4ECC005B3A56 /* LandingView.swift */; };
 		763B35EB2A00FA57005B3A56 /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35EA2A00FA57005B3A56 /* TrackView.swift */; };
 		7692E15E2A11037A005AEA7D /* Number+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7692E15D2A11037A005AEA7D /* Number+.swift */; };
+		7692E1612A110E25005AEA7D /* FormViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7692E1602A110E25005AEA7D /* FormViewModifier.swift */; };
 		76A75F832A0113A50076DB70 /* GradientNoiseBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */; };
 		76A75F852A01146A0076DB70 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */; };
 		76A75F882A0360E40076DB70 /* CustomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F872A0360E40076DB70 /* CustomSheet.swift */; };
@@ -80,6 +81,7 @@
 		763B35E329FF4ECC005B3A56 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		763B35EA2A00FA57005B3A56 /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
 		7692E15D2A11037A005AEA7D /* Number+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+.swift"; sourceTree = "<group>"; };
+		7692E1602A110E25005AEA7D /* FormViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModifier.swift; sourceTree = "<group>"; };
 		76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientNoiseBackground.swift; sourceTree = "<group>"; };
 		76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 		76A75F872A0360E40076DB70 /* CustomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSheet.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		763B357729FE4A6C005B3A56 /* Subery */ = {
 			isa = PBXGroup;
 			children = (
+				7692E15F2A110E16005AEA7D /* ViewModifiers */,
 				762203162A03D3A70078CAE3 /* Extensions */,
 				763B35CC29FF4B12005B3A56 /* Design */,
 				763B35E129FF4B90005B3A56 /* Domain */,
@@ -243,6 +246,14 @@
 				763B35EA2A00FA57005B3A56 /* TrackView.swift */,
 			);
 			path = TrackView;
+			sourceTree = "<group>";
+		};
+		7692E15F2A110E16005AEA7D /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				7692E1602A110E25005AEA7D /* FormViewModifier.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 		76A75F862A0360D60076DB70 /* Components */ = {
@@ -415,6 +426,7 @@
 				763B357929FE4A6C005B3A56 /* SuberyApp.swift in Sources */,
 				7622031C2A04B7D20078CAE3 /* Dropdown.swift in Sources */,
 				762203132A03B9C60078CAE3 /* StatusBarHostingController.swift in Sources */,
+				7692E1612A110E25005AEA7D /* FormViewModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

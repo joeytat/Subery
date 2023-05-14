@@ -27,6 +27,17 @@ struct TrackView: View {
               }
             }
             Spacer()
+
+            HStack {
+              Spacer()
+
+              NavigationLink(destination: TrackView(store: store)) {
+                Text("Save Subscription")
+                  .font(.headline)
+                  .foregroundColor(Color.dark)
+                  .bevelStyle()
+              }
+            }
           }
           .monospacedDigit()
           .formStyle(.columns)
@@ -40,11 +51,11 @@ struct TrackView: View {
   private func serviceName(_ viewStore: ViewStoreOf<AppState>) -> some View {
     VStack(alignment: .leading) {
       Text("App / Service Name")
-        .font(.headline)
-        .foregroundColor(.white)
+        .formLabel()
 
       VStack(spacing: 0) {
         TextField(viewStore.placeholderService.name, text: viewStore.binding(\.$serviceName))
+          .foregroundColor(Color.white)
           .font(.body)
           .padding()
 
@@ -53,8 +64,7 @@ struct TrackView: View {
         }
       }
       .padding(.bottom, viewStore.state.serviceSuggestions.isEmpty ? 0 : Theme.spacing.sm)
-      .background(Color.white)
-      .cornerRadius(10)
+      .formContainer()
     }
   }
 
@@ -84,8 +94,7 @@ struct TrackView: View {
   private func servicePrice(_ viewStore: ViewStoreOf<AppState>) -> some View {
     VStack(alignment: .leading) {
       Text("Price")
-        .font(.headline)
-        .foregroundColor(.white)
+        .formLabel()
 
       HStack {
         PriceTextField(
@@ -115,16 +124,14 @@ struct TrackView: View {
         }
       }
       .padding()
-      .background(Color.white)
-      .cornerRadius(10)
+      .formContainer()
     }
   }
 
   private func serviceStartAt(_ viewStore: ViewStoreOf<AppState>) -> some View {
     VStack(alignment: .leading) {
       Text("Start at")
-        .font(.headline)
-        .foregroundColor(.white)
+        .formLabel()
 
       TextField(Date().format(), text: viewStore.binding(\.$serviceStartAt))
         .font(.body)
@@ -144,8 +151,7 @@ struct TrackView: View {
   private func serviceEndAt(_ viewStore: ViewStoreOf<AppState>) -> some View {
     VStack(alignment: .leading) {
       Text("End at")
-        .font(.headline)
-        .foregroundColor(.white)
+        .formLabel()
 
       TextField(Date().format(), text: viewStore.binding(\.$serviceEndAt))
         .font(.body)
@@ -165,8 +171,7 @@ struct TrackView: View {
   private func serviceCategory(_ viewStore: ViewStoreOf<AppState>) -> some View {
     VStack(alignment: .leading) {
       Text("Category")
-        .font(.headline)
-        .foregroundColor(.white)
+        .formLabel()
 
       TextField(
         viewStore.placeholderService.category.rawValue,
@@ -174,8 +179,7 @@ struct TrackView: View {
       )
       .font(.body)
       .padding()
-      .background(Color.white)
-      .cornerRadius(10)
+      .formContainer()
     }
   }
 }
