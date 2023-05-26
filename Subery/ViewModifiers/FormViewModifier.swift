@@ -17,13 +17,18 @@ extension View {
     self.modifier(FormInputModifier())
   }
 
-  func formContainer() -> some View {
-    self.modifier(FormContainerModifier())
+  func formContainer(_ state: FormContainerModifier.State) -> some View {
+    self.modifier(FormContainerModifier(state: state))
   }
 
   func formCTAButton() -> some View {
     self.modifier(FormCTAButtonModifier())
   }
+
+  func formError() -> some View {
+    self.modifier(FormErrorModifier())
+  }
+
 }
 
 struct FormLabelModifier: ViewModifier {
@@ -43,13 +48,20 @@ struct FormInputModifier: ViewModifier {
 }
 
 struct FormContainerModifier: ViewModifier {
+  enum State {
+    case normal
+    case error
+  }
+
+  let state: State
+
   func body(content: Content) -> some View {
     content
       .background(Color.white)
       .cornerRadius(10)
       .overlay(
         RoundedRectangle(cornerRadius: 10)
-          .stroke(Color.theme, lineWidth: 2)
+          .stroke(state == .normal ? Color.theme : Color.error, lineWidth: 2)
       )
   }
 }
@@ -62,4 +74,13 @@ struct FormCTAButtonModifier: ViewModifier {
       .bevelStyle()
   }
 }
+
+struct FormErrorModifier: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(.caption)
+      .foregroundColor(Color.error)
+  }
+}
+
 

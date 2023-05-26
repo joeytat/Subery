@@ -40,7 +40,9 @@ struct TrackView: View {
             HStack {
               Spacer()
 
-              NavigationLink(destination: TrackView(store: store)) {
+              Button {
+                viewStore.send(.validateForm)
+              } label: {
                 Text("Save Subscription")
               }
               .formCTAButton()
@@ -61,17 +63,25 @@ struct TrackView: View {
         .formLabel()
 
       VStack(spacing: 0) {
-        TextField(viewStore.placeholderService.name, text: viewStore.binding(\.$serviceName))
-          .formInput()
-          .focused($focusedField, equals: .name)
-          .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
+        TextField(
+          viewStore.placeholderService.name,
+          text: viewStore.binding(\.$serviceName)
+        )
+        .formInput()
+        .focused($focusedField, equals: .name)
+        .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
 
         if !viewStore.state.serviceSuggestions.isEmpty {
           serviceSuggestion(viewStore)
         }
       }
       .padding(.bottom, viewStore.state.serviceSuggestions.isEmpty ? 0 : Theme.spacing.sm)
-      .formContainer()
+      .formContainer(viewStore.serviceNameError == nil ? .normal : .error)
+
+      if let error = viewStore.serviceNameError {
+        Text(error)
+          .formError()
+      }
     }
   }
 
@@ -133,7 +143,12 @@ struct TrackView: View {
         }
       }
       .padding()
-      .formContainer()
+      .formContainer(viewStore.servicePriceError == nil ? .normal : .error)
+
+      if let error = viewStore.servicePriceError {
+        Text(error)
+          .formError()
+      }
     }
   }
 
@@ -152,7 +167,7 @@ struct TrackView: View {
             showingDatePicker: viewStore.binding(\.$isServiceDateStartPickerPresented)
           )
         }
-        .formContainer()
+        .formContainer(.normal)
         .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
     }
   }
@@ -172,7 +187,7 @@ struct TrackView: View {
             showingDatePicker: viewStore.binding(\.$isServiceDateEndPickerPresented)
           )
         }
-        .formContainer()
+        .formContainer(.normal)
         .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
     }
   }
@@ -188,7 +203,7 @@ struct TrackView: View {
       )
       .focused($focusedField, equals: .category)
       .formInput()
-      .formContainer()
+      .formContainer(.normal)
       .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
     }
   }

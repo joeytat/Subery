@@ -18,12 +18,14 @@ struct AppState: ReducerProtocol {
     @BindingState var serviceName: String = ""
     @BindingState var serviceCategory: String = ""
     @BindingState var servicePrice: String = ""
+
+    var serviceNameError: String?
+    var serviceCategoryError: String?
+    var servicePriceError: String?
+    var serviceStartAtError: String?
+    var serviceEndAtError: String?
+
     @BindingState var servicePricePerMonth: String = ""
-    enum RenewalFrequency: String, CaseIterable {
-      case yearly = "Yearly"
-      case quarterly = "Quarterly"
-      case monthly = "Monthly"
-    }
     var serviceRenewalFrequency: RenewalFrequency = .monthly
 
     @BindingState var serviceStartAt: String = ""
@@ -40,6 +42,7 @@ struct AppState: ReducerProtocol {
   enum Action: BindableAction, Equatable {
     case binding(BindingAction<State>)
     case setRenewalFrequency(State.RenewalFrequency)
+    case validateForm
   }
 
   var body: some ReducerProtocol<State, Action> {
@@ -60,6 +63,7 @@ struct AppState: ReducerProtocol {
           } else {
             state.serviceSuggestions = suggestionsResult
           }
+          state.serviceNameError = nil
         } else {
           state.serviceSuggestions = []
         }
@@ -82,7 +86,7 @@ struct AppState: ReducerProtocol {
         return .none
       case .binding(\.$servicePrice):
         let numberStr = state.servicePrice.filter { $0.isNumber }
-        if let deformattedPriceValue = Float(numberStr)?.roundedToDecimalPlaces() {
+        if let deformattedPriceValue = Float(numberStr)?.roundedToDecimalPlaces(), deformattedPriceValue > 0 {
           state.servicePrice = deformattedPriceValue.formatted()
           switch state.serviceRenewalFrequency {
           case .monthly:
@@ -92,6 +96,7 @@ struct AppState: ReducerProtocol {
           case .yearly:
             state.servicePricePerMonth = "(\((deformattedPriceValue / 12).roundedToDecimalPlaces())/month)"
           }
+          state.servicePriceError = nil
         } else {
           state.servicePrice = Float(state.servicePrice)?.formatted() ?? ""
         }
@@ -111,6 +116,43 @@ struct AppState: ReducerProtocol {
         }
         return .none
       case .binding:
+        return .none
+      case .validateForm:
+        if state.serviceName.isEmpty {
+          state.serviceNameError = "Service name is required"
+          return .none
+        }
+
+        if state.serviceCategory.isEmpty {
+          state.serviceCategoryError = "Service category is required"
+          return .none
+        }
+
+        if state.servicePrice.isEmpty {
+          state.servicePriceError = "Service price is required"
+          return .none
+        }
+
+        if let price = Float(state.servicePrice.filter { $0.isNumber }), price <= 0 {
+          state.servicePriceError = "Service price should be greater than 0"
+          return .none
+        }
+
+        if state.serviceStartAt.isEmpty {
+          state.serviceStartAtError = "Service start date is required"
+          return .none
+        }
+
+        if state.serviceEndAt.isEmpty {
+          state.serviceEndAtError = "Service end date is required"
+          return .none
+        }
+
+        if state.serviceStartAtDate > state.serviceEndAtDate {
+          state.serviceEndAtError = "Service end date should be after start date"
+          return .none
+        }
+
         return .none
       }
     }._printChanges()
@@ -203,5 +245,13 @@ extension AppState.State {
       "WooCommerce": .ecommerce
     ]
     return raw.map { SubscriptionServicePreset(name: $0.key, category: $0.value) }
+  }
+}
+
+extension AppState.State {
+  enum RenewalFrequency: String, CaseIterable {
+    case yearly = "Yearly"
+    case quarterly = "Quarterly"
+    case monthly = "Monthly"
   }
 }
