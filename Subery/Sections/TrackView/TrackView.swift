@@ -23,7 +23,7 @@ struct TrackView: View {
 
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
-      GradientNoiseBackground().overlay {
+      GradientBackgroundView().overlay {
         VStack(alignment: .leading, spacing: Theme.spacing.lg) {
           Form {
             VStack(spacing: Theme.spacing.xl) {
@@ -42,10 +42,8 @@ struct TrackView: View {
 
               NavigationLink(destination: TrackView(store: store)) {
                 Text("Save Subscription")
-                  .font(.headline)
-                  .foregroundColor(Color.dark)
-                  .bevelStyle()
               }
+              .formCTAButton()
             }
           }
           .monospacedDigit()

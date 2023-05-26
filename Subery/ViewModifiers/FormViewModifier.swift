@@ -7,6 +7,25 @@
 
 import SwiftUI
 
+
+extension View {
+  func formLabel() -> some View {
+    self.modifier(FormLabelModifier())
+  }
+
+  func formInput() -> some View {
+    self.modifier(FormInputModifier())
+  }
+
+  func formContainer() -> some View {
+    self.modifier(FormContainerModifier())
+  }
+
+  func formCTAButton() -> some View {
+    self.modifier(FormCTAButtonModifier())
+  }
+}
+
 struct FormLabelModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
@@ -15,13 +34,6 @@ struct FormLabelModifier: ViewModifier {
   }
 }
 
-extension View {
-  func formLabel() -> some View {
-    self.modifier(FormLabelModifier())
-  }
-}
-
-
 struct FormInputModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
@@ -29,13 +41,6 @@ struct FormInputModifier: ViewModifier {
       .padding()
   }
 }
-
-extension View {
-  func formInput() -> some View {
-    self.modifier(FormInputModifier())
-  }
-}
-
 
 struct FormContainerModifier: ViewModifier {
   func body(content: Content) -> some View {
@@ -49,8 +54,12 @@ struct FormContainerModifier: ViewModifier {
   }
 }
 
-extension View {
-  func formContainer() -> some View {
-    self.modifier(FormContainerModifier())
+struct FormCTAButtonModifier: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(.headline)
+      .foregroundColor(Color.dark)
+      .bevelStyle()
   }
 }
+
