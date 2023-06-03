@@ -20,6 +20,7 @@ struct TrackView: View {
 
   let store: StoreOf<AppState>
   @FocusState var focusedField: FormInput?
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
@@ -37,15 +38,13 @@ struct TrackView: View {
           Spacer()
 
           HStack {
-            NavigationLink(
-              destination: LandingView(
-                store: store
-              )
-            ) {
+            Button {
+              presentationMode.wrappedValue.dismiss()
+            } label: {
               Text("Back")
-                .formCancelButton()
             }
-
+            .formCancelButton()
+            
             Spacer()
 
             Button {
