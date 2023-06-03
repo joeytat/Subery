@@ -15,9 +15,13 @@ struct GradientNoiseBackground: View {
   var body: some View {
     ZStack {
       LinearGradient(
-        gradient: Gradient(colors: [Color.dark, Color.theme]),
-        startPoint: .bottomLeading,
-        endPoint: .topTrailing
+        gradient: Gradient(colors: [
+          Color.black,
+          Color.daisy.neutralFocus,
+          Color.daisy.primary
+        ]),
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
       )
       .ignoresSafeArea()
 

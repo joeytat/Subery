@@ -22,7 +22,7 @@ struct DatePickerView: View {
         .datePickerStyle(GraphicalDatePickerStyle())
         .labelsHidden()
         .padding()
-        .tint(Color.theme)
+        .tint(Color.daisy.primary)
         Spacer()
       }
       .navigationTitle("Date Picker")
@@ -31,13 +31,13 @@ struct DatePickerView: View {
           Button("Cancel") {
             showingDatePicker = false
           }
-          .foregroundColor(Color.theme)
+          .foregroundColor(Color.daisy.primary)
         }
         ToolbarItem(placement: .confirmationAction) {
           Button("Done") {
             showingDatePicker = false
           }
-          .foregroundColor(Color.theme)
+          .foregroundColor(Color.daisy.primary)
         }
       }
     }

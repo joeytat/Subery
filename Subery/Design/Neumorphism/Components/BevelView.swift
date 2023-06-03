@@ -7,11 +7,11 @@ struct BevelViewModifier: ViewModifier {
       .background(
         ZStack {
           Capsule()
-            .fill(Color.element)
+            .fill(Color.neumorphism.element)
             .northWestShadow(radius: 3, offset: 1)
           Capsule()
             .inset(by: 3)
-            .fill(Color.element)
+            .fill(Color.neumorphism.element)
             .southEastShadow(radius: 1, offset: 1)
         }
       )
@@ -27,7 +27,7 @@ extension View {
 struct BevelText_Previews: PreviewProvider {
   static var previews: some View {
     ZStack {
-      Color.element
+      Color.neumorphism.element
       Text("Test").bevelStyle()
     }
     .previewLayout(.sizeThatFits)

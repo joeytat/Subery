@@ -23,13 +23,18 @@ struct LandingView: View {
 
         Text("Keep track of all your monthly and annual subscriptions in one place. Never miss another renewal date or get surprised by unexpected fees again.")
           .font(.body)
-          .foregroundColor(.lightGray)
+          .foregroundColor(.red)
           .padding(.bottom, 32)
 
-        NavigationLink(destination: TrackView(store: store)) {
+        NavigationLink(
+          destination: TrackView(
+            store: store
+          )
+          .navigationBarBackButtonHidden()
+        ) {
           Text("Take Control Now")
             .font(.headline)
-            .foregroundColor(Color.dark)
+            .foregroundColor(Color.red)
             .bevelStyle()
         }
 

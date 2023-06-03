@@ -7,7 +7,7 @@ struct ColorCircle: View {
   var body: some View {
     ZStack {
       Circle()
-        .fill(Color.element)
+        .fill(Color.neumorphism.element)
         .northWestShadow()
     }
     .frame(width: size, height: size)
@@ -17,7 +17,7 @@ struct ColorCircle: View {
 struct ColorCircle_Previews: PreviewProvider {
   static var previews: some View {
     ZStack {
-      Color.element
+      Color.neumorphism.element
       ColorCircle(rgb: RGB(), size: 200)
     }
     .frame(width: 300, height: 300)

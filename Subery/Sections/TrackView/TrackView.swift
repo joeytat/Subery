@@ -24,35 +24,33 @@ struct TrackView: View {
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
       GradientBackgroundView().overlay {
-        VStack(alignment: .leading, spacing: Theme.spacing.lg) {
-          Form {
-            VStack(spacing: Theme.spacing.xl) {
-              serviceName(viewStore)
-              serviceCategory(viewStore)
-              servicePrice(viewStore)
-              HStack(spacing: Theme.spacing.lg) {
-                serviceStartAt(viewStore)
-                serviceEndAt(viewStore)
-              }
-            }
-            Spacer()
-
-            HStack {
-              Spacer()
-
-              Button {
-                viewStore.send(.validateForm)
-              } label: {
-                Text("Save Subscription")
-              }
-              .formCTAButton()
+        Form {
+          VStack(spacing: Theme.spacing.xl) {
+            serviceName(viewStore)
+            serviceCategory(viewStore)
+            servicePrice(viewStore)
+            HStack(spacing: Theme.spacing.lg) {
+              serviceStartAt(viewStore)
+              serviceEndAt(viewStore)
             }
           }
-          .monospacedDigit()
-          .formStyle(.columns)
-          .padding(.horizontal, Theme.spacing.sm)
-          .padding(.vertical, Theme.spacing.lg)
+          Spacer()
+
+          HStack {
+            Spacer()
+
+            Button {
+              viewStore.send(.validateForm)
+            } label: {
+              Text("Save")
+            }
+            .formCTAButton()
+          }
         }
+        .monospacedDigit()
+        .formStyle(.columns)
+        .padding(.horizontal, Theme.spacing.sm)
+        .padding(.vertical, Theme.spacing.lg)
       }
     }
   }
@@ -62,21 +60,24 @@ struct TrackView: View {
       Text("App / Service Name")
         .formLabel()
 
-      VStack(spacing: 0) {
-        TextField(
-          viewStore.placeholderService.name,
-          text: viewStore.binding(\.$serviceName)
-        )
-        .formInput()
-        .focused($focusedField, equals: .name)
-        .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
-
-        if !viewStore.state.serviceSuggestions.isEmpty {
-          serviceSuggestion(viewStore)
+      TextField(
+        "",
+        text: viewStore.binding(\.$serviceName)
+      )
+      .focused($focusedField, equals: .name)
+      .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
+      .formInput(
+        placeholder: viewStore.placeholderService.name,
+        isEmpty: viewStore.serviceName.isEmpty,
+        isFocused: focusedField == .name,
+        suggestions: viewStore.state.serviceSuggestions.map { $0.name },
+        onSuggestionTapped: { suggestion in
+          viewStore.send(.binding(.set(\.$serviceName, suggestion)))
         }
-      }
-      .padding(.bottom, viewStore.state.serviceSuggestions.isEmpty ? 0 : Theme.spacing.sm)
-      .formContainer(viewStore.serviceNameError == nil ? .normal : .error)
+      )
+      .padding(
+        .bottom, viewStore.state.serviceSuggestions.isEmpty ? 0 : Theme.spacing.sm
+      )
 
       if let error = viewStore.serviceNameError {
         Text(error)
@@ -85,65 +86,53 @@ struct TrackView: View {
     }
   }
 
-  private func serviceSuggestion(_ viewStore: ViewStoreOf<AppState>) -> some View {
-    ScrollView {
-      VStack {
-        ForEach(viewStore.serviceSuggestions) { service in
-          VStack(alignment: .leading) {
-            Divider()
-            Text(service.name)
-              .font(.callout)
-              .foregroundColor(Color.lightGray)
-              .frame(height: 40)
-              .onTapGesture {
-                viewStore.send(.binding(.set(\.$serviceName, service.name)))
-              }
-          }
-        }
-      }
-    }
-    .frame(maxHeight: CGFloat.minimum(40 * CGFloat(viewStore.serviceSuggestions.count), 120))
-    .padding(.horizontal)
-    .transition(.slide)
-    .animation(.spring(), value: viewStore.state.serviceSuggestions)
-  }
-
   private func servicePrice(_ viewStore: ViewStoreOf<AppState>) -> some View {
     VStack(alignment: .leading) {
       Text("Price")
         .formLabel()
 
-      HStack {
-        PriceTextField(
-          prefix: "$",
-          suffix: viewStore.servicePricePerMonth,
-          placeholder: "6.00",
-          keyboardType: .numberPad,
-          text: viewStore.binding(\.$servicePrice),
-          focusState: $focusedField
-        )
-        .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
-
-        Dropdown(label: {
-          HStack {
-            Text(viewStore.serviceRenewalFrequency.rawValue)
-              .foregroundColor(.primary)
-            Image(systemName: "chevron.down")
-              .foregroundColor(Color.lightGray)
-          }
-        }) {
-          ForEach(AppState.State.RenewalFrequency.allCases, id: \.self) { option in
-            Button(action: {
-              viewStore.send(.setRenewalFrequency(option))
-            }) {
-              Text(option.rawValue)
-                .formLabel()
+      TextField(
+        "",
+        text: viewStore.binding(\.$servicePrice)
+      )
+      .keyboardType(.numberPad)
+      .focused($focusedField, equals: .price)
+      .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
+      .formInput(
+        isEmpty: viewStore.serviceName.isEmpty,
+        isFocused: focusedField == .price,
+        prefix: (
+          Text("$")
+            .foregroundColor(Color.daisy.secondary)
+            .font(.body)
+            .padding(.trailing, Theme.spacing.ssm)
+        ),
+        suffix: (
+          Dropdown(label: {
+            HStack {
+              Text(viewStore.serviceRenewalFrequency.rawValue)
+                .foregroundColor(Color.daisy.infoContent)
+              Image(systemName: "chevron.down")
+                .foregroundColor(Color.daisy.secondary)
+            }
+          }) {
+            ForEach(AppState.State.RenewalFrequency.allCases, id: \.self) { option in
+              Button(action: {
+                viewStore.send(.setRenewalFrequency(option))
+              }) {
+                Text(option.rawValue)
+                  .formLabel()
+              }
             }
           }
-        }
+        )
+      )
+
+      if !viewStore.servicePricePerMonth.isEmpty {
+        Text(viewStore.servicePricePerMonth)
+          .font(.caption)
+          .foregroundColor(Color.daisy.secondary)
       }
-      .padding()
-      .formContainer(viewStore.servicePriceError == nil ? .normal : .error)
 
       if let error = viewStore.servicePriceError {
         Text(error)
@@ -157,8 +146,12 @@ struct TrackView: View {
       Text("Start at")
         .formLabel()
 
-      TextField(Date().format(), text: viewStore.binding(\.$serviceStartAt))
-        .formInput()
+      TextField("", text: viewStore.binding(\.$serviceStartAt))
+        .formInput(
+          placeholder: Date().format(),
+          isEmpty: viewStore.serviceStartAt.isEmpty,
+          isFocused: focusedField == .startAt
+        )
         .focused($focusedField, equals: .startAt)
         .onTapGesture { viewStore.send(.binding(.set(\.$isServiceDateStartPickerPresented, true))) }
         .sheet(isPresented: viewStore.binding(\.$isServiceDateStartPickerPresented)) {
@@ -167,7 +160,6 @@ struct TrackView: View {
             showingDatePicker: viewStore.binding(\.$isServiceDateStartPickerPresented)
           )
         }
-        .formContainer(.normal)
         .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
     }
   }
@@ -177,8 +169,12 @@ struct TrackView: View {
       Text("End at")
         .formLabel()
 
-      TextField(Date().format(), text: viewStore.binding(\.$serviceEndAt))
-        .formInput()
+      TextField("", text: viewStore.binding(\.$serviceEndAt))
+        .formInput(
+          placeholder: Date().format(),
+          isEmpty: viewStore.serviceEndAt.isEmpty,
+          isFocused: focusedField == .endAt
+        )
         .focused($focusedField, equals: .endAt)
         .onTapGesture { viewStore.send(.binding(.set(\.$isServiceDateEndPickerPresented, true))) }
         .sheet(isPresented: viewStore.binding(\.$isServiceDateEndPickerPresented)) {
@@ -187,7 +183,6 @@ struct TrackView: View {
             showingDatePicker: viewStore.binding(\.$isServiceDateEndPickerPresented)
           )
         }
-        .formContainer(.normal)
         .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
     }
   }
@@ -198,12 +193,15 @@ struct TrackView: View {
         .formLabel()
 
       TextField(
-        viewStore.placeholderService.category.rawValue,
+        "",
         text: viewStore.binding(\.$serviceCategory)
       )
       .focused($focusedField, equals: .category)
-      .formInput()
-      .formContainer(.normal)
+      .formInput(
+        placeholder: viewStore.placeholderService.category.rawValue,
+        isEmpty: viewStore.serviceCategory.isEmpty,
+        isFocused: focusedField == .category
+      )
       .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
     }
   }

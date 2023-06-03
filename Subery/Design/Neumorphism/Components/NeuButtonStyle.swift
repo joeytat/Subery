@@ -11,11 +11,11 @@ struct NeuButtonStyle: ButtonStyle {
         Group {
           if configuration.isPressed {
             Capsule()
-              .fill(Color.element)
+              .fill(Color.neumorphism.element)
               .southEastShadow()
           } else {
             Capsule()
-              .fill(Color.element)
+              .fill(Color.neumorphism.element)
               .northWestShadow()
           }
         }

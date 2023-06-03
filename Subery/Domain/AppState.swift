@@ -92,9 +92,9 @@ struct AppState: ReducerProtocol {
           case .monthly:
             state.servicePricePerMonth = ""
           case .quarterly:
-            state.servicePricePerMonth = "(\((deformattedPriceValue / 4).roundedToDecimalPlaces())/month)"
+            state.servicePricePerMonth = "\((deformattedPriceValue / 4).roundedToDecimalPlaces())/month"
           case .yearly:
-            state.servicePricePerMonth = "(\((deformattedPriceValue / 12).roundedToDecimalPlaces())/month)"
+            state.servicePricePerMonth = "\((deformattedPriceValue / 12).roundedToDecimalPlaces())/month"
           }
           state.servicePriceError = nil
         } else {
@@ -109,9 +109,9 @@ struct AppState: ReducerProtocol {
           case .monthly:
             state.servicePricePerMonth = ""
           case .quarterly:
-            state.servicePricePerMonth = "(\((deformattedPriceValue / 4).roundedToDecimalPlaces())/month)"
+            state.servicePricePerMonth = "\((deformattedPriceValue / 4).roundedToDecimalPlaces())/month"
           case .yearly:
-            state.servicePricePerMonth = "(\((deformattedPriceValue / 12).roundedToDecimalPlaces())/month)"
+            state.servicePricePerMonth = "\((deformattedPriceValue / 12).roundedToDecimalPlaces())/month"
           }
         }
         return .none
@@ -160,10 +160,12 @@ struct AppState: ReducerProtocol {
 }
 
 extension AppState.State {
-  struct SubscriptionServicePreset: Identifiable, Equatable  {
-    var id: String { name }
+  struct SubscriptionServicePreset: Identifiable, Equatable, CustomStringConvertible  {
     let name: String
     let category: SubscriptionCategory
+
+    var id: String { name }
+    var description: String { name }
   }
 
   enum SubscriptionCategory: String, CaseIterable {

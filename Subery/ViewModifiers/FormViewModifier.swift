@@ -13,12 +13,62 @@ extension View {
     self.modifier(FormLabelModifier())
   }
 
-  func formInput() -> some View {
-    self.modifier(FormInputModifier())
+  func formInput<Prefix: View, Suffix: View>(
+    placeholder: String? = nil,
+    isEmpty: Bool,
+    isFocused: Bool,
+    suggestions: [String] = [],
+    onSuggestionTapped: @escaping (String) -> Void = { _ in },
+    prefix: Prefix? = nil,
+    suffix: Suffix? = nil
+  ) -> some View  {
+    HStack(spacing: 0) {
+      prefix
+      self.modifier(
+        FormInputModifier(
+          placeholder: placeholder,
+          isEmpty: isEmpty,
+          suggestions: suggestions,
+          onSuggestionTapped: onSuggestionTapped
+        )
+      )
+      suffix
+    }
+    .padding()
+    .background(Color.daisy.neutral)
+    .cornerRadius(10)
+    .overlay(
+      RoundedRectangle(cornerRadius: 10)
+        .stroke(
+          isFocused ? Color.daisy.primary : Color.daisy.neutralFocus, lineWidth: 2
+        )
+    )
   }
 
-  func formContainer(_ state: FormContainerModifier.State) -> some View {
-    self.modifier(FormContainerModifier(state: state))
+  func formInput(
+    placeholder: String? = nil,
+    isEmpty: Bool,
+    isFocused: Bool,
+    suggestions: [String] = [],
+    onSuggestionTapped: @escaping (String) -> Void = { _ in }
+  ) -> some View {
+    self.modifier(
+      FormInputModifier(
+        placeholder: placeholder,
+        isEmpty: isEmpty,
+        suggestions: suggestions,
+        onSuggestionTapped: onSuggestionTapped
+      )
+    )
+    .padding()
+    .background(Color.daisy.neutral)
+    .cornerRadius(10)
+    .overlay(
+      RoundedRectangle(cornerRadius: 10)
+        .stroke(
+          isFocused ? Color.daisy.primary : Color.daisy.neutralFocus, lineWidth: 2
+        )
+    )
   }
 
   func formCTAButton() -> some View {
@@ -35,43 +85,76 @@ struct FormLabelModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
       .font(.headline)
-      .foregroundColor(Color.lightGray)
+      .foregroundColor(Color.daisy.infoContent)
   }
 }
 
 struct FormInputModifier: ViewModifier {
-  func body(content: Content) -> some View {
-    content
-      .font(.body)
-      .padding()
-  }
-}
-
-struct FormContainerModifier: ViewModifier {
-  enum State {
-    case normal
-    case error
-  }
-
-  let state: State
+  let placeholder: String?
+  let isEmpty: Bool
+  let suggestions: [String]
+  let onSuggestionTapped: (String) -> Void
 
   func body(content: Content) -> some View {
-    content
-      .background(Color.white)
-      .cornerRadius(10)
-      .overlay(
-        RoundedRectangle(cornerRadius: 10)
-          .stroke(state == .normal ? Color.theme : Color.error, lineWidth: 2)
-      )
+    VStack(spacing: 0) {
+      content
+        .font(.body)
+        .tint(.daisy.infoContent)
+        .accentColor(Color.daisy.primaryContent)
+        .foregroundColor(Color.daisy.neutralContent)
+        .overlay(
+          HStack {
+            if let placeholder, isEmpty {
+              Text(placeholder)
+                .foregroundColor(Color.daisy.secondary)
+                .font(.body)
+              Spacer()
+            }
+          }.allowsHitTesting(false)
+        )
+
+      if !suggestions.isEmpty {
+        ScrollView {
+          VStack {
+            ForEach(suggestions, id: \.self) { suggestion in
+              VStack(alignment: .leading) {
+                Divider()
+                  .foregroundColor(Color.daisy.secondaryFocus)
+                Button {
+                  onSuggestionTapped(suggestion)
+                } label: {
+                  Text(suggestion)
+                    .font(.callout)
+                    .frame(height: 30)
+                    .foregroundColor(Color.daisy.secondaryFocus)
+                }
+              }
+              .transition(.slide)
+              .animation(.spring(), value: suggestions)
+            }
+          }
+          .padding(.leading)
+        }
+        .frame(
+          maxHeight: .minimum(
+            50 * CGFloat(suggestions.count), 150
+          )
+        )
+      }
+    }
   }
+
 }
 
 struct FormCTAButtonModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
       .font(.headline)
-      .foregroundColor(Color.dark)
-      .bevelStyle()
+      .padding(.horizontal, Theme.spacing.lg)
+      .padding(.vertical, Theme.spacing.md)
+      .foregroundColor(Color.daisy.primaryContent)
+      .background(Color.daisy.primary)
+      .cornerRadius(10)
   }
 }
 
@@ -79,7 +162,7 @@ struct FormErrorModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
       .font(.caption)
-      .foregroundColor(Color.error)
+      .foregroundColor(Color.daisy.error)
   }
 }
 

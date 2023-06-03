@@ -11,12 +11,12 @@ extension View {
   ) -> some View {
     return self
       .shadow(
-        color: .highlight,
+        color: Color.neumorphism.highlight,
         radius: radius,
         x: -offset,
         y: -offset)
       .shadow(
-        color: .shadow, radius: radius, x: offset, y: offset)
+        color: Color.neumorphism.shadow, radius: radius, x: offset, y: offset)
   }
 
   /// Simulate shining a light on the southeast edge of a view.
@@ -30,8 +30,8 @@ extension View {
   ) -> some View {
     return self
       .shadow(
-        color: .shadow, radius: radius, x: -offset, y: -offset)
+        color: Color.neumorphism.shadow, radius: radius, x: -offset, y: -offset)
       .shadow(
-        color: .highlight, radius: radius, x: offset, y: offset)
+        color: Color.neumorphism.highlight, radius: radius, x: offset, y: offset)
   }
 }

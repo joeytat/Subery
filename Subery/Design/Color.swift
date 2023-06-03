@@ -9,15 +9,47 @@ extension Color {
     self.init(red: rgb.red, green: rgb.green, blue: rgb.blue)
   }
 
-  // Add Neumorphism colors to standard colors
-  static let element = Color("Element")
-  static let highlight = Color("Highlight")
-  static let shadow = Color("Shadow")
-  static let lightGray = Color("LightGray")
-  static let dark = Color("Dark")
-  static let theme = Color("Theme")
-  static let darkTheme = Color("DarkTheme")
-  static let error = Color("Error")
+}
+
+extension Color {
+  struct Neumorphism {
+    let element = Color("Element")
+    let highlight = Color("Highlight")
+    let shadow = Color("Shadow")
+  }
+
+  static let neumorphism = Neumorphism()
+}
+
+extension Color {
+  struct Daisy {
+    let primary = Color("primary")
+    let primaryFocus = Color("primary-focus")
+    let primaryContent = Color("primary-content")
+
+    let secondary = Color("secondary")
+    let secondaryFocus = Color("secondary-focus")
+    let secondaryContent = Color("secondary-content")
+
+    let accent = Color("accent")
+    let accentFocus = Color("accent-focus")
+    let accentContent = Color("accent-content")
+
+    let neutral = Color("neutral")
+    let neutralFocus = Color("neutral-focus")
+    let neutralContent = Color("neutral-content")
+
+    let info = Color("info")
+    let infoContent = Color("info-content")
+    let error = Color("error")
+    let errorContent = Color("error-content")
+    let success = Color("success")
+    let successContent = Color("success-content")
+    let warning = Color("warning")
+    let warningContent = Color("warning-content")
+  }
+
+  static let daisy = Daisy()
 }
 
 extension Color {
