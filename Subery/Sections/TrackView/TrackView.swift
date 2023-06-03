@@ -37,6 +37,15 @@ struct TrackView: View {
           Spacer()
 
           HStack {
+            NavigationLink(
+              destination: LandingView(
+                store: store
+              )
+            ) {
+              Text("Back")
+                .formCancelButton()
+            }
+
             Spacer()
 
             Button {

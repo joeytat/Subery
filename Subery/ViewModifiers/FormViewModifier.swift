@@ -75,6 +75,10 @@ extension View {
     self.modifier(FormCTAButtonModifier())
   }
 
+  func formCancelButton() -> some View {
+    self.modifier(FormCancelButtonModifier())
+  }
+
   func formError() -> some View {
     self.modifier(FormErrorModifier())
   }
@@ -154,6 +158,17 @@ struct FormCTAButtonModifier: ViewModifier {
       .padding(.vertical, Theme.spacing.md)
       .foregroundColor(Color.daisy.primaryContent)
       .background(Color.daisy.primary)
+      .cornerRadius(10)
+  }
+}
+
+struct FormCancelButtonModifier: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(.headline)
+      .padding(.horizontal, Theme.spacing.lg)
+      .padding(.vertical, Theme.spacing.md)
+      .foregroundColor(Color.daisy.primaryContent)
       .cornerRadius(10)
   }
 }

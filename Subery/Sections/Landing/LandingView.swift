@@ -19,11 +19,11 @@ struct LandingView: View {
         Text("All Your Subscriptions, Simplified.")
           .font(.title)
           .bold()
-          .foregroundColor(.white)
+          .foregroundColor(Color.daisy.infoContent)
 
         Text("Keep track of all your monthly and annual subscriptions in one place. Never miss another renewal date or get surprised by unexpected fees again.")
           .font(.body)
-          .foregroundColor(.red)
+          .foregroundColor(Color.daisy.secondary)
           .padding(.bottom, 32)
 
         NavigationLink(
@@ -33,9 +33,7 @@ struct LandingView: View {
           .navigationBarBackButtonHidden()
         ) {
           Text("Take Control Now")
-            .font(.headline)
-            .foregroundColor(Color.red)
-            .bevelStyle()
+            .formCTAButton()
         }
 
         Spacer()
