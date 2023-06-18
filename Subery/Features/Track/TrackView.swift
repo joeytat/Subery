@@ -48,7 +48,7 @@ struct TrackView: View {
             Spacer()
 
             Button {
-              viewStore.send(.validateForm)
+              viewStore.send(.onSaveButtonTapped)
             } label: {
               Text("Save")
             }
@@ -220,7 +220,27 @@ struct TrackView_Previews: PreviewProvider {
     GradientNoiseBackground().overlay {
       TrackView(
         store: Store(
-          initialState: TrackFeature.State(),
+          initialState: TrackFeature.State(
+            placeholderService: TrackFeature.State.popularSubscriptions.randomElement()!,
+            serviceSuggestions: [],
+            serviceName: "Gihub Copilot",
+            serviceCategory: "AI",
+            servicePrice: "9.9",
+            serviceStartAt: Date().formatted(),
+            serviceStartAtDate: Date(),
+            serviceEndAt: Date().formatted(),
+            serviceEndAtDate: Date(),
+            serviceRenewalFrequency: .monthly,
+            serviceNameError: nil,
+            serviceCategoryError: nil,
+            servicePriceError: nil,
+            serviceStartAtError: nil,
+            serviceEndAtError: nil,
+            servicePricePerMonth: "",
+            isServiceDateStartPickerPresented: false,
+            isServiceDateEndPickerPresented: false,
+            serviceFocusedInput: .none
+          ),
           reducer: TrackFeature()
         )
       )

@@ -37,7 +37,7 @@ struct TrackFeature: ReducerProtocol {
   enum Action: BindableAction, Equatable {
     case binding(BindingAction<State>)
     case setRenewalFrequency(State.RenewalFrequency)
-    case validateForm
+    case onSaveButtonTapped
   }
 
   var body: some ReducerProtocol<State, Action> {
@@ -112,7 +112,7 @@ struct TrackFeature: ReducerProtocol {
         return .none
       case .binding:
         return .none
-      case .validateForm:
+      case .onSaveButtonTapped:
         if state.serviceName.isEmpty {
           state.serviceNameError = "Service name is required"
           return .none
