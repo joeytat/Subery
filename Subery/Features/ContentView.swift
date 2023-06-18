@@ -9,13 +9,13 @@ import SwiftUI
 import ComposableArchitecture
 
 struct ContentView: View {
-  let store: StoreOf<ListFeature>
+  let store: StoreOf<TracksFeature>
 
   var body: some View {
     NavigationStack {
       WithViewStore(store, observe: { $0 }) { viewStore in
         GradientBackgroundView().overlay {
-          ListView(store: store)
+          TracksView(store: store)
         }
       }
     }

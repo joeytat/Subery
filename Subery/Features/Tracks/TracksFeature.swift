@@ -1,5 +1,5 @@
 //
-//  ListFeature.swift
+//  TracksFeature.swift
 //  Subery
 //
 //  Created by yu wang on 2023/6/18.
@@ -26,7 +26,7 @@ extension Track {
   }
 }
 
-struct ListFeature: ReducerProtocol {
+struct TracksFeature: ReducerProtocol {
   struct State: Equatable {
     @PresentationState var addTrack: TrackFeature.State?
     @PresentationState var alert: AlertState<Action.Alert>?

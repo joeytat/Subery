@@ -8,8 +8,8 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct ListView: View {
-  let store: StoreOf<ListFeature>
+struct TracksView: View {
+  let store: StoreOf<TracksFeature>
   var body: some View {
     WithViewStore(self.store) { viewStore in
       NavigationView {
@@ -64,10 +64,10 @@ struct ListView: View {
   }
 }
 
-struct ListView_Previews: PreviewProvider {
+struct TracksView_Previews: PreviewProvider {
   static var previews: some View {
-    ListView(store: Store(
-      initialState: ListFeature.State(
+    TracksView(store: Store(
+      initialState: TracksFeature.State(
         tracks: [
           .init(
             id: UUID(),
@@ -97,7 +97,7 @@ struct ListView_Previews: PreviewProvider {
             renewalFrequency: .yearly
           )
         ]),
-      reducer: ListFeature()
+      reducer: TracksFeature()
     )
     )
   }
