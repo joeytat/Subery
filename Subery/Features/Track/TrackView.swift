@@ -18,7 +18,7 @@ struct TrackView: View {
     case endAt
   }
 
-  let store: StoreOf<AppState>
+  let store: StoreOf<TrackFeature>
   @FocusState var focusedField: FormInput?
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
@@ -63,7 +63,7 @@ struct TrackView: View {
     }
   }
 
-  private func serviceName(_ viewStore: ViewStoreOf<AppState>) -> some View {
+  private func serviceName(_ viewStore: ViewStoreOf<TrackFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("App / Service Name")
         .formLabel()
@@ -94,7 +94,7 @@ struct TrackView: View {
     }
   }
 
-  private func servicePrice(_ viewStore: ViewStoreOf<AppState>) -> some View {
+  private func servicePrice(_ viewStore: ViewStoreOf<TrackFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("Price")
         .formLabel()
@@ -124,7 +124,7 @@ struct TrackView: View {
                 .foregroundColor(Color.daisy.secondary)
             }
           }) {
-            ForEach(AppState.State.RenewalFrequency.allCases, id: \.self) { option in
+            ForEach(TrackFeature.State.RenewalFrequency.allCases, id: \.self) { option in
               Button(action: {
                 viewStore.send(.setRenewalFrequency(option))
               }) {
@@ -149,7 +149,7 @@ struct TrackView: View {
     }
   }
 
-  private func serviceStartAt(_ viewStore: ViewStoreOf<AppState>) -> some View {
+  private func serviceStartAt(_ viewStore: ViewStoreOf<TrackFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("Start at")
         .formLabel()
@@ -172,7 +172,7 @@ struct TrackView: View {
     }
   }
 
-  private func serviceEndAt(_ viewStore: ViewStoreOf<AppState>) -> some View {
+  private func serviceEndAt(_ viewStore: ViewStoreOf<TrackFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("End at")
         .formLabel()
@@ -195,7 +195,7 @@ struct TrackView: View {
     }
   }
 
-  private func serviceCategory(_ viewStore: ViewStoreOf<AppState>) -> some View {
+  private func serviceCategory(_ viewStore: ViewStoreOf<TrackFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("Category")
         .formLabel()
@@ -220,8 +220,8 @@ struct TrackView_Previews: PreviewProvider {
     GradientNoiseBackground().overlay {
       TrackView(
         store: Store(
-          initialState: AppState.State(),
-          reducer: AppState()
+          initialState: TrackFeature.State(),
+          reducer: TrackFeature()
         )
       )
     }

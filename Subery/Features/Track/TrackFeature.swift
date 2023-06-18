@@ -7,17 +7,20 @@
 
 import Foundation
 import ComposableArchitecture
-import SwiftUI
 
-struct AppState: ReducerProtocol {
+struct TrackFeature: ReducerProtocol {
   struct State: Equatable {
-    // Track
     var placeholderService: SubscriptionServicePreset = State.popularSubscriptions.randomElement()!
     var serviceSuggestions: IdentifiedArrayOf<SubscriptionServicePreset> = []
 
     @BindingState var serviceName: String = ""
     @BindingState var serviceCategory: String = ""
     @BindingState var servicePrice: String = ""
+    @BindingState var serviceStartAt: String = ""
+    @BindingState var serviceStartAtDate: Date = Date()
+    @BindingState var serviceEndAt: String = ""
+    @BindingState var serviceEndAtDate: Date = Date()
+    var serviceRenewalFrequency: RenewalFrequency = .monthly
 
     var serviceNameError: String?
     var serviceCategoryError: String?
@@ -26,16 +29,8 @@ struct AppState: ReducerProtocol {
     var serviceEndAtError: String?
 
     @BindingState var servicePricePerMonth: String = ""
-    var serviceRenewalFrequency: RenewalFrequency = .monthly
-
-    @BindingState var serviceStartAt: String = ""
-    @BindingState var serviceStartAtDate: Date = Date()
     @BindingState var isServiceDateStartPickerPresented: Bool = false
-
-    @BindingState var serviceEndAt: String = ""
-    @BindingState var serviceEndAtDate: Date = Date()
     @BindingState var isServiceDateEndPickerPresented: Bool = false
-
     @BindingState var serviceFocusedInput: TrackView.FormInput?
   }
 
@@ -51,7 +46,7 @@ struct AppState: ReducerProtocol {
       switch action {
       case .binding(\.$serviceName):
         if !state.serviceName.isEmpty {
-          let suggestionsResult: IdentifiedArrayOf<AppState.State.SubscriptionServicePreset> = IdentifiedArray(
+          let suggestionsResult: IdentifiedArrayOf<TrackFeature.State.SubscriptionServicePreset> = IdentifiedArray(
             uniqueElements: State.popularSubscriptions
               .filter { $0.name.lowercased().starts(with: state.serviceName.lowercased()) }
           )
@@ -159,7 +154,7 @@ struct AppState: ReducerProtocol {
   }
 }
 
-extension AppState.State {
+extension TrackFeature.State {
   struct SubscriptionServicePreset: Identifiable, Equatable, CustomStringConvertible  {
     let name: String
     let category: SubscriptionCategory
@@ -250,7 +245,7 @@ extension AppState.State {
   }
 }
 
-extension AppState.State {
+extension TrackFeature.State {
   enum RenewalFrequency: String, CaseIterable {
     case yearly = "Yearly"
     case quarterly = "Quarterly"

@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct LandingView: View {
-  let store: StoreOf<AppState>
+  let store: StoreOf<TrackFeature>
 
   var body: some View {
     WithViewStore(self.store, observe: { $0 }) { viewStore in
@@ -48,8 +48,8 @@ struct LandingView_Previews: PreviewProvider {
   static var previews: some View {
     LandingView(
       store: Store(
-        initialState: AppState.State(),
-        reducer: AppState()
+        initialState: TrackFeature.State(),
+        reducer: TrackFeature()
       )
     )
     .background(GradientBackgroundView())

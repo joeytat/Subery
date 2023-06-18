@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct ContentView: View {
-  let store: StoreOf<AppState>
+  let store: StoreOf<TrackFeature>
 
   var body: some View {
     NavigationStack {
@@ -27,8 +27,8 @@ struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView(
       store: Store(
-        initialState: AppState.State(),
-        reducer: AppState()
+        initialState: TrackFeature.State(),
+        reducer: TrackFeature()
       )
     )
   }
