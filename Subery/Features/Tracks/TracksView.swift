@@ -65,39 +65,41 @@ struct TracksView: View {
 
 struct TracksView_Previews: PreviewProvider {
   static var previews: some View {
-    TracksView(store: Store(
-      initialState: TracksFeature.State(
-        tracks: [
-          .init(
-            id: UUID(),
-            name: "Github Copilot",
-            category: "AI",
-            price: "9.99",
-            startAtDate: Date(),
-            endAtDate: Date(),
-            renewalFrequency: .monthly
-          ),
-          .init(
-            id: UUID(),
-            name: "Midjourney",
-            category: "AI",
-            price: "9.99",
-            startAtDate: Date(),
-            endAtDate: Date(),
-            renewalFrequency: .yearly
-          ),
-          .init(
-            id: UUID(),
-            name: "Netflix",
-            category: "Video Streaming",
-            price: "9.99",
-            startAtDate: Date(),
-            endAtDate: Date(),
-            renewalFrequency: .yearly
-          )
-        ]),
-      reducer: TracksFeature()
-    )
+    TracksView(
+      store: Store(
+        initialState: TracksFeature.State(
+          tracks: [
+            .init(
+              id: UUID(),
+              name: "Github Copilot",
+              category: "AI",
+              price: "9.99",
+              startAtDate: Date(),
+              endAtDate: Date(),
+              renewalFrequency: .monthly
+            ),
+            .init(
+              id: UUID(),
+              name: "Midjourney",
+              category: "AI",
+              price: "9.99",
+              startAtDate: Date(),
+              endAtDate: Date(),
+              renewalFrequency: .yearly
+            ),
+            .init(
+              id: UUID(),
+              name: "Netflix",
+              category: "Video Streaming",
+              price: "9.99",
+              startAtDate: Date(),
+              endAtDate: Date(),
+              renewalFrequency: .yearly
+            )
+          ]
+        ),
+        reducer: TracksFeature()
+      )
     )
   }
 }
