@@ -28,16 +28,14 @@ extension Track {
 
 struct TracksFeature: ReducerProtocol {
   struct State: Equatable {
-    @PresentationState var addTrack: AddTrackFeature.State?
-    @PresentationState var alert: AlertState<Action.Alert>?
+    @PresentationState var destination: Destination.State?
     var tracks: IdentifiedArrayOf<Track> = []
   }
   
   enum Action {
     case addTrackButtonTapped
-    case addTrack(PresentationAction<AddTrackFeature.Action>)
     case deleteButtonTapped(id: Track.ID)
-    case alert(PresentationAction<Alert>)
+    case destination(PresentationAction<Destination.Action>)
     enum Alert: Equatable {
       case confirmDeletion(id: Track.ID)
     }
@@ -47,42 +45,63 @@ struct TracksFeature: ReducerProtocol {
     Reduce { state, action in
       switch action {
       case .addTrackButtonTapped:
-        state.addTrack = AddTrackFeature.State(
-          track: .init(
-            id: UUID(),
-            name: "",
-            category: "",
-            price: "",
-            startAtDate: Date(),
-            endAtDate: Date(),
-            renewalFrequency: .monthly
+        state.destination = .addTrack(
+          AddTrackFeature.State(
+            track: .init(
+              id: UUID(),
+              name: "",
+              category: "",
+              price: "",
+              startAtDate: Date(),
+              endAtDate: Date(),
+              renewalFrequency: .monthly
+            )
           )
         )
         return .none
-      case .addTrack(.presented(.delegate(.saveTrack(let track)))):
+      case .destination(.presented(.addTrack(.delegate(.saveTrack(let track))))):
         state.tracks.append(track)
         return .none
-      case .addTrack:
-        return .none
-      case .alert(.presented(.confirmDeletion(let id))):
+      case .destination(.presented(.alert(.confirmDeletion(let id)))):
         state.tracks.remove(id: id)
         return .none
-      case .alert:
-        return .none
       case .deleteButtonTapped(let id):
-        state.alert = AlertState {
-          TextState("Are you sure?")
-        } actions: {
-          ButtonState(role: .destructive, action: .confirmDeletion(id: id)) {
-            TextState("Delete")
+        state.destination = .alert(
+          AlertState {
+            TextState("Are you sure")
+          } actions: {
+            ButtonState(role: .destructive, action: .confirmDeletion(id: id)) {
+              TextState("Delete")
+            }
           }
-        }
+        )
+        return .none
+      case .destination:
         return .none
       }
     }
-    .ifLet(\.$addTrack, action: /Action.addTrack) {
-      AddTrackFeature()
+    .ifLet(\.$destination, action: /Action.destination) {
+      Destination()
     }
-    .ifLet(\.$alert, action: /Action.alert)
+  }
+}
+
+extension TracksFeature {
+  struct Destination: ReducerProtocol {
+    enum State: Equatable {
+      case addTrack(AddTrackFeature.State)
+      case alert(AlertState<TracksFeature.Action.Alert>)
+    }
+
+    enum Action {
+      case addTrack(AddTrackFeature.Action)
+      case alert(TracksFeature.Action.Alert)
+    }
+
+    var body: some ReducerProtocolOf<Self> {
+      Scope(state: /State.addTrack, action: /Action.addTrack) {
+        AddTrackFeature()
+      }
+    }
   }
 }

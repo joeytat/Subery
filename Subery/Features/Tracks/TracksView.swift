@@ -45,19 +45,18 @@ struct TracksView: View {
           )
         )
         .sheet(
-          store: self.store.scope(
-            state: \.$addTrack,
-            action: { .addTrack($0) })
+          store: self.store.scope(state: \.$destination, action: { .destination($0) }),
+          state: /TracksFeature.Destination.State.addTrack,
+          action: TracksFeature.Destination.Action.addTrack
         ) { addTrackStore in
           NavigationStack {
             AddTrackView(store: addTrackStore)
           }
         }
         .alert(
-          store: self.store.scope(
-            state: \.$alert,
-            action: { .alert($0) }
-          )
+          store: self.store.scope(state: \.$destination, action: { .destination($0) }),
+          state: /TracksFeature.Destination.State.alert,
+          action: TracksFeature.Destination.Action.alert
         )
       }
     }
