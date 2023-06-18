@@ -166,10 +166,7 @@ struct FormCancelButtonModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
       .font(.headline)
-      .padding(.horizontal, Theme.spacing.lg)
-      .padding(.vertical, Theme.spacing.md)
       .foregroundColor(Color.daisy.neutralContent)
-      .cornerRadius(10)
   }
 }
 

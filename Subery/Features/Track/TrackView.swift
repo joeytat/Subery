@@ -23,45 +23,52 @@ struct TrackView: View {
 
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
-      GradientBackgroundView().overlay {
-        Form {
-          VStack(spacing: Theme.spacing.xl) {
-            serviceName(viewStore)
-            serviceCategory(viewStore)
-            servicePrice(viewStore)
-            Section {
-              HStack(spacing: Theme.spacing.lg) {
-                serviceStartAt(viewStore)
-                serviceEndAt(viewStore)
+      Form {
+        Text("Add Track")
+          .font(.title)
+          .fontWeight(.semibold)
+          .foregroundColor(Color.daisy.primaryContent)
+
+        VStack(spacing: Theme.spacing.xl) {
+          serviceName(viewStore)
+          serviceCategory(viewStore)
+          servicePrice(viewStore)
+          Section {
+            HStack(spacing: Theme.spacing.lg) {
+              serviceStartAt(viewStore)
+              serviceEndAt(viewStore)
+            }
+          }
+
+          Section {
+            HStack {
+              Button {
+                viewStore.send(.onCancelButtonTapped)
+              } label: {
+                Text("Cancel")
+                  .formCancelButton()
+              }
+
+              Spacer()
+
+              Button {
+                viewStore.send(.onSaveButtonTapped)
+              } label: {
+                Text("Save")
+                  .formCTAButton()
               }
             }
           }
-          Spacer()
-
-          HStack {
-            Button {
-              viewStore.send(.onCancelButtonTapped)
-            } label: {
-              Text("Cancel")
-            }
-            .formCancelButton()
-            
-            Spacer()
-
-            Button {
-              viewStore.send(.onSaveButtonTapped)
-            } label: {
-              Text("Save")
-            }
-            .formCTAButton()
-          }
         }
-        .monospacedDigit()
-        .formStyle(.columns)
-        .padding(.horizontal, Theme.spacing.sm)
-        .padding(.vertical, Theme.spacing.lg)
+        .padding(.top, Theme.spacing.sm)
+        
+        Spacer()
       }
+      .formStyle(.columns)
     }
+    .padding(.horizontal, Theme.spacing.md)
+    .padding(.vertical, Theme.spacing.xl)
+    .background(GradientBackgroundView())
   }
 
   private func serviceName(_ viewStore: ViewStoreOf<TrackFeature>) -> some View {
@@ -244,7 +251,7 @@ struct TrackView: View {
 
 struct TrackView_Previews: PreviewProvider {
   static var previews: some View {
-    GradientNoiseBackground().overlay {
+    NavigationStack {
       TrackView(
         store: Store(
           initialState: TrackFeature.State(
