@@ -23,6 +23,14 @@ struct ListView: View {
               Spacer()
               Text(track.price)
             }
+            .swipeActions(edge: .trailing) {
+              Button {
+                viewStore.send(.deleteButtonTapped(id: track.id))
+              } label: {
+                Image(systemName: "trash")
+                  .foregroundColor(Color.daisy.warning)
+              }
+            }
           }
         }
         .navigationTitle("Subery")
@@ -45,6 +53,12 @@ struct ListView: View {
             TrackView(store: addTrackStore)
           }
         }
+        .alert(
+          store: self.store.scope(
+            state: \.$alert,
+            action: { .alert($0) }
+          )
+        )
       }
     }
   }

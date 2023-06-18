@@ -29,14 +29,20 @@ extension Track {
 struct ListFeature: ReducerProtocol {
   struct State: Equatable {
     @PresentationState var addTrack: TrackFeature.State?
+    @PresentationState var alert: AlertState<Action.Alert>?
     var tracks: IdentifiedArrayOf<Track> = []
   }
   
   enum Action {
     case addTrackButtonTapped
     case addTrack(PresentationAction<TrackFeature.Action>)
+    case deleteButtonTapped(id: Track.ID)
+    case alert(PresentationAction<Alert>)
+    enum Alert: Equatable {
+      case confirmDeletion(id: Track.ID)
+    }
   }
-  
+
   var body: some ReducerProtocolOf<Self> {
     Reduce { state, action in
       switch action {
@@ -58,9 +64,25 @@ struct ListFeature: ReducerProtocol {
         return .none
       case .addTrack:
         return .none
+      case .alert(.presented(.confirmDeletion(let id))):
+        state.tracks.remove(id: id)
+        return .none
+      case .alert:
+        return .none
+      case .deleteButtonTapped(let id):
+        state.alert = AlertState {
+          TextState("Are you sure?")
+        } actions: {
+          ButtonState(role: .destructive, action: .confirmDeletion(id: id)) {
+            TextState("Delete")
+          }
+        }
+        return .none
       }
-    }.ifLet(\.$addTrack, action: /Action.addTrack) {
+    }
+    .ifLet(\.$addTrack, action: /Action.addTrack) {
       TrackFeature()
     }
+    .ifLet(\.$alert, action: /Action.alert)
   }
 }

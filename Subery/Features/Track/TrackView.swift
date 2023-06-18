@@ -61,7 +61,7 @@ struct TrackView: View {
           }
         }
         .padding(.top, Theme.spacing.sm)
-        
+
         Spacer()
       }
       .formStyle(.columns)
