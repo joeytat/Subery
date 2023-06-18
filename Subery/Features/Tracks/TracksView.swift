@@ -50,7 +50,7 @@ struct TracksView: View {
             action: { .addTrack($0) })
         ) { addTrackStore in
           NavigationStack {
-            TrackView(store: addTrackStore)
+            AddTrackView(store: addTrackStore)
           }
         }
         .alert(

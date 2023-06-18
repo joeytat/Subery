@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct LandingView: View {
-  let store: StoreOf<TrackFeature>
+  let store: StoreOf<AddTrackFeature>
 
   var body: some View {
     WithViewStore(self.store, observe: { $0 }) { viewStore in
@@ -27,7 +27,7 @@ struct LandingView: View {
           .padding(.bottom, 32)
 
         NavigationLink(
-          destination: TrackView(
+          destination: AddTrackView(
             store: store
           )
           .navigationBarBackButtonHidden()
@@ -48,7 +48,7 @@ struct LandingView_Previews: PreviewProvider {
   static var previews: some View {
     LandingView(
       store: Store(
-        initialState: TrackFeature.State(
+        initialState: AddTrackFeature.State(
           track: .init(
             id: UUID(),
             name: "Github Copilot",
@@ -59,7 +59,7 @@ struct LandingView_Previews: PreviewProvider {
             renewalFrequency: .monthly
           )
         ),
-        reducer: TrackFeature()
+        reducer: AddTrackFeature()
       )
     )
     .background(GradientBackgroundView())

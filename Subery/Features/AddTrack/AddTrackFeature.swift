@@ -1,5 +1,5 @@
 //
-//  Feature.swift
+//  AddTrackFeature.swift
 //  Subery
 //
 //  Created by yu wang on 2023/5/1.
@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-struct TrackFeature: ReducerProtocol {
+struct AddTrackFeature: ReducerProtocol {
   struct State: Equatable {
     var placeholderService: SubscriptionServicePreset = State.popularSubscriptions.randomElement()!
     var serviceSuggestions: IdentifiedArrayOf<SubscriptionServicePreset> = []
@@ -23,7 +23,7 @@ struct TrackFeature: ReducerProtocol {
     @BindingState var servicePricePerMonth: String = ""
     @BindingState var isServiceDateStartPickerPresented: Bool = false
     @BindingState var isServiceDateEndPickerPresented: Bool = false
-    @BindingState var serviceFocusedInput: TrackView.FormInput?
+    @BindingState var serviceFocusedInput: AddTrackView.FormInput?
   }
 
   enum Action: BindableAction {
@@ -50,7 +50,7 @@ struct TrackFeature: ReducerProtocol {
       case .setName(let name):
         state.track.name = name
         if !name.isEmpty {
-          let suggestionsResult: IdentifiedArrayOf<TrackFeature.State.SubscriptionServicePreset> = IdentifiedArray(
+          let suggestionsResult: IdentifiedArrayOf<AddTrackFeature.State.SubscriptionServicePreset> = IdentifiedArray(
             uniqueElements: State.popularSubscriptions
               .filter { $0.name.lowercased().starts(with: name.lowercased()) }
           )
@@ -145,7 +145,7 @@ struct TrackFeature: ReducerProtocol {
   }
 }
 
-extension TrackFeature.State {
+extension AddTrackFeature.State {
   struct SubscriptionServicePreset: Identifiable, Equatable, CustomStringConvertible  {
     let name: String
     let category: SubscriptionCategory

@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 import Combine
 
-struct TrackView: View {
+struct AddTrackView: View {
   enum FormInput: String, Hashable {
     case name
     case category
@@ -18,7 +18,7 @@ struct TrackView: View {
     case endAt
   }
 
-  let store: StoreOf<TrackFeature>
+  let store: StoreOf<AddTrackFeature>
   @FocusState var focusedField: FormInput?
 
   var body: some View {
@@ -71,7 +71,7 @@ struct TrackView: View {
     .background(GradientBackgroundView())
   }
 
-  private func serviceName(_ viewStore: ViewStoreOf<TrackFeature>) -> some View {
+  private func serviceName(_ viewStore: ViewStoreOf<AddTrackFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("App / Service Name")
         .formLabel()
@@ -103,7 +103,7 @@ struct TrackView: View {
     }
   }
 
-  private func servicePrice(_ viewStore: ViewStoreOf<TrackFeature>) -> some View {
+  private func servicePrice(_ viewStore: ViewStoreOf<AddTrackFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("Price")
         .formLabel()
@@ -160,7 +160,7 @@ struct TrackView: View {
     }
   }
 
-  private func serviceStartAt(_ viewStore: ViewStoreOf<TrackFeature>) -> some View {
+  private func serviceStartAt(_ viewStore: ViewStoreOf<AddTrackFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("Start at")
         .formLabel()
@@ -193,7 +193,7 @@ struct TrackView: View {
     }
   }
 
-  private func serviceEndAt(_ viewStore: ViewStoreOf<TrackFeature>) -> some View {
+  private func serviceEndAt(_ viewStore: ViewStoreOf<AddTrackFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("End at")
         .formLabel()
@@ -226,7 +226,7 @@ struct TrackView: View {
     }
   }
 
-  private func serviceCategory(_ viewStore: ViewStoreOf<TrackFeature>) -> some View {
+  private func serviceCategory(_ viewStore: ViewStoreOf<AddTrackFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("Category")
         .formLabel()
@@ -252,10 +252,10 @@ struct TrackView: View {
 struct TrackView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationStack {
-      TrackView(
+      AddTrackView(
         store: Store(
-          initialState: TrackFeature.State(
-            placeholderService: TrackFeature.State.popularSubscriptions.randomElement()!,
+          initialState: AddTrackFeature.State(
+            placeholderService: AddTrackFeature.State.popularSubscriptions.randomElement()!,
             serviceSuggestions: [],
             track: .init(
               id: UUID(),
@@ -276,7 +276,7 @@ struct TrackView_Previews: PreviewProvider {
             isServiceDateEndPickerPresented: false,
             serviceFocusedInput: .none
           ),
-          reducer: TrackFeature()
+          reducer: AddTrackFeature()
         )
       )
     }
@@ -290,7 +290,7 @@ struct PriceTextField: View {
   let keyboardType: UIKeyboardType
 
   @Binding var text: String
-  var focusState: FocusState<TrackView.FormInput?>.Binding
+  var focusState: FocusState<AddTrackView.FormInput?>.Binding
 
   var body: some View {
     HStack(alignment: .firstTextBaseline, spacing: Theme.spacing.sm) {
