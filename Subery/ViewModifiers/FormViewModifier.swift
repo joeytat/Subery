@@ -35,12 +35,12 @@ extension View {
       suffix
     }
     .padding()
-    .background(Color.daisy.neutral)
+    .background(Color.daisy.neutralFocus)
     .cornerRadius(10)
     .overlay(
       RoundedRectangle(cornerRadius: 10)
         .stroke(
-          isFocused ? Color.daisy.primary : Color.daisy.neutralFocus, lineWidth: 2
+          isFocused ? Color.daisy.accent : Color.clear, lineWidth: 2
         )
     )
   }
@@ -61,12 +61,12 @@ extension View {
       )
     )
     .padding()
-    .background(Color.daisy.neutral)
+    .background(Color.daisy.neutralFocus)
     .cornerRadius(10)
     .overlay(
       RoundedRectangle(cornerRadius: 10)
         .stroke(
-          isFocused ? Color.daisy.primary : Color.daisy.neutralFocus, lineWidth: 2
+          isFocused ? Color.daisy.accent : Color.clear, lineWidth: 2
         )
     )
   }
@@ -89,7 +89,7 @@ struct FormLabelModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
       .font(.headline)
-      .foregroundColor(Color.daisy.infoContent)
+      .foregroundColor(Color.daisy.neutralContent)
   }
 }
 
@@ -156,8 +156,8 @@ struct FormCTAButtonModifier: ViewModifier {
       .font(.headline)
       .padding(.horizontal, Theme.spacing.lg)
       .padding(.vertical, Theme.spacing.md)
-      .foregroundColor(Color.daisy.primaryContent)
-      .background(Color.daisy.primary)
+      .foregroundColor(Color.daisy.accentContent)
+      .background(Color.daisy.accent)
       .cornerRadius(10)
   }
 }
@@ -168,7 +168,7 @@ struct FormCancelButtonModifier: ViewModifier {
       .font(.headline)
       .padding(.horizontal, Theme.spacing.lg)
       .padding(.vertical, Theme.spacing.md)
-      .foregroundColor(Color.daisy.primaryContent)
+      .foregroundColor(Color.daisy.neutralContent)
       .cornerRadius(10)
   }
 }

@@ -34,6 +34,7 @@ extension Color {
     let accent = Color("accent")
     let accentFocus = Color("accent-focus")
     let accentContent = Color("accent-content")
+    let accentInvert = Color("accent-invert")
 
     let neutral = Color("neutral")
     let neutralFocus = Color("neutral-focus")

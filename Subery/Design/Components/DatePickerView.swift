@@ -22,8 +22,7 @@ struct DatePickerView: View {
         .datePickerStyle(GraphicalDatePickerStyle())
         .labelsHidden()
         .padding()
-        .tint(Color.daisy.warning)
-        .colorMultiply(Color.daisy.infoContent)
+        .tint(Color.daisy.accentInvert)
         .colorInvert()
         Spacer()
       }

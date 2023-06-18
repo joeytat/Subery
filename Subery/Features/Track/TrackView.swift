@@ -92,6 +92,7 @@ struct TrackView: View {
       if let error = viewStore.serviceNameError {
         Text(error)
           .formError()
+          .padding(.leading)
       }
     }
   }
@@ -113,7 +114,7 @@ struct TrackView: View {
         isFocused: focusedField == .price,
         prefix: (
           Text("$")
-            .foregroundColor(Color.daisy.secondary)
+            .foregroundColor(Color.daisy.neutralContent)
             .font(.body)
             .padding(.trailing, Theme.spacing.ssm)
         ),
@@ -121,9 +122,9 @@ struct TrackView: View {
           Dropdown(label: {
             HStack {
               Text(viewStore.track.renewalFrequency.rawValue)
-                .foregroundColor(Color.daisy.infoContent)
+                .foregroundColor(Color.daisy.neutralContent)
               Image(systemName: "chevron.down")
-                .foregroundColor(Color.daisy.secondary)
+                .foregroundColor(Color.daisy.neutralContent)
             }
           }) {
             ForEach(Track.RenewalFrequency.allCases, id: \.self) { option in
@@ -140,13 +141,15 @@ struct TrackView: View {
 
       if !viewStore.servicePricePerMonth.isEmpty {
         Text(viewStore.servicePricePerMonth)
-          .font(.caption)
-          .foregroundColor(Color.daisy.secondary)
+          .font(.callout)
+          .foregroundColor(Color.daisy.infoContent)
+          .padding(.leading)
       }
 
       if let error = viewStore.servicePriceError {
         Text(error)
           .formError()
+          .padding(.leading)
       }
     }
   }
@@ -252,10 +255,10 @@ struct TrackView_Previews: PreviewProvider {
               id: UUID(),
               name: "Github Copilot",
               category: "AI",
-              price: "9",
+              price: "99",
               startAtDate: Date(),
               endAtDate: Date(),
-              renewalFrequency: .monthly
+              renewalFrequency: .yearly
             ),
             serviceNameError: nil,
             serviceCategoryError: nil,

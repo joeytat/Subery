@@ -12,8 +12,7 @@ struct GradientBackgroundView: View {
     LinearGradient(
       gradient: Gradient(
         colors: [
-          Color.black,
-          Color.daisy.neutralFocus,
+          Color.daisy.neutral,
         ]),
       startPoint: .topLeading,
       endPoint: .bottomTrailing
