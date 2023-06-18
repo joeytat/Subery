@@ -31,18 +31,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     if let windowScene = scene as? UIWindowScene {
       let window = UIWindow(windowScene: windowScene)
       let rootView = ContentView(store: Store(
-        initialState: TrackFeature.State(
-          track: .init(
-            id: UUID(),
-            name: "Github Copilot",
-            category: "AI",
-            price: "9.99",
-            startAtDate: Date(),
-            endAtDate: Date(),
-            renewalFrequency: .monthly
-          )
-        ),
-        reducer: TrackFeature()
+        initialState: ListFeature.State(),
+        reducer: ListFeature()
       ))
       let hostingController = StatusBarHostingController(rootView: rootView, lightStatusBar: true)
       window.rootViewController = hostingController

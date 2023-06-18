@@ -26,8 +26,13 @@ struct TrackFeature: ReducerProtocol {
     @BindingState var serviceFocusedInput: TrackView.FormInput?
   }
 
-  enum Action: BindableAction, Equatable {
+  enum Action: BindableAction {
+    enum Delegate {
+      case saveTrack(Track)
+    }
+    case delegate(Delegate)
     case binding(BindingAction<State>)
+    case onCancelButtonTapped
     case onSaveButtonTapped
     case setName(String)
     case setCategory(String)
@@ -37,11 +42,13 @@ struct TrackFeature: ReducerProtocol {
     case setRenewalFrequency(Track.RenewalFrequency)
   }
 
+  @Dependency(\.dismiss) var dismiss
   var body: some ReducerProtocol<State, Action> {
     BindingReducer()
     Reduce { state, action in
       switch action {
       case .setName(let name):
+        state.track.name = name
         if !name.isEmpty {
           let suggestionsResult: IdentifiedArrayOf<TrackFeature.State.SubscriptionServicePreset> = IdentifiedArray(
             uniqueElements: State.popularSubscriptions
@@ -98,8 +105,6 @@ struct TrackFeature: ReducerProtocol {
           }
         }
         return .none
-      case .binding:
-        return .none
       case .onSaveButtonTapped:
         if state.track.name.isEmpty {
           state.serviceNameError = "Service name is required"
@@ -125,7 +130,15 @@ struct TrackFeature: ReducerProtocol {
           state.serviceEndAtError = "Service end date should be after start date"
           return .none
         }
-
+        return .run { [ track = state.track] send in
+          await send(.delegate(.saveTrack(track)))
+          await self.dismiss()
+        }
+      case .onCancelButtonTapped:
+        return .run { _ in await self.dismiss() }
+      case .binding:
+        return .none
+      case .delegate:
         return .none
       }
     }._printChanges()

@@ -53,6 +53,9 @@ struct ListFeature: ReducerProtocol {
           )
         )
         return .none
+      case .addTrack(.presented(.delegate(.saveTrack(let track)))):
+        state.tracks.append(track)
+        return .none
       case .addTrack:
         return .none
       }

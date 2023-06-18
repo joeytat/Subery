@@ -25,7 +25,7 @@ struct ListView: View {
             }
           }
         }
-        .navigationTitle("List")
+        .navigationTitle("Subery")
         .navigationBarItems(
           trailing: Button(
             action: {
@@ -36,9 +36,17 @@ struct ListView: View {
             }
           )
         )
+        .sheet(
+          store: self.store.scope(
+            state: \.$addTrack,
+            action: { .addTrack($0) })
+        ) { addTrackStore in
+          NavigationStack {
+            TrackView(store: addTrackStore)
+          }
+        }
       }
     }
-
   }
 }
 

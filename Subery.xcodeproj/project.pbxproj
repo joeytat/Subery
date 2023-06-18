@@ -154,7 +154,6 @@
 				763B35CC29FF4B12005B3A56 /* Design */,
 				763B35E129FF4B90005B3A56 /* Domain */,
 				76E78D6A2A3EAEC400C9414D /* Features */,
-				763B35E229FF4EBE005B3A56 /* Sections */,
 				763B357829FE4A6C005B3A56 /* SuberyApp.swift */,
 				763B357C29FE4A6D005B3A56 /* Assets.xcassets */,
 				763B357E29FE4A6D005B3A56 /* Preview Content */,
@@ -226,14 +225,6 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		763B35E229FF4EBE005B3A56 /* Sections */ = {
-			isa = PBXGroup;
-			children = (
-				763B357A29FE4A6C005B3A56 /* ContentView.swift */,
-			);
-			path = Sections;
-			sourceTree = "<group>";
-		};
 		763B35E529FF5930005B3A56 /* Landing */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +257,7 @@
 		76E78D6A2A3EAEC400C9414D /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				763B357A29FE4A6C005B3A56 /* ContentView.swift */,
 				763B35E529FF5930005B3A56 /* Landing */,
 				76E78D6B2A3EAECF00C9414D /* Track */,
 				76E78D6E2A3EAFC300C9414D /* List */,
