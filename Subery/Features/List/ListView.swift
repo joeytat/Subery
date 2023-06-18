@@ -52,9 +52,7 @@ struct ListView_Previews: PreviewProvider {
             name: "Github Copilot",
             category: "AI",
             price: "9.99",
-            startAt: Date().formatted(),
             startAtDate: Date(),
-            endAt: Date().formatted(),
             endAtDate: Date(),
             renewalFrequency: .monthly
           ),
@@ -63,9 +61,7 @@ struct ListView_Previews: PreviewProvider {
             name: "Midjourney",
             category: "AI",
             price: "9.99",
-            startAt: Date().formatted(),
             startAtDate: Date(),
-            endAt: Date().formatted(),
             endAtDate: Date(),
             renewalFrequency: .yearly
           ),
@@ -74,9 +70,7 @@ struct ListView_Previews: PreviewProvider {
             name: "Netflix",
             category: "Video Streaming",
             price: "9.99",
-            startAt: Date().formatted(),
             startAtDate: Date(),
-            endAt: Date().formatted(),
             endAtDate: Date(),
             renewalFrequency: .yearly
           )

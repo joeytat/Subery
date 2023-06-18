@@ -30,9 +30,11 @@ struct TrackView: View {
             serviceName(viewStore)
             serviceCategory(viewStore)
             servicePrice(viewStore)
-            HStack(spacing: Theme.spacing.lg) {
-              serviceStartAt(viewStore)
-              serviceEndAt(viewStore)
+            Section {
+              HStack(spacing: Theme.spacing.lg) {
+                serviceStartAt(viewStore)
+                serviceEndAt(viewStore)
+              }
             }
           }
           Spacer()
@@ -70,17 +72,17 @@ struct TrackView: View {
 
       TextField(
         "",
-        text: viewStore.binding(\.$serviceName)
+        text: viewStore.binding(get: \.track.name, send: { .setName($0) })
       )
       .focused($focusedField, equals: .name)
       .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
       .formInput(
         placeholder: viewStore.placeholderService.name,
-        isEmpty: viewStore.serviceName.isEmpty,
+        isEmpty: viewStore.track.name.isEmpty,
         isFocused: focusedField == .name,
         suggestions: viewStore.state.serviceSuggestions.map { $0.name },
         onSuggestionTapped: { suggestion in
-          viewStore.send(.binding(.set(\.$serviceName, suggestion)))
+          viewStore.send(.setName(suggestion))
         }
       )
       .padding(
@@ -101,13 +103,13 @@ struct TrackView: View {
 
       TextField(
         "",
-        text: viewStore.binding(\.$servicePrice)
+        text: viewStore.binding(get: \.track.price, send: { .setPrice($0) })
       )
       .keyboardType(.numberPad)
       .focused($focusedField, equals: .price)
       .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
       .formInput(
-        isEmpty: viewStore.serviceName.isEmpty,
+        isEmpty: viewStore.track.name.isEmpty,
         isFocused: focusedField == .price,
         prefix: (
           Text("$")
@@ -118,13 +120,13 @@ struct TrackView: View {
         suffix: (
           Dropdown(label: {
             HStack {
-              Text(viewStore.serviceRenewalFrequency.rawValue)
+              Text(viewStore.track.renewalFrequency.rawValue)
                 .foregroundColor(Color.daisy.infoContent)
               Image(systemName: "chevron.down")
                 .foregroundColor(Color.daisy.secondary)
             }
           }) {
-            ForEach(TrackFeature.State.RenewalFrequency.allCases, id: \.self) { option in
+            ForEach(Track.RenewalFrequency.allCases, id: \.self) { option in
               Button(action: {
                 viewStore.send(.setRenewalFrequency(option))
               }) {
@@ -154,21 +156,31 @@ struct TrackView: View {
       Text("Start at")
         .formLabel()
 
-      TextField("", text: viewStore.binding(\.$serviceStartAt))
-        .formInput(
-          placeholder: Date().format(),
-          isEmpty: viewStore.serviceStartAt.isEmpty,
-          isFocused: focusedField == .startAt
-        )
-        .focused($focusedField, equals: .startAt)
-        .onTapGesture { viewStore.send(.binding(.set(\.$isServiceDateStartPickerPresented, true))) }
-        .sheet(isPresented: viewStore.binding(\.$isServiceDateStartPickerPresented)) {
-          DatePickerView(
-            date: viewStore.binding(\.$serviceStartAtDate),
-            showingDatePicker: viewStore.binding(\.$isServiceDateStartPickerPresented)
+      HStack {
+        Text(viewStore.track.startAtDate, style: .date)
+        Spacer()
+      }
+      .formInput(
+        placeholder: Date().format(),
+        isEmpty: false,
+        isFocused: focusedField == .startAt
+      )
+      .onTapGesture {
+        viewStore.send(
+          .binding(
+            .set(\.$isServiceDateStartPickerPresented, true)
           )
-        }
-        .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
+        )
+      }
+      .sheet(isPresented: viewStore.binding(\.$isServiceDateStartPickerPresented)) {
+        DatePickerView(
+          date: viewStore.binding(
+            get: \.track.startAtDate,
+            send: { .setStartAt($0) }
+          ),
+          showingDatePicker: viewStore.binding(\.$isServiceDateStartPickerPresented)
+        )
+      }
     }
   }
 
@@ -177,21 +189,31 @@ struct TrackView: View {
       Text("End at")
         .formLabel()
 
-      TextField("", text: viewStore.binding(\.$serviceEndAt))
-        .formInput(
-          placeholder: Date().format(),
-          isEmpty: viewStore.serviceEndAt.isEmpty,
-          isFocused: focusedField == .endAt
-        )
-        .focused($focusedField, equals: .endAt)
-        .onTapGesture { viewStore.send(.binding(.set(\.$isServiceDateEndPickerPresented, true))) }
-        .sheet(isPresented: viewStore.binding(\.$isServiceDateEndPickerPresented)) {
-          DatePickerView(
-            date: viewStore.binding(\.$serviceEndAtDate),
-            showingDatePicker: viewStore.binding(\.$isServiceDateEndPickerPresented)
+      HStack {
+        Text(viewStore.track.endAtDate, style: .date)
+        Spacer()
+      }
+      .formInput(
+        placeholder: Date().format(),
+        isEmpty: false,
+        isFocused: focusedField == .endAt
+      )
+      .onTapGesture {
+        viewStore.send(
+          .binding(
+            .set(\.$isServiceDateEndPickerPresented, true)
           )
-        }
-        .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
+        )
+      }
+      .sheet(isPresented: viewStore.binding(\.$isServiceDateEndPickerPresented)) {
+        DatePickerView(
+          date: viewStore.binding(
+            get: \.track.endAtDate,
+            send: { .setEndAt($0) }
+          ),
+          showingDatePicker: viewStore.binding(\.$isServiceDateEndPickerPresented)
+        )
+      }
     }
   }
 
@@ -202,12 +224,15 @@ struct TrackView: View {
 
       TextField(
         "",
-        text: viewStore.binding(\.$serviceCategory)
+        text: viewStore.binding(
+          get: \.track.category,
+          send: { .setCategory($0) }
+        )
       )
       .focused($focusedField, equals: .category)
       .formInput(
         placeholder: viewStore.placeholderService.category.rawValue,
-        isEmpty: viewStore.serviceCategory.isEmpty,
+        isEmpty: viewStore.track.category.isEmpty,
         isFocused: focusedField == .category
       )
       .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
@@ -223,14 +248,15 @@ struct TrackView_Previews: PreviewProvider {
           initialState: TrackFeature.State(
             placeholderService: TrackFeature.State.popularSubscriptions.randomElement()!,
             serviceSuggestions: [],
-            serviceName: "Gihub Copilot",
-            serviceCategory: "AI",
-            servicePrice: "9.9",
-            serviceStartAt: Date().formatted(),
-            serviceStartAtDate: Date(),
-            serviceEndAt: Date().formatted(),
-            serviceEndAtDate: Date(),
-            serviceRenewalFrequency: .monthly,
+            track: .init(
+              id: UUID(),
+              name: "Github Copilot",
+              category: "AI",
+              price: "9",
+              startAtDate: Date(),
+              endAtDate: Date(),
+              renewalFrequency: .monthly
+            ),
             serviceNameError: nil,
             serviceCategoryError: nil,
             servicePriceError: nil,

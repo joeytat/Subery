@@ -48,7 +48,17 @@ struct LandingView_Previews: PreviewProvider {
   static var previews: some View {
     LandingView(
       store: Store(
-        initialState: TrackFeature.State(),
+        initialState: TrackFeature.State(
+          track: .init(
+            id: UUID(),
+            name: "Github Copilot",
+            category: "AI",
+            price: "9.99",
+            startAtDate: Date(),
+            endAtDate: Date(),
+            renewalFrequency: .monthly
+          )
+        ),
         reducer: TrackFeature()
       )
     )

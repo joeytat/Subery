@@ -12,15 +12,7 @@ struct TrackFeature: ReducerProtocol {
   struct State: Equatable {
     var placeholderService: SubscriptionServicePreset = State.popularSubscriptions.randomElement()!
     var serviceSuggestions: IdentifiedArrayOf<SubscriptionServicePreset> = []
-
-    @BindingState var serviceName: String = ""
-    @BindingState var serviceCategory: String = ""
-    @BindingState var servicePrice: String = ""
-    @BindingState var serviceStartAt: String = ""
-    @BindingState var serviceStartAtDate: Date = Date()
-    @BindingState var serviceEndAt: String = ""
-    @BindingState var serviceEndAtDate: Date = Date()
-    var serviceRenewalFrequency: RenewalFrequency = .monthly
+    var track: Track
 
     var serviceNameError: String?
     var serviceCategoryError: String?
@@ -36,25 +28,30 @@ struct TrackFeature: ReducerProtocol {
 
   enum Action: BindableAction, Equatable {
     case binding(BindingAction<State>)
-    case setRenewalFrequency(State.RenewalFrequency)
     case onSaveButtonTapped
+    case setName(String)
+    case setCategory(String)
+    case setPrice(String)
+    case setStartAt(Date)
+    case setEndAt(Date)
+    case setRenewalFrequency(Track.RenewalFrequency)
   }
 
   var body: some ReducerProtocol<State, Action> {
     BindingReducer()
     Reduce { state, action in
       switch action {
-      case .binding(\.$serviceName):
-        if !state.serviceName.isEmpty {
+      case .setName(let name):
+        if !name.isEmpty {
           let suggestionsResult: IdentifiedArrayOf<TrackFeature.State.SubscriptionServicePreset> = IdentifiedArray(
             uniqueElements: State.popularSubscriptions
-              .filter { $0.name.lowercased().starts(with: state.serviceName.lowercased()) }
+              .filter { $0.name.lowercased().starts(with: name.lowercased()) }
           )
           if suggestionsResult.count == 1,
              let firstPreset = suggestionsResult.first,
-             firstPreset.name == state.serviceName {
+             firstPreset.name == name {
             state.serviceSuggestions = []
-            state.serviceCategory = firstPreset.category.rawValue
+            state.track.category = firstPreset.category.rawValue
           } else {
             state.serviceSuggestions = suggestionsResult
           }
@@ -63,27 +60,20 @@ struct TrackFeature: ReducerProtocol {
           state.serviceSuggestions = []
         }
         return .none
-      case .binding(\.$isServiceDateStartPickerPresented):
-        if !state.isServiceDateStartPickerPresented {
-          state.serviceStartAt = state.serviceStartAtDate.startOfDay().format()
-        }
+      case .setCategory(let category):
+        state.track.category = category
         return .none
-      case .binding(\.$isServiceDateEndPickerPresented):
-        if !state.isServiceDateEndPickerPresented {
-          state.serviceEndAt = state.serviceEndAtDate.startOfDay().format()
-        }
+      case .setStartAt(let date):
+        state.track.startAtDate = date
         return .none
-      case .binding(\.$serviceStartAtDate):
-        state.serviceStartAt = state.serviceStartAtDate.startOfDay().format()
+      case .setEndAt(let date):
+        state.track.endAtDate = date
         return .none
-      case .binding(\.$serviceEndAtDate):
-        state.serviceEndAt = state.serviceEndAtDate.startOfDay().format()
-        return .none
-      case .binding(\.$servicePrice):
-        let numberStr = state.servicePrice.filter { $0.isNumber }
+      case .setPrice(let priceStr):
+        let numberStr = priceStr.filter { $0.isNumber }
         if let deformattedPriceValue = Float(numberStr)?.roundedToDecimalPlaces(), deformattedPriceValue > 0 {
-          state.servicePrice = deformattedPriceValue.formatted()
-          switch state.serviceRenewalFrequency {
+          state.track.price = deformattedPriceValue.formatted()
+          switch state.track.renewalFrequency {
           case .monthly:
             state.servicePricePerMonth = ""
           case .quarterly:
@@ -92,15 +82,13 @@ struct TrackFeature: ReducerProtocol {
             state.servicePricePerMonth = "\((deformattedPriceValue / 12).roundedToDecimalPlaces())/month"
           }
           state.servicePriceError = nil
-        } else {
-          state.servicePrice = Float(state.servicePrice)?.formatted() ?? ""
         }
         return .none
       case .setRenewalFrequency(let renewalFrequency):
-        state.serviceRenewalFrequency = renewalFrequency
-        let numberStr = state.servicePrice.filter { $0.isNumber }
+        state.track.renewalFrequency = renewalFrequency
+        let numberStr = state.track.price.filter { $0.isNumber }
         if let deformattedPriceValue = Float(numberStr) {
-          switch state.serviceRenewalFrequency {
+          switch renewalFrequency {
           case .monthly:
             state.servicePricePerMonth = ""
           case .quarterly:
@@ -113,37 +101,27 @@ struct TrackFeature: ReducerProtocol {
       case .binding:
         return .none
       case .onSaveButtonTapped:
-        if state.serviceName.isEmpty {
+        if state.track.name.isEmpty {
           state.serviceNameError = "Service name is required"
           return .none
         }
 
-        if state.serviceCategory.isEmpty {
+        if state.track.category.isEmpty {
           state.serviceCategoryError = "Service category is required"
           return .none
         }
 
-        if state.servicePrice.isEmpty {
+        if state.track.price.isEmpty {
           state.servicePriceError = "Service price is required"
           return .none
         }
 
-        if let price = Float(state.servicePrice.filter { $0.isNumber }), price <= 0 {
+        if let price = Float(state.track.price.filter { $0.isNumber }), price <= 0 {
           state.servicePriceError = "Service price should be greater than 0"
           return .none
         }
 
-        if state.serviceStartAt.isEmpty {
-          state.serviceStartAtError = "Service start date is required"
-          return .none
-        }
-
-        if state.serviceEndAt.isEmpty {
-          state.serviceEndAtError = "Service end date is required"
-          return .none
-        }
-
-        if state.serviceStartAtDate > state.serviceEndAtDate {
+        if state.track.startAtDate > state.track.endAtDate {
           state.serviceEndAtError = "Service end date should be after start date"
           return .none
         }
@@ -242,13 +220,5 @@ extension TrackFeature.State {
       "WooCommerce": .ecommerce
     ]
     return raw.map { SubscriptionServicePreset(name: $0.key, category: $0.value) }
-  }
-}
-
-extension TrackFeature.State {
-  enum RenewalFrequency: String, CaseIterable {
-    case yearly = "Yearly"
-    case quarterly = "Quarterly"
-    case monthly = "Monthly"
   }
 }

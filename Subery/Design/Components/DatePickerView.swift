@@ -22,24 +22,26 @@ struct DatePickerView: View {
         .datePickerStyle(GraphicalDatePickerStyle())
         .labelsHidden()
         .padding()
-        .tint(Color.daisy.primary)
+        .tint(Color.daisy.warning)
+        .colorMultiply(Color.daisy.infoContent)
+        .colorInvert()
         Spacer()
       }
-      .navigationTitle("Date Picker")
       .toolbar {
         ToolbarItem(placement: .cancellationAction) {
           Button("Cancel") {
             showingDatePicker = false
           }
-          .foregroundColor(Color.daisy.primary)
+          .foregroundColor(Color.daisy.neutralContent)
         }
         ToolbarItem(placement: .confirmationAction) {
           Button("Done") {
             showingDatePicker = false
           }
-          .foregroundColor(Color.daisy.primary)
+          .foregroundColor(Color.daisy.neutralContent)
         }
       }
+      .background(Color.daisy.neutral)
     }
   }
 }

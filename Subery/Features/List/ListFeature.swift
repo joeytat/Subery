@@ -13,28 +13,51 @@ struct Track: Equatable, Identifiable {
   var name: String
   var category: String
   var price: String
-  var startAt: String
   var startAtDate: Date
-  var endAt: String
   var endAtDate: Date
-  var renewalFrequency: TrackFeature.State.RenewalFrequency
+  var renewalFrequency: RenewalFrequency
+}
+
+extension Track {
+  enum RenewalFrequency: String, CaseIterable {
+    case yearly = "Yearly"
+    case quarterly = "Quarterly"
+    case monthly = "Monthly"
+  }
 }
 
 struct ListFeature: ReducerProtocol {
   struct State: Equatable {
+    @PresentationState var addTrack: TrackFeature.State?
     var tracks: IdentifiedArrayOf<Track> = []
   }
   
   enum Action {
     case addTrackButtonTapped
+    case addTrack(PresentationAction<TrackFeature.Action>)
   }
   
   var body: some ReducerProtocolOf<Self> {
     Reduce { state, action in
       switch action {
       case .addTrackButtonTapped:
+        state.addTrack = TrackFeature.State(
+          track: .init(
+            id: UUID(),
+            name: "",
+            category: "",
+            price: "",
+            startAtDate: Date(),
+            endAtDate: Date(),
+            renewalFrequency: .monthly
+          )
+        )
+        return .none
+      case .addTrack:
         return .none
       }
+    }.ifLet(\.$addTrack, action: /Action.addTrack) {
+      TrackFeature()
     }
   }
 }

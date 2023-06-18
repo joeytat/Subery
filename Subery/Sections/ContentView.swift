@@ -22,14 +22,3 @@ struct ContentView: View {
     .preferredColorScheme(.light)
   }
 }
-
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView(
-      store: Store(
-        initialState: TrackFeature.State(),
-        reducer: TrackFeature()
-      )
-    )
-  }
-}
