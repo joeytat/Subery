@@ -10,12 +10,12 @@ import ComposableArchitecture
 
 struct Track: Equatable, Identifiable {
   let id: UUID
-  var name: String
-  var category: String
-  var price: String
-  var startAtDate: Date
-  var endAtDate: Date
-  var renewalFrequency: RenewalFrequency
+  var name: String = ""
+  var category: String = ""
+  var price: String = ""
+  var startAtDate: Date = Date()
+  var endAtDate: Date = Date()
+  var renewalFrequency: RenewalFrequency = .monthly
 }
 
 extension Track {
@@ -44,7 +44,7 @@ struct TracksFeature: ReducerProtocol {
     case destination(PresentationAction<Destination.Action>)
     case path(StackAction<AddTrackFeature.State,  AddTrackFeature.Action>)
   }
-
+  @Dependency(\.uuid) var uuid
   var body: some ReducerProtocolOf<Self> {
     Reduce { state, action in
       switch action {
@@ -52,13 +52,7 @@ struct TracksFeature: ReducerProtocol {
         state.destination = .addTrack(
           AddTrackFeature.State(
             track: .init(
-              id: UUID(),
-              name: "",
-              category: "",
-              price: "",
-              startAtDate: Date(),
-              endAtDate: Date(),
-              renewalFrequency: .monthly
+              id: self.uuid()
             )
           )
         )
@@ -82,8 +76,8 @@ struct TracksFeature: ReducerProtocol {
         return .none
       case .destination:
         return .none
-      case let .path(.element(id: id, action: .delegate(.saveTrack(track)))):
-//        guard let addTrackState = state.path[id: id] else { return .none }
+      case let .path(.element(_, action: .delegate(.saveTrack(track)))):
+        //        guard let addTrackState = state.path[id: id] else { return .none }
         state.tracks.append(track)
         return .none
       case .path:

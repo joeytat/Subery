@@ -33,15 +33,7 @@ struct TracksView: View {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(
             state: AddTrackFeature.State(
-              track: .init(
-                id: UUID(),
-                name: "",
-                category: "",
-                price: "",
-                startAtDate: Date(),
-                endAtDate: Date(),
-                renewalFrequency: .monthly
-              )
+              track: .init(id: UUID())
             )
           ) {
             Image(systemName: "plus.app.fill")
@@ -145,29 +137,17 @@ struct TracksView_Previews: PreviewProvider {
             .init(
               id: UUID(),
               name: "Github Copilot",
-              category: "AI",
-              price: "9.99",
-              startAtDate: Date(),
-              endAtDate: Date(),
-              renewalFrequency: .monthly
+              price: "9.99"
             ),
             .init(
               id: UUID(),
               name: "Midjourney",
-              category: "AI",
-              price: "9.99",
-              startAtDate: Date(),
-              endAtDate: Date(),
-              renewalFrequency: .yearly
+              price: "9.99"
             ),
             .init(
               id: UUID(),
               name: "Netflix",
-              category: "Video Streaming",
-              price: "9.99",
-              startAtDate: Date(),
-              endAtDate: Date(),
-              renewalFrequency: .yearly
+              price: "9.99"
             )
           ]
         ),
