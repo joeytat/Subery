@@ -11,40 +11,48 @@ import ComposableArchitecture
 struct TracksView: View {
   let store: StoreOf<TracksFeature>
   var body: some View {
-    WithViewStore(self.store) { viewStore in
-      VStack {
-        navBar
-        listHeader
-        list
+    NavigationStackStore(self.store.scope(state: \.path, action: { .path($0) } )) {
+      WithViewStore(self.store) { viewStore in
+        VStack {
+          listHeader
+            .background(Color.daisy.neutral)
+          list
+        }
+        .background(Color.daisy.neutral)
       }
-      .background(GradientBackgroundView())
-    }
-  }
-
-  private var navBar: some View {
-    WithViewStore(self.store) { viewStore in
-      ZStack {
-        GradientBackgroundView()
-        Text("Subery")
-          .font(.title)
-          .fontWeight(.semibold)
-          .foregroundColor(Color.white)
-
-        HStack {
-          Spacer()
-          Button(
-            action: {
-              viewStore.send(.addTrackButtonTapped)
-            },
-            label: {
-              Image(systemName: "plus.app.fill")
-                .foregroundColor(Color.daisy.accent)
-                .font(.title)
-            }
-          ).padding(.trailing)
+      .background(Color.daisy.neutral)
+      .navigationBarTitleDisplayMode(.inline)
+      .navigationBarBackButtonHidden()
+      .toolbar {
+        ToolbarItem(placement: .principal) {
+          Text("Subery")
+            .foregroundColor(Color.white)
+            .font(.title2)
+            .fontWeight(.bold)
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          NavigationLink(
+            state: AddTrackFeature.State(
+              track: .init(
+                id: UUID(),
+                name: "",
+                category: "",
+                price: "",
+                startAtDate: Date(),
+                endAtDate: Date(),
+                renewalFrequency: .monthly
+              )
+            )
+          ) {
+            Image(systemName: "plus.app.fill")
+              .foregroundColor(Color.daisy.accent)
+              .font(.title3)
+              .fontWeight(.semibold)
+          }
         }
       }
-      .frame(height: 44.0)
+    } destination: { store in
+      AddTrackView(store: store)
     }
   }
 

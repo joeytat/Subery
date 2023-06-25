@@ -12,11 +12,9 @@ struct ContentView: View {
   let store: StoreOf<TracksFeature>
 
   var body: some View {
-    NavigationStack {
-      WithViewStore(store, observe: { $0 }) { viewStore in
-        GradientBackgroundView().overlay {
-          TracksView(store: store)
-        }
+    WithViewStore(store, observe: { $0 }) { viewStore in
+      GradientBackgroundView().overlay {
+        TracksView(store: store)
       }
     }
     .preferredColorScheme(.light)

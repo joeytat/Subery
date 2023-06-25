@@ -29,16 +29,20 @@ extension Track {
 struct TracksFeature: ReducerProtocol {
   struct State: Equatable {
     @PresentationState var destination: Destination.State?
+
+    var path = StackState<AddTrackFeature.State>()
     var tracks: IdentifiedArrayOf<Track> = []
   }
   
   enum Action {
-    case addTrackButtonTapped
-    case deleteButtonTapped(id: Track.ID)
-    case destination(PresentationAction<Destination.Action>)
     enum Alert: Equatable {
       case confirmDeletion(id: Track.ID)
     }
+
+    case addTrackButtonTapped
+    case deleteButtonTapped(id: Track.ID)
+    case destination(PresentationAction<Destination.Action>)
+    case path(StackAction<AddTrackFeature.State,  AddTrackFeature.Action>)
   }
 
   var body: some ReducerProtocolOf<Self> {
@@ -78,10 +82,19 @@ struct TracksFeature: ReducerProtocol {
         return .none
       case .destination:
         return .none
+      case let .path(.element(id: id, action: .delegate(.saveTrack(track)))):
+//        guard let addTrackState = state.path[id: id] else { return .none }
+        state.tracks.append(track)
+        return .none
+      case .path:
+        return .none
       }
     }
     .ifLet(\.$destination, action: /Action.destination) {
       Destination()
+    }
+    .forEach(\.path, action: /Action.path) {
+      AddTrackFeature()
     }
   }
 }

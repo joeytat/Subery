@@ -24,11 +24,6 @@ struct AddTrackView: View {
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
       Form {
-        Text("Add Track")
-          .font(.title)
-          .fontWeight(.semibold)
-          .foregroundColor(Color.daisy.primaryContent)
-
         VStack(spacing: Theme.spacing.xl) {
           serviceName(viewStore)
           serviceCategory(viewStore)
@@ -39,36 +34,45 @@ struct AddTrackView: View {
               serviceEndAt(viewStore)
             }
           }
-
-          Section {
-            HStack {
-              Button {
-                viewStore.send(.onCancelButtonTapped)
-              } label: {
-                Text("Cancel")
-                  .formCancelButton()
-              }
-
-              Spacer()
-
-              Button {
-                viewStore.send(.onSaveButtonTapped)
-              } label: {
-                Text("Save")
-                  .formCTAButton()
-              }
-            }
-          }
         }
         .padding(.top, Theme.spacing.sm)
 
         Spacer()
       }
       .formStyle(.columns)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button {
+            viewStore.send(.onCancelButtonTapped)
+          } label: {
+            Image(systemName: "chevron.backward")
+              .foregroundColor(Color.white)
+              .font(.title3)
+              .fontWeight(.semibold)
+          }
+        }
+        ToolbarItem(placement: .principal) {
+          Text("Add Track")
+            .foregroundColor(Color.white)
+            .font(.title2)
+            .fontWeight(.bold)
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            viewStore.send(.onSaveButtonTapped)
+          } label: {
+            Image(systemName: "square.and.arrow.down.fill")
+              .foregroundColor(Color.daisy.accent)
+              .font(.title3)
+              .fontWeight(.semibold)
+          }
+        }
+      }
     }
     .padding(.horizontal, Theme.spacing.md)
-    .padding(.vertical, Theme.spacing.xl)
     .background(GradientBackgroundView())
+    .navigationBarTitleDisplayMode(.inline)
+    .navigationBarBackButtonHidden()
   }
 
   private func serviceName(_ viewStore: ViewStoreOf<AddTrackFeature>) -> some View {
