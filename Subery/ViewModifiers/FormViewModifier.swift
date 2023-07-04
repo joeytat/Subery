@@ -137,7 +137,6 @@ struct FormInputModifier: ViewModifier {
               .animation(.spring(), value: suggestions)
             }
           }
-          .padding(.leading)
         }
         .frame(
           maxHeight: .minimum(
