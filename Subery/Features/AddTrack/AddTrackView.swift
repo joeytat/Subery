@@ -123,10 +123,27 @@ struct AddTrackView: View {
         isEmpty: viewStore.track.name.isEmpty,
         isFocused: focusedField == .price,
         prefix: (
-          Text("$")
-            .foregroundColor(Color.daisy.neutralContent)
-            .font(.body)
-            .padding(.trailing, Theme.spacing.ssm)
+          Dropdown(label: {
+            Text(viewStore.track.currency.display)
+              .underline()
+              .foregroundColor(Color.daisy.neutralContent)
+              .font(.body)
+              .padding(.trailing, Theme.spacing.ssm)
+          }) {
+            ForEach(Currency.all, id: \.self) { currency in
+              Button(action: {
+                viewStore.send(.setCurrency(currency))
+              }) {
+                HStack {
+                  Text(currency.display)
+                    .formLabel()
+                  if currency == viewStore.track.currency {
+                    Image(systemName: "checkmark.square.fill")
+                  }
+                }
+              }
+            }
+          }
         ),
         suffix: (
           Dropdown(label: {

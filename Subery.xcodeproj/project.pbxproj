@@ -36,6 +36,7 @@
 		76A75F832A0113A50076DB70 /* GradientNoiseBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */; };
 		76A75F852A01146A0076DB70 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */; };
 		76A75F882A0360E40076DB70 /* CustomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F872A0360E40076DB70 /* CustomSheet.swift */; };
+		76B619362A5448A200831F1A /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B619352A5448A200831F1A /* Currency.swift */; };
 		76E78D702A3EAFD600C9414D /* TracksFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E78D6F2A3EAFD600C9414D /* TracksFeature.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientNoiseBackground.swift; sourceTree = "<group>"; };
 		76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 		76A75F872A0360E40076DB70 /* CustomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSheet.swift; sourceTree = "<group>"; };
+		76B619352A5448A200831F1A /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		76E78D6F2A3EAFD600C9414D /* TracksFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksFeature.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -221,6 +223,7 @@
 		763B35E129FF4B90005B3A56 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				76B619352A5448A200831F1A /* Currency.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				763B35D829FF4B12005B3A56 /* NeuButtonStyle.swift in Sources */,
 				763B35EB2A00FA57005B3A56 /* AddTrackView.swift in Sources */,
 				763B35DB29FF4B12005B3A56 /* Neumorphism+ViewExtension.swift in Sources */,
+				76B619362A5448A200831F1A /* Currency.swift in Sources */,
 				763B35DD29FF4B12005B3A56 /* Spacing.swift in Sources */,
 				763B35D729FF4B12005B3A56 /* RGB.swift in Sources */,
 				7684AD062A3EB1C500C01747 /* TracksView.swift in Sources */,

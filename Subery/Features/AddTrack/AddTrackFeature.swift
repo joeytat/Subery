@@ -37,6 +37,7 @@ struct AddTrackFeature: ReducerProtocol {
     case setName(String)
     case setCategory(String)
     case setPrice(String)
+    case setCurrency(Currency)
     case setStartAt(Date)
     case setEndAt(Date)
     case setRenewalFrequency(Track.RenewalFrequency)
@@ -75,6 +76,9 @@ struct AddTrackFeature: ReducerProtocol {
         return .none
       case .setEndAt(let date):
         state.track.endAtDate = date
+        return .none
+      case .setCurrency(let currency):
+        state.track.currency = currency
         return .none
       case .setPrice(let priceStr):
         let numberStr = priceStr.filter { $0.isNumber }

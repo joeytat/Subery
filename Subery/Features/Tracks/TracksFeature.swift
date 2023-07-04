@@ -16,6 +16,7 @@ struct Track: Equatable, Identifiable {
   var startAtDate: Date = Date()
   var endAtDate: Date = Date()
   var renewalFrequency: RenewalFrequency = .monthly
+  var currency: Currency = .current
 }
 
 extension Track {
