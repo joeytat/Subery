@@ -14,6 +14,7 @@ struct TracksView: View {
     NavigationStackStore(self.store.scope(state: \.path, action: { .path($0) } )) {
       WithViewStore(self.store) { viewStore in
         VStack {
+          totalExpenses
           listHeader
             .background(Color.daisy.neutral)
           list
@@ -48,28 +49,46 @@ struct TracksView: View {
     }
   }
 
-  private var listHeader: some View {
+  private var totalExpenses: some View {
     WithViewStore(self.store) { viewStore in
-      VStack {
-        Divider()
-          .background(Color.daisy.neutralContent)
+      HStack {
+        VStack(alignment: .leading, spacing: Theme.spacing.lg) {
+          Text("What you've paid")
+            .font(.body)
+            .fontWeight(.medium)
+            .foregroundColor(Color.daisy.neutralContent)
 
-        HStack {
-          Text("Service")
-            .font(.headline)
-            .foregroundColor(Color.white)
-
-          Spacer()
-
-          Text("Price")
-            .font(.headline)
+          Text(viewStore.totalAmount)
+            .font(.title)
+            .fontWeight(.medium)
             .foregroundColor(Color.white)
         }
-        .padding()
-
-        Divider()
-          .background(Color.daisy.neutralContent)
+        Spacer()
       }
+      .padding()
+    }
+  }
+
+  private var listHeader: some View {
+    VStack {
+      Divider()
+        .background(Color.daisy.neutralContent)
+
+      HStack {
+        Text("Service")
+          .font(.headline)
+          .foregroundColor(Color.white)
+
+        Spacer()
+
+        Text("Price")
+          .font(.headline)
+          .foregroundColor(Color.white)
+      }
+      .padding()
+
+      Divider()
+        .background(Color.daisy.neutralContent)
     }
   }
 
@@ -91,8 +110,9 @@ struct TracksView: View {
 
               Spacer()
 
-              Text(track.price)
-                .foregroundColor(Color.daisy.neutralContent)
+              Text(track.currency.symbol + track.price)
+                .font(.headline)
+                .foregroundColor(Color.white)
             }
 
             Divider()
@@ -137,16 +157,19 @@ struct TracksView_Previews: PreviewProvider {
             .init(
               id: UUID(),
               name: "Github Copilot",
+              category: "AI",
               price: "9.99"
             ),
             .init(
               id: UUID(),
               name: "Midjourney",
+              category: "AI",
               price: "9.99"
             ),
             .init(
               id: UUID(),
               name: "Netflix",
+              category: "Video Streaming",
               price: "9.99"
             )
           ]
@@ -154,5 +177,9 @@ struct TracksView_Previews: PreviewProvider {
         reducer: TracksFeature()
       )
     )
+    .onAppear {
+      UINavigationBar.appearance().backgroundColor = UIColor(named: "neutral")
+      UINavigationBar.appearance().isTranslucent = false
+    }
   }
 }

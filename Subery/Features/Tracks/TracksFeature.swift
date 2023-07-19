@@ -33,6 +33,17 @@ struct TracksFeature: ReducerProtocol {
 
     var path = StackState<AddTrackFeature.State>()
     var tracks: IdentifiedArrayOf<Track> = []
+
+    var totalAmount: String {
+      let total = tracks.reduce(into: Float(0.0)) { acc, next in
+        if let price = Float(next.price) {
+          acc += price
+        }
+      }
+      .roundedToDecimalPlaces()
+
+      return "$\(total)"
+    }
   }
   
   enum Action {
