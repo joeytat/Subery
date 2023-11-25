@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-struct AddTrackFeature: ReducerProtocol {
+struct AddTrackFeature: Reducer {
   struct State: Equatable {
     var placeholderService: SubscriptionServicePreset = State.popularSubscriptions.randomElement()!
     var serviceSuggestions: IdentifiedArrayOf<SubscriptionServicePreset> = []
@@ -20,10 +20,19 @@ struct AddTrackFeature: ReducerProtocol {
     var serviceStartAtError: String?
     var serviceEndAtError: String?
 
+    var isServiceDateStartPickerPresented: Bool = false
+    var isServiceDateEndPickerPresented: Bool = false
+
     @BindingState var servicePricePerMonth: String = ""
-    @BindingState var isServiceDateStartPickerPresented: Bool = false
-    @BindingState var isServiceDateEndPickerPresented: Bool = false
-    @BindingState var serviceFocusedInput: AddTrackView.FormInput?
+    @BindingState var serviceFocusedInput: Field?
+
+    enum Field: String, Hashable {
+      case name
+      case category
+      case price
+      case startAt
+      case endAt
+    }
   }
 
   enum Action: BindableAction {
@@ -41,10 +50,12 @@ struct AddTrackFeature: ReducerProtocol {
     case setStartAt(Date)
     case setEndAt(Date)
     case setRenewalFrequency(Track.RenewalFrequency)
+    case setServiceDateStartPickerPresented(isPresented: Bool)
+    case setServiceDateEndPickerPresented(isPresented: Bool)
   }
 
   @Dependency(\.dismiss) var dismiss
-  var body: some ReducerProtocol<State, Action> {
+  var body: some ReducerOf<Self> {
     BindingReducer()
     Reduce { state, action in
       switch action {
@@ -143,6 +154,12 @@ struct AddTrackFeature: ReducerProtocol {
       case .binding:
         return .none
       case .delegate:
+        return .none
+      case .setServiceDateStartPickerPresented(let isPresented):
+        state.isServiceDateStartPickerPresented = isPresented
+        return .none
+      case .setServiceDateEndPickerPresented(let isPresented):
+        state.isServiceDateEndPickerPresented = isPresented
         return .none
       }
     }._printChanges()

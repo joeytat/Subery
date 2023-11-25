@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct DatePickerView: View {
   @Binding var date: Date
-  @Binding var showingDatePicker: Bool
+  var setDatePicker: (Bool) -> Void
 
   var body: some View {
     NavigationView {
@@ -29,13 +30,13 @@ struct DatePickerView: View {
       .toolbar {
         ToolbarItem(placement: .cancellationAction) {
           Button("Cancel") {
-            showingDatePicker = false
+            setDatePicker(false)
           }
           .foregroundColor(Color.daisy.neutralContent)
         }
         ToolbarItem(placement: .confirmationAction) {
           Button("Done") {
-            showingDatePicker = false
+            setDatePicker(false)
           }
           .foregroundColor(Color.daisy.neutralContent)
         }
@@ -47,6 +48,6 @@ struct DatePickerView: View {
 
 struct DatePickerView_Previews: PreviewProvider {
   static var previews: some View {
-    DatePickerView(date: .constant(Date()), showingDatePicker: .constant(true))
+    DatePickerView(date: .constant(Date()), setDatePicker: { _ in })
   }
 }

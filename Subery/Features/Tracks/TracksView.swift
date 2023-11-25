@@ -12,7 +12,7 @@ struct TracksView: View {
   let store: StoreOf<TracksFeature>
   var body: some View {
     NavigationStackStore(self.store.scope(state: \.path, action: { .path($0) } )) {
-      WithViewStore(self.store) { viewStore in
+      WithViewStore(store, observe: { $0 }) { viewStore in
         VStack {
           totalExpenses
           listHeader
@@ -50,7 +50,7 @@ struct TracksView: View {
   }
 
   private var totalExpenses: some View {
-    WithViewStore(self.store) { viewStore in
+    WithViewStore(store, observe: { $0 }) { viewStore in
       HStack {
         VStack(alignment: .leading, spacing: Theme.spacing.lg) {
           Text("What you've paid")
@@ -93,7 +93,7 @@ struct TracksView: View {
   }
 
   private var list: some View {
-    WithViewStore(self.store) { viewStore in
+    WithViewStore(store, observe: { $0 }) { viewStore in
       List {
         ForEach(viewStore.tracks) { track in
           VStack {
@@ -144,42 +144,6 @@ struct TracksView: View {
         state: /TracksFeature.Destination.State.alert,
         action: TracksFeature.Destination.Action.alert
       )
-    }
-  }
-}
-
-struct TracksView_Previews: PreviewProvider {
-  static var previews: some View {
-    TracksView(
-      store: Store(
-        initialState: TracksFeature.State(
-          tracks: [
-            .init(
-              id: UUID(),
-              name: "Github Copilot",
-              category: "AI",
-              price: "9.99"
-            ),
-            .init(
-              id: UUID(),
-              name: "Midjourney",
-              category: "AI",
-              price: "9.99"
-            ),
-            .init(
-              id: UUID(),
-              name: "Netflix",
-              category: "Video Streaming",
-              price: "9.99"
-            )
-          ]
-        ),
-        reducer: TracksFeature()
-      )
-    )
-    .onAppear {
-      UINavigationBar.appearance().backgroundColor = UIColor(named: "neutral")
-      UINavigationBar.appearance().isTranslucent = false
     }
   }
 }

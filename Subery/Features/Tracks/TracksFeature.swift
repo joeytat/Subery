@@ -27,7 +27,7 @@ extension Track {
   }
 }
 
-struct TracksFeature: ReducerProtocol {
+struct TracksFeature: Reducer {
   struct State: Equatable {
     @PresentationState var destination: Destination.State?
 
@@ -57,7 +57,7 @@ struct TracksFeature: ReducerProtocol {
     case path(StackAction<AddTrackFeature.State,  AddTrackFeature.Action>)
   }
   @Dependency(\.uuid) var uuid
-  var body: some ReducerProtocolOf<Self> {
+  var body: some ReducerOf<Self> {
     Reduce { state, action in
       switch action {
       case .addTrackButtonTapped:
@@ -106,7 +106,7 @@ struct TracksFeature: ReducerProtocol {
 }
 
 extension TracksFeature {
-  struct Destination: ReducerProtocol {
+  struct Destination: Reducer {
     enum State: Equatable {
       case addTrack(AddTrackFeature.State)
       case alert(AlertState<TracksFeature.Action.Alert>)
@@ -117,7 +117,7 @@ extension TracksFeature {
       case alert(TracksFeature.Action.Alert)
     }
 
-    var body: some ReducerProtocolOf<Self> {
+    var body: some ReducerOf<Self> {
       Scope(state: /State.addTrack, action: /Action.addTrack) {
         AddTrackFeature()
       }

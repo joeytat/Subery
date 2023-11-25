@@ -10,16 +10,8 @@ import ComposableArchitecture
 import Combine
 
 struct AddTrackView: View {
-  enum FormInput: String, Hashable {
-    case name
-    case category
-    case price
-    case startAt
-    case endAt
-  }
-
   let store: StoreOf<AddTrackFeature>
-  @FocusState var focusedField: FormInput?
+  @FocusState var focusedField: AddTrackFeature.State.Field?
 
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
@@ -40,6 +32,7 @@ struct AddTrackView: View {
         Spacer()
       }
       .formStyle(.columns)
+      .bind(viewStore.$serviceFocusedInput, to: self.$focusedField)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
@@ -85,7 +78,6 @@ struct AddTrackView: View {
         text: viewStore.binding(get: \.track.name, send: { .setName($0) })
       )
       .focused($focusedField, equals: .name)
-      .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
       .formInput(
         placeholder: viewStore.placeholderService.name,
         isEmpty: viewStore.track.name.isEmpty,
@@ -118,7 +110,6 @@ struct AddTrackView: View {
       )
       .keyboardType(.numberPad)
       .focused($focusedField, equals: .price)
-      .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
       .formInput(
         isEmpty: viewStore.track.name.isEmpty,
         isFocused: focusedField == .price,
@@ -196,21 +187,22 @@ struct AddTrackView: View {
         isFocused: focusedField == .startAt
       )
       .onTapGesture {
-        viewStore.send(
-          .binding(
-            .set(\.$isServiceDateStartPickerPresented, true)
+        viewStore.send(.setServiceDateStartPickerPresented(isPresented: true))
+      }
+      .sheet(
+        isPresented: viewStore.binding(
+          get: \.isServiceDateStartPickerPresented,
+          send: { .setServiceDateStartPickerPresented(isPresented: $0) }),
+        content: {
+          DatePickerView(
+            date: viewStore.binding(
+              get: \.track.startAtDate,
+              send: { .setStartAt($0) }
+            ),
+            setDatePicker: { viewStore.send(.setServiceDateStartPickerPresented(isPresented: $0)) }
           )
-        )
-      }
-      .sheet(isPresented: viewStore.binding(\.$isServiceDateStartPickerPresented)) {
-        DatePickerView(
-          date: viewStore.binding(
-            get: \.track.startAtDate,
-            send: { .setStartAt($0) }
-          ),
-          showingDatePicker: viewStore.binding(\.$isServiceDateStartPickerPresented)
-        )
-      }
+        }
+      )
     }
   }
 
@@ -229,21 +221,22 @@ struct AddTrackView: View {
         isFocused: focusedField == .endAt
       )
       .onTapGesture {
-        viewStore.send(
-          .binding(
-            .set(\.$isServiceDateEndPickerPresented, true)
+        viewStore.send(.setServiceDateEndPickerPresented(isPresented: true))
+      }
+      .sheet(
+        isPresented: viewStore.binding(
+          get: \.isServiceDateEndPickerPresented,
+          send: { .setServiceDateEndPickerPresented(isPresented: $0) }),
+        content: {
+          DatePickerView(
+            date: viewStore.binding(
+              get: \.track.endAtDate,
+              send: { .setEndAt($0) }
+            ),
+            setDatePicker: { viewStore.send(.setServiceDateEndPickerPresented(isPresented: $0)) }
           )
-        )
-      }
-      .sheet(isPresented: viewStore.binding(\.$isServiceDateEndPickerPresented)) {
-        DatePickerView(
-          date: viewStore.binding(
-            get: \.track.endAtDate,
-            send: { .setEndAt($0) }
-          ),
-          showingDatePicker: viewStore.binding(\.$isServiceDateEndPickerPresented)
-        )
-      }
+        }
+      )
     }
   }
 
@@ -265,41 +258,6 @@ struct AddTrackView: View {
         isEmpty: viewStore.track.category.isEmpty,
         isFocused: focusedField == .category
       )
-      .synchronize(viewStore.binding(\.$serviceFocusedInput), self.$focusedField)
-    }
-  }
-}
-
-struct TrackView_Previews: PreviewProvider {
-  static var previews: some View {
-    NavigationStack {
-      AddTrackView(
-        store: Store(
-          initialState: AddTrackFeature.State(
-            placeholderService: AddTrackFeature.State.popularSubscriptions.randomElement()!,
-            serviceSuggestions: [],
-            track: .init(
-              id: UUID(),
-              name: "Github Copilot",
-              category: "AI",
-              price: "99",
-              startAtDate: Date(),
-              endAtDate: Date(),
-              renewalFrequency: .yearly
-            ),
-            serviceNameError: nil,
-            serviceCategoryError: nil,
-            servicePriceError: nil,
-            serviceStartAtError: nil,
-            serviceEndAtError: nil,
-            servicePricePerMonth: "",
-            isServiceDateStartPickerPresented: false,
-            isServiceDateEndPickerPresented: false,
-            serviceFocusedInput: .none
-          ),
-          reducer: AddTrackFeature()
-        )
-      )
     }
   }
 }
@@ -311,7 +269,7 @@ struct PriceTextField: View {
   let keyboardType: UIKeyboardType
 
   @Binding var text: String
-  var focusState: FocusState<AddTrackView.FormInput?>.Binding
+  var focusState: FocusState<AddTrackFeature.State.Field?>.Binding
 
   var body: some View {
     HStack(alignment: .firstTextBaseline, spacing: Theme.spacing.sm) {
@@ -350,7 +308,6 @@ struct PriceTextField: View {
     return size.width
   }
 }
-
 
 extension View {
   func synchronize<Value>(

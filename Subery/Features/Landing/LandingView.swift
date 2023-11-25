@@ -43,25 +43,3 @@ struct LandingView: View {
     .toolbarColorScheme(.light, for: .navigationBar)
   }
 }
-
-struct LandingView_Previews: PreviewProvider {
-  static var previews: some View {
-    LandingView(
-      store: Store(
-        initialState: AddTrackFeature.State(
-          track: .init(
-            id: UUID(),
-            name: "Github Copilot",
-            category: "AI",
-            price: "9.99",
-            startAtDate: Date(),
-            endAtDate: Date(),
-            renewalFrequency: .monthly
-          )
-        ),
-        reducer: AddTrackFeature()
-      )
-    )
-    .background(GradientBackgroundView())
-  }
-}
