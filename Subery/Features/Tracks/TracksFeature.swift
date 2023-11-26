@@ -30,10 +30,8 @@ extension Track {
 struct TracksFeature: Reducer {
   struct State: Equatable {
     @PresentationState var destination: Destination.State?
-
-    var path = StackState<AddTrackFeature.State>()
     var tracks: IdentifiedArrayOf<Track> = []
-
+    var isAddTrackPresneted: Bool = false
     var totalAmount: String {
       let total = tracks.reduce(into: Float(0.0)) { acc, next in
         if let price = Float(next.price) {
@@ -45,29 +43,22 @@ struct TracksFeature: Reducer {
       return "$\(total)"
     }
   }
-  
+
   enum Action {
     enum Alert: Equatable {
       case confirmDeletion(id: Track.ID)
     }
 
-    case addTrackButtonTapped
+    case setAddTrackView(presented: Bool)
     case deleteButtonTapped(id: Track.ID)
     case destination(PresentationAction<Destination.Action>)
-    case path(StackAction<AddTrackFeature.State,  AddTrackFeature.Action>)
   }
   @Dependency(\.uuid) var uuid
   var body: some ReducerOf<Self> {
     Reduce { state, action in
       switch action {
-      case .addTrackButtonTapped:
-        state.destination = .addTrack(
-          AddTrackFeature.State(
-            track: .init(
-              id: self.uuid()
-            )
-          )
-        )
+      case .setAddTrackView(let presented):
+        state.isAddTrackPresneted = presented
         return .none
       case .destination(.presented(.addTrack(.delegate(.saveTrack(let track))))):
         state.tracks.append(track)
@@ -88,19 +79,10 @@ struct TracksFeature: Reducer {
         return .none
       case .destination:
         return .none
-      case let .path(.element(_, action: .delegate(.saveTrack(track)))):
-        //        guard let addTrackState = state.path[id: id] else { return .none }
-        state.tracks.append(track)
-        return .none
-      case .path:
-        return .none
       }
     }
     .ifLet(\.$destination, action: /Action.destination) {
       Destination()
-    }
-    .forEach(\.path, action: /Action.path) {
-      AddTrackFeature()
     }
   }
 }

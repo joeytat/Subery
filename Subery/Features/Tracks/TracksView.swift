@@ -11,41 +11,40 @@ import ComposableArchitecture
 struct TracksView: View {
   let store: StoreOf<TracksFeature>
   var body: some View {
-    NavigationStackStore(self.store.scope(state: \.path, action: { .path($0) } )) {
-      WithViewStore(store, observe: { $0 }) { viewStore in
+    WithViewStore(store, observe: { $0 }) { viewStore in
+      ZStack(alignment: .bottom) {
         VStack {
           totalExpenses
           listHeader
             .background(Color.daisy.neutral)
           list
         }
-        .background(Color.daisy.neutral)
-      }
-      .background(Color.daisy.neutral)
-      .navigationBarTitleDisplayMode(.inline)
-      .navigationBarBackButtonHidden()
-      .toolbar {
-        ToolbarItem(placement: .principal) {
-          Text("Subery")
-            .foregroundColor(Color.white)
-            .font(.title2)
-            .fontWeight(.bold)
+        Button(action: {
+          viewStore.send(.setAddTrackView(presented: true))
+        }) {
+          Text("Track Subscription")
+            .modifier(FormCTAButtonModifier())
         }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          NavigationLink(
-            state: AddTrackFeature.State(
-              track: .init(id: UUID())
+      }
+      .sheet(
+        isPresented: viewStore.binding(
+          get: \.isAddTrackPresneted,
+          send: { .setAddTrackView(presented: $0) }),
+        content: {
+          NavigationView {
+            AddTrackView(
+              store: .init(
+                initialState: AddTrackFeature.State(
+                  track: .init(id: UUID())
+                )
+              ) {
+                AddTrackFeature()
+              }
             )
-          ) {
-            Image(systemName: "plus.app.fill")
-              .foregroundColor(Color.daisy.accent)
-              .font(.title3)
-              .fontWeight(.semibold)
           }
         }
-      }
-    } destination: { store in
-      AddTrackView(store: store)
+      )
+      .background(Color.daisy.neutral)
     }
   }
 
@@ -146,4 +145,15 @@ struct TracksView: View {
       )
     }
   }
+}
+
+#Preview {
+  TracksView(
+    store: Store(
+      initialState: TracksFeature.State(),
+      reducer: {
+        TracksFeature()
+      }
+    )
+  )
 }
