@@ -62,4 +62,3 @@ struct GradientNoiseBackground_Previews: PreviewProvider {
     GradientNoiseBackground()
   }
 }
-

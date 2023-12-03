@@ -38,9 +38,7 @@ struct TracksListFeature: Reducer {
   @Dependency(\.uuid) var uuid
 
   var body: some ReducerOf<Self> {
-    Reduce {
-      state,
-      action in
+    Reduce { state, action in
       switch action {
       case .addButtonTapped:
         state.tracks.append(.mock)

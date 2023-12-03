@@ -61,32 +61,30 @@ struct TrackFormFeature: Reducer {
   @Dependency(\.dismiss) var dismiss
   var body: some ReducerOf<Self> {
     BindingReducer()
-    Reduce {
-      state,
-      action in
+    Reduce { state, action in
       switch action {
       case .onSaveButtonTapped:
         if state.name.isEmpty {
           state.serviceNameError = "Service name is required"
           return .none
         }
-        
+
         if state.category.isEmpty {
           state.serviceCategoryError = "Service category is required"
           return .none
         }
-        
+
         if state.price.isEmpty {
           state.servicePriceError = "Service price is required"
           return .none
         }
-        
+
         if let price = Float(state.price.filter { $0.isNumber }),
            price <= 0 {
           state.servicePriceError = "Service price should be greater than 0"
           return .none
         }
-        
+
         if state.startAtDate > state.endAtDate {
           state.serviceEndAtError = "Service end date should be after start date"
           return .none

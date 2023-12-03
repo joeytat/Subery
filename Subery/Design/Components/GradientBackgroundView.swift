@@ -26,4 +26,3 @@ struct LinearBackgroundView_Previews: PreviewProvider {
     GradientBackgroundView()
   }
 }
-

@@ -175,5 +175,3 @@ struct FormErrorModifier: ViewModifier {
       .foregroundColor(Color.daisy.error)
   }
 }
-
-

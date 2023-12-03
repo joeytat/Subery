@@ -25,7 +25,6 @@
 		763B35DD29FF4B12005B3A56 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D529FF4B12005B3A56 /* Spacing.swift */; };
 		763B35DE29FF4B12005B3A56 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D629FF4B12005B3A56 /* Theme.swift */; };
 		763B35E029FF4B8B005B3A56 /* TrackFormFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35DF29FF4B8B005B3A56 /* TrackFormFeature.swift */; };
-		763B35E429FF4ECC005B3A56 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35E329FF4ECC005B3A56 /* LandingView.swift */; };
 		763B35EB2A00FA57005B3A56 /* TrackFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35EA2A00FA57005B3A56 /* TrackFormView.swift */; };
 		7684AD062A3EB1C500C01747 /* TracksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7684AD052A3EB1C500C01747 /* TracksListView.swift */; };
 		768F8BC52B1C91E00023905C /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F8BC42B1C91E00023905C /* Track.swift */; };
@@ -78,7 +77,6 @@
 		763B35D529FF4B12005B3A56 /* Spacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		763B35D629FF4B12005B3A56 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		763B35DF29FF4B8B005B3A56 /* TrackFormFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackFormFeature.swift; sourceTree = "<group>"; };
-		763B35E329FF4ECC005B3A56 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		763B35EA2A00FA57005B3A56 /* TrackFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackFormView.swift; sourceTree = "<group>"; };
 		7684AD052A3EB1C500C01747 /* TracksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksListView.swift; sourceTree = "<group>"; };
 		768F8BC42B1C91E00023905C /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
@@ -226,14 +224,6 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		763B35E529FF5930005B3A56 /* Landing */ = {
-			isa = PBXGroup;
-			children = (
-				763B35E329FF4ECC005B3A56 /* LandingView.swift */,
-			);
-			path = Landing;
-			sourceTree = "<group>";
-		};
 		768F8BC32B1C91D50023905C /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				763B357A29FE4A6C005B3A56 /* ContentView.swift */,
-				763B35E529FF5930005B3A56 /* Landing */,
 				76E78D6B2A3EAECF00C9414D /* TrackForm */,
 				76E78D6E2A3EAFC300C9414D /* Tracks */,
 			);
@@ -462,7 +451,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				76A75F882A0360E40076DB70 /* CustomSheet.swift in Sources */,
-				763B35E429FF4ECC005B3A56 /* LandingView.swift in Sources */,
 				76A75F852A01146A0076DB70 /* GradientBackgroundView.swift in Sources */,
 				763B35D829FF4B12005B3A56 /* NeuButtonStyle.swift in Sources */,
 				763B35EB2A00FA57005B3A56 /* TrackFormView.swift in Sources */,

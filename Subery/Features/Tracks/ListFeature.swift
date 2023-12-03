@@ -32,7 +32,7 @@ struct TracksFeature: ReducerProtocol {
     @PresentationState var alert: AlertState<Action.Alert>?
     var tracks: IdentifiedArrayOf<Track> = []
   }
-  
+
   enum Action {
     case addTrackButtonTapped
     case addTrack(PresentationAction<TrackFeature.Action>)
