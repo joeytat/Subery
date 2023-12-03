@@ -15,9 +15,6 @@
 		763B357B29FE4A6C005B3A56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B357A29FE4A6C005B3A56 /* ContentView.swift */; };
 		763B357D29FE4A6D005B3A56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 763B357C29FE4A6D005B3A56 /* Assets.xcassets */; };
 		763B358029FE4A6D005B3A56 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 763B357F29FE4A6D005B3A56 /* Preview Assets.xcassets */; };
-		763B358A29FE4A6D005B3A56 /* SuberyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B358929FE4A6D005B3A56 /* SuberyTests.swift */; };
-		763B359429FE4A6D005B3A56 /* SuberyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B359329FE4A6D005B3A56 /* SuberyUITests.swift */; };
-		763B359629FE4A6D005B3A56 /* SuberyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B359529FE4A6D005B3A56 /* SuberyUITestsLaunchTests.swift */; };
 		763B35C129FF47F8005B3A56 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 763B35C029FF47F8005B3A56 /* ComposableArchitecture */; };
 		763B35D729FF4B12005B3A56 /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35CE29FF4B12005B3A56 /* RGB.swift */; };
 		763B35D829FF4B12005B3A56 /* NeuButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D029FF4B12005B3A56 /* NeuButtonStyle.swift */; };
@@ -33,6 +30,7 @@
 		7684AD062A3EB1C500C01747 /* TracksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7684AD052A3EB1C500C01747 /* TracksListView.swift */; };
 		768F8BC52B1C91E00023905C /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F8BC42B1C91E00023905C /* Track.swift */; };
 		768F8BC82B1C959F0023905C /* TrackPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F8BC72B1C959F0023905C /* TrackPresets.swift */; };
+		768F8BCA2B1CC77B0023905C /* TrackFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F8BC92B1CC77B0023905C /* TrackFormTests.swift */; };
 		7692E15E2A11037A005AEA7D /* Number+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7692E15D2A11037A005AEA7D /* Number+.swift */; };
 		7692E1612A110E25005AEA7D /* FormViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7692E1602A110E25005AEA7D /* FormViewModifier.swift */; };
 		76A75F832A0113A50076DB70 /* GradientNoiseBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */; };
@@ -70,10 +68,7 @@
 		763B357C29FE4A6D005B3A56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		763B357F29FE4A6D005B3A56 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		763B358529FE4A6D005B3A56 /* SuberyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuberyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		763B358929FE4A6D005B3A56 /* SuberyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuberyTests.swift; sourceTree = "<group>"; };
 		763B358F29FE4A6D005B3A56 /* SuberyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuberyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		763B359329FE4A6D005B3A56 /* SuberyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuberyUITests.swift; sourceTree = "<group>"; };
-		763B359529FE4A6D005B3A56 /* SuberyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuberyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		763B35CE29FF4B12005B3A56 /* RGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGB.swift; sourceTree = "<group>"; };
 		763B35D029FF4B12005B3A56 /* NeuButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeuButtonStyle.swift; sourceTree = "<group>"; };
 		763B35D129FF4B12005B3A56 /* ColorCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCircle.swift; sourceTree = "<group>"; };
@@ -88,6 +83,7 @@
 		7684AD052A3EB1C500C01747 /* TracksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksListView.swift; sourceTree = "<group>"; };
 		768F8BC42B1C91E00023905C /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		768F8BC72B1C959F0023905C /* TrackPresets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPresets.swift; sourceTree = "<group>"; };
+		768F8BC92B1CC77B0023905C /* TrackFormTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackFormTests.swift; sourceTree = "<group>"; };
 		7692E15D2A11037A005AEA7D /* Number+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+.swift"; sourceTree = "<group>"; };
 		7692E1602A110E25005AEA7D /* FormViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModifier.swift; sourceTree = "<group>"; };
 		76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientNoiseBackground.swift; sourceTree = "<group>"; };
@@ -178,7 +174,7 @@
 		763B358829FE4A6D005B3A56 /* SuberyTests */ = {
 			isa = PBXGroup;
 			children = (
-				763B358929FE4A6D005B3A56 /* SuberyTests.swift */,
+				768F8BC92B1CC77B0023905C /* TrackFormTests.swift */,
 			);
 			path = SuberyTests;
 			sourceTree = "<group>";
@@ -186,8 +182,6 @@
 		763B359229FE4A6D005B3A56 /* SuberyUITests */ = {
 			isa = PBXGroup;
 			children = (
-				763B359329FE4A6D005B3A56 /* SuberyUITests.swift */,
-				763B359529FE4A6D005B3A56 /* SuberyUITestsLaunchTests.swift */,
 			);
 			path = SuberyUITests;
 			sourceTree = "<group>";
@@ -501,7 +495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				763B358A29FE4A6D005B3A56 /* SuberyTests.swift in Sources */,
+				768F8BCA2B1CC77B0023905C /* TrackFormTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,8 +503,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				763B359629FE4A6D005B3A56 /* SuberyUITestsLaunchTests.swift in Sources */,
-				763B359429FE4A6D005B3A56 /* SuberyUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,7 +573,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -636,7 +628,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -662,7 +654,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -692,7 +684,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -9,11 +9,11 @@ import Foundation
 
 struct Track: Equatable, Identifiable {
   let id: UUID
-  var name: String = ""
-  var category: String = ""
-  var price: String = ""
-  var startAtDate: Date = Date()
-  var endAtDate: Date = Date()
+  var name: String
+  var category: String
+  var price: String
+  var startAtDate: Date
+  var endAtDate: Date
   var renewalFrequency: RenewalFrequency = .monthly
   var currency: Currency = .current
 }

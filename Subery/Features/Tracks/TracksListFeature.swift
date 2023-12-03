@@ -38,10 +38,12 @@ struct TracksListFeature: Reducer {
   @Dependency(\.uuid) var uuid
 
   var body: some ReducerOf<Self> {
-    Reduce { state, action in
+    Reduce {
+      state,
+      action in
       switch action {
       case .addButtonTapped:
-        state.tracks.append(Track(id: UUID()))
+        state.tracks.append(.mock)
         return .none
       case .destination(.presented(.alert(.confirmDeletion(let id)))):
         state.tracks.remove(id: id)

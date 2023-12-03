@@ -20,11 +20,11 @@ struct TrackFormView: View {
           Text("App / Service Name")
             .formLabel()
 
-          TextField("App / Service Name", text: viewStore.$track.name)
+          TextField("App / Service Name", text: viewStore.$name)
             .focused($focus, equals: .name)
             .formInput(
               placeholder: viewStore.placeholderService.name,
-              isEmpty: viewStore.track.name.isEmpty,
+              isEmpty: viewStore.name.isEmpty,
               isFocused: focus == .name,
               suggestions: viewStore.state.serviceSuggestions.map { $0.name },
               onSuggestionTapped: { _ in
@@ -46,11 +46,11 @@ struct TrackFormView: View {
           Text("Category")
             .formLabel()
 
-          TextField("", text: viewStore.$track.category)
+          TextField("", text: viewStore.$category)
             .focused($focus, equals: .category)
             .formInput(
               placeholder: viewStore.placeholderService.category.rawValue,
-              isEmpty: viewStore.track.category.isEmpty,
+              isEmpty: viewStore.category.isEmpty,
               isFocused: focus == .category
             )
         }
@@ -59,14 +59,14 @@ struct TrackFormView: View {
           Text("Price")
             .formLabel()
 
-          TextField("", text: viewStore.$track.price)
+          TextField("", text: viewStore.$price)
             .keyboardType(.numberPad)
             .focused($focus, equals: .price)
             .formInput(
-              isEmpty: viewStore.track.price.isEmpty,
+              isEmpty: viewStore.price.isEmpty,
               isFocused: focus == .price,
-              prefix: currencyDropdown(viewStore.$track.currency),
-              suffix: renewalFrequencyDropdown(viewStore.$track.renewalFrequency)
+              prefix: currencyDropdown(viewStore.$currency),
+              suffix: renewalFrequencyDropdown(viewStore.$renewalFrequency)
             )
 
           if !viewStore.priceDescription.isEmpty {
@@ -90,7 +90,7 @@ struct TrackFormView: View {
                 .formLabel()
 
               HStack {
-                Text(viewStore.track.startAtDate.format())
+                Text(viewStore.startAtDate.format())
                 Spacer()
               }
               .formInput(
@@ -107,7 +107,7 @@ struct TrackFormView: View {
                   send: { .setServiceDateStartPickerPresented(isPresented: $0) }),
                 content: {
                   DatePickerView(
-                    date: viewStore.$track.startAtDate,
+                    date: viewStore.$startAtDate,
                     setDatePicker: { viewStore.send(.setServiceDateStartPickerPresented(isPresented: $0)) }
                   )
                 }
@@ -119,7 +119,7 @@ struct TrackFormView: View {
                 .formLabel()
 
               HStack {
-                Text(viewStore.track.endAtDate.format())
+                Text(viewStore.endAtDate.format())
                 Spacer()
               }
               .formInput(
@@ -136,7 +136,7 @@ struct TrackFormView: View {
                   send: { .setServiceDateEndPickerPresented(isPresented: $0) }),
                 content: {
                   DatePickerView(
-                    date: viewStore.$track.endAtDate,
+                    date: viewStore.$endAtDate,
                     setDatePicker: { viewStore.send(.setServiceDateEndPickerPresented(isPresented: $0)) }
                   )
                 }
@@ -274,8 +274,16 @@ extension View {
   NavigationView {
     TrackFormView(
       store: .init(
-        initialState: TrackFormFeature.State(track: .mock),
-        reducer: { TrackFormFeature() }
+        initialState: TrackFormFeature.State(
+          name: "",
+          category: "",
+          price: "",
+          startAtDate: .now,
+          endAtDate: .now.nextMonth()
+        ),
+        reducer: {
+          TrackFormFeature()
+        }
       )
     )
   }
