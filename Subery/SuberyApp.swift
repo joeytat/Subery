@@ -33,8 +33,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     if let windowScene = scene as? UIWindowScene {
       let window = UIWindow(windowScene: windowScene)
       let rootView = ContentView(
-        store: Store(initialState: TracksFeature.State()) {
-          TracksFeature()
+        store: Store(initialState: TracksListFeature.State()) {
+          TracksListFeature()
         }
       )
       let hostingController = StatusBarHostingController(rootView: rootView, lightStatusBar: true)

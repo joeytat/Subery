@@ -30,14 +30,15 @@
 		763B35E029FF4B8B005B3A56 /* AddTrackFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35DF29FF4B8B005B3A56 /* AddTrackFeature.swift */; };
 		763B35E429FF4ECC005B3A56 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35E329FF4ECC005B3A56 /* LandingView.swift */; };
 		763B35EB2A00FA57005B3A56 /* AddTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35EA2A00FA57005B3A56 /* AddTrackView.swift */; };
-		7684AD062A3EB1C500C01747 /* TracksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7684AD052A3EB1C500C01747 /* TracksView.swift */; };
+		7684AD062A3EB1C500C01747 /* TracksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7684AD052A3EB1C500C01747 /* TracksListView.swift */; };
+		768F8BC52B1C91E00023905C /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F8BC42B1C91E00023905C /* Track.swift */; };
 		7692E15E2A11037A005AEA7D /* Number+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7692E15D2A11037A005AEA7D /* Number+.swift */; };
 		7692E1612A110E25005AEA7D /* FormViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7692E1602A110E25005AEA7D /* FormViewModifier.swift */; };
 		76A75F832A0113A50076DB70 /* GradientNoiseBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */; };
 		76A75F852A01146A0076DB70 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */; };
 		76A75F882A0360E40076DB70 /* CustomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F872A0360E40076DB70 /* CustomSheet.swift */; };
 		76B619362A5448A200831F1A /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B619352A5448A200831F1A /* Currency.swift */; };
-		76E78D702A3EAFD600C9414D /* TracksFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E78D6F2A3EAFD600C9414D /* TracksFeature.swift */; };
+		76E78D702A3EAFD600C9414D /* TracksListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E78D6F2A3EAFD600C9414D /* TracksListFeature.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,14 +84,15 @@
 		763B35DF29FF4B8B005B3A56 /* AddTrackFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrackFeature.swift; sourceTree = "<group>"; };
 		763B35E329FF4ECC005B3A56 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		763B35EA2A00FA57005B3A56 /* AddTrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrackView.swift; sourceTree = "<group>"; };
-		7684AD052A3EB1C500C01747 /* TracksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksView.swift; sourceTree = "<group>"; };
+		7684AD052A3EB1C500C01747 /* TracksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksListView.swift; sourceTree = "<group>"; };
+		768F8BC42B1C91E00023905C /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		7692E15D2A11037A005AEA7D /* Number+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+.swift"; sourceTree = "<group>"; };
 		7692E1602A110E25005AEA7D /* FormViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModifier.swift; sourceTree = "<group>"; };
 		76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientNoiseBackground.swift; sourceTree = "<group>"; };
 		76A75F842A01146A0076DB70 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 		76A75F872A0360E40076DB70 /* CustomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSheet.swift; sourceTree = "<group>"; };
 		76B619352A5448A200831F1A /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
-		76E78D6F2A3EAFD600C9414D /* TracksFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksFeature.swift; sourceTree = "<group>"; };
+		76E78D6F2A3EAFD600C9414D /* TracksListFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksListFeature.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +238,14 @@
 			path = Landing;
 			sourceTree = "<group>";
 		};
+		768F8BC32B1C91D50023905C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				768F8BC42B1C91E00023905C /* Track.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		7692E15F2A110E16005AEA7D /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,8 +290,9 @@
 		76E78D6E2A3EAFC300C9414D /* Tracks */ = {
 			isa = PBXGroup;
 			children = (
-				76E78D6F2A3EAFD600C9414D /* TracksFeature.swift */,
-				7684AD052A3EB1C500C01747 /* TracksView.swift */,
+				768F8BC32B1C91D50023905C /* Models */,
+				76E78D6F2A3EAFD600C9414D /* TracksListFeature.swift */,
+				7684AD052A3EB1C500C01747 /* TracksListView.swift */,
 			);
 			path = Tracks;
 			sourceTree = "<group>";
@@ -452,14 +463,15 @@
 				763B35EB2A00FA57005B3A56 /* AddTrackView.swift in Sources */,
 				763B35DB29FF4B12005B3A56 /* Neumorphism+ViewExtension.swift in Sources */,
 				76B619362A5448A200831F1A /* Currency.swift in Sources */,
+				768F8BC52B1C91E00023905C /* Track.swift in Sources */,
 				763B35DD29FF4B12005B3A56 /* Spacing.swift in Sources */,
 				763B35D729FF4B12005B3A56 /* RGB.swift in Sources */,
-				7684AD062A3EB1C500C01747 /* TracksView.swift in Sources */,
+				7684AD062A3EB1C500C01747 /* TracksListView.swift in Sources */,
 				7692E15E2A11037A005AEA7D /* Number+.swift in Sources */,
 				763B35D929FF4B12005B3A56 /* ColorCircle.swift in Sources */,
 				763B35E029FF4B8B005B3A56 /* AddTrackFeature.swift in Sources */,
 				763B35DA29FF4B12005B3A56 /* BevelView.swift in Sources */,
-				76E78D702A3EAFD600C9414D /* TracksFeature.swift in Sources */,
+				76E78D702A3EAFD600C9414D /* TracksListFeature.swift in Sources */,
 				763B35DC29FF4B12005B3A56 /* Color.swift in Sources */,
 				762203182A03D3B10078CAE3 /* Date+.swift in Sources */,
 				762203152A03CEAA0078CAE3 /* DatePickerView.swift in Sources */,

@@ -9,12 +9,12 @@ import SwiftUI
 import ComposableArchitecture
 
 struct ContentView: View {
-  let store: StoreOf<TracksFeature>
+  let store: StoreOf<TracksListFeature>
 
   var body: some View {
     WithViewStore(store, observe: { $0 }) { _ in
       GradientBackgroundView().overlay {
-        TracksView(store: store)
+        TracksListView(store: store)
       }
     }
     .preferredColorScheme(.light)
