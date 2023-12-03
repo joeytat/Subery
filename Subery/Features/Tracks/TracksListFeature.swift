@@ -70,18 +70,18 @@ struct TracksListFeature: Reducer {
 extension TracksListFeature {
   struct Destination: Reducer {
     enum State: Equatable {
-      case addTrack(AddTrackFeature.State)
+      case addTrack(TrackFormFeature.State)
       case alert(AlertState<TracksListFeature.Action.Alert>)
     }
 
     enum Action {
-      case addTrack(AddTrackFeature.Action)
+      case addTrack(TrackFormFeature.Action)
       case alert(TracksListFeature.Action.Alert)
     }
 
     var body: some ReducerOf<Self> {
       Scope(state: /State.addTrack, action: /Action.addTrack) {
-        AddTrackFeature()
+        TrackFormFeature()
       }
     }
   }

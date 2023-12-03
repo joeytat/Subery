@@ -27,9 +27,9 @@
 		763B35DC29FF4B12005B3A56 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D429FF4B12005B3A56 /* Color.swift */; };
 		763B35DD29FF4B12005B3A56 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D529FF4B12005B3A56 /* Spacing.swift */; };
 		763B35DE29FF4B12005B3A56 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D629FF4B12005B3A56 /* Theme.swift */; };
-		763B35E029FF4B8B005B3A56 /* AddTrackFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35DF29FF4B8B005B3A56 /* AddTrackFeature.swift */; };
+		763B35E029FF4B8B005B3A56 /* TrackFormFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35DF29FF4B8B005B3A56 /* TrackFormFeature.swift */; };
 		763B35E429FF4ECC005B3A56 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35E329FF4ECC005B3A56 /* LandingView.swift */; };
-		763B35EB2A00FA57005B3A56 /* AddTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35EA2A00FA57005B3A56 /* AddTrackView.swift */; };
+		763B35EB2A00FA57005B3A56 /* TrackFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35EA2A00FA57005B3A56 /* TrackFormView.swift */; };
 		7684AD062A3EB1C500C01747 /* TracksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7684AD052A3EB1C500C01747 /* TracksListView.swift */; };
 		768F8BC52B1C91E00023905C /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F8BC42B1C91E00023905C /* Track.swift */; };
 		7692E15E2A11037A005AEA7D /* Number+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7692E15D2A11037A005AEA7D /* Number+.swift */; };
@@ -81,9 +81,9 @@
 		763B35D429FF4B12005B3A56 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		763B35D529FF4B12005B3A56 /* Spacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		763B35D629FF4B12005B3A56 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		763B35DF29FF4B8B005B3A56 /* AddTrackFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrackFeature.swift; sourceTree = "<group>"; };
+		763B35DF29FF4B8B005B3A56 /* TrackFormFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackFormFeature.swift; sourceTree = "<group>"; };
 		763B35E329FF4ECC005B3A56 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
-		763B35EA2A00FA57005B3A56 /* AddTrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrackView.swift; sourceTree = "<group>"; };
+		763B35EA2A00FA57005B3A56 /* TrackFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackFormView.swift; sourceTree = "<group>"; };
 		7684AD052A3EB1C500C01747 /* TracksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksListView.swift; sourceTree = "<group>"; };
 		768F8BC42B1C91E00023905C /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		7692E15D2A11037A005AEA7D /* Number+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+.swift"; sourceTree = "<group>"; };
@@ -272,19 +272,19 @@
 			children = (
 				763B357A29FE4A6C005B3A56 /* ContentView.swift */,
 				763B35E529FF5930005B3A56 /* Landing */,
-				76E78D6B2A3EAECF00C9414D /* AddTrack */,
+				76E78D6B2A3EAECF00C9414D /* TrackForm */,
 				76E78D6E2A3EAFC300C9414D /* Tracks */,
 			);
 			path = Features;
 			sourceTree = "<group>";
 		};
-		76E78D6B2A3EAECF00C9414D /* AddTrack */ = {
+		76E78D6B2A3EAECF00C9414D /* TrackForm */ = {
 			isa = PBXGroup;
 			children = (
-				763B35DF29FF4B8B005B3A56 /* AddTrackFeature.swift */,
-				763B35EA2A00FA57005B3A56 /* AddTrackView.swift */,
+				763B35DF29FF4B8B005B3A56 /* TrackFormFeature.swift */,
+				763B35EA2A00FA57005B3A56 /* TrackFormView.swift */,
 			);
-			path = AddTrack;
+			path = TrackForm;
 			sourceTree = "<group>";
 		};
 		76E78D6E2A3EAFC300C9414D /* Tracks */ = {
@@ -460,7 +460,7 @@
 				763B35E429FF4ECC005B3A56 /* LandingView.swift in Sources */,
 				76A75F852A01146A0076DB70 /* GradientBackgroundView.swift in Sources */,
 				763B35D829FF4B12005B3A56 /* NeuButtonStyle.swift in Sources */,
-				763B35EB2A00FA57005B3A56 /* AddTrackView.swift in Sources */,
+				763B35EB2A00FA57005B3A56 /* TrackFormView.swift in Sources */,
 				763B35DB29FF4B12005B3A56 /* Neumorphism+ViewExtension.swift in Sources */,
 				76B619362A5448A200831F1A /* Currency.swift in Sources */,
 				768F8BC52B1C91E00023905C /* Track.swift in Sources */,
@@ -469,7 +469,7 @@
 				7684AD062A3EB1C500C01747 /* TracksListView.swift in Sources */,
 				7692E15E2A11037A005AEA7D /* Number+.swift in Sources */,
 				763B35D929FF4B12005B3A56 /* ColorCircle.swift in Sources */,
-				763B35E029FF4B8B005B3A56 /* AddTrackFeature.swift in Sources */,
+				763B35E029FF4B8B005B3A56 /* TrackFormFeature.swift in Sources */,
 				763B35DA29FF4B12005B3A56 /* BevelView.swift in Sources */,
 				76E78D702A3EAFD600C9414D /* TracksListFeature.swift in Sources */,
 				763B35DC29FF4B12005B3A56 /* Color.swift in Sources */,

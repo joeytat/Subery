@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct LandingView: View {
-  let store: StoreOf<AddTrackFeature>
+  let store: StoreOf<TrackFormFeature>
 
   var body: some View {
     WithViewStore(self.store, observe: { $0 }) { viewStore in
@@ -27,7 +27,7 @@ struct LandingView: View {
           .padding(.bottom, 32)
 
         NavigationLink(
-          destination: AddTrackView(
+          destination: TrackFormView(
             store: store
           )
           .navigationBarBackButtonHidden()

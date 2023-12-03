@@ -9,9 +9,9 @@ import SwiftUI
 import ComposableArchitecture
 import Combine
 
-struct AddTrackView: View {
-  let store: StoreOf<AddTrackFeature>
-  @FocusState var focusedField: AddTrackFeature.State.Field?
+struct TrackFormView: View {
+  let store: StoreOf<TrackFormFeature>
+  @FocusState var focusedField: TrackFormFeature.State.Field?
 
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
@@ -68,7 +68,7 @@ struct AddTrackView: View {
     .navigationBarBackButtonHidden()
   }
 
-  private func serviceName(_ viewStore: ViewStoreOf<AddTrackFeature>) -> some View {
+  private func serviceName(_ viewStore: ViewStoreOf<TrackFormFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("App / Service Name")
         .formLabel()
@@ -99,7 +99,7 @@ struct AddTrackView: View {
     }
   }
 
-  private func servicePrice(_ viewStore: ViewStoreOf<AddTrackFeature>) -> some View {
+  private func servicePrice(_ viewStore: ViewStoreOf<TrackFormFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("Price")
         .formLabel()
@@ -172,7 +172,7 @@ struct AddTrackView: View {
     }
   }
 
-  private func serviceStartAt(_ viewStore: ViewStoreOf<AddTrackFeature>) -> some View {
+  private func serviceStartAt(_ viewStore: ViewStoreOf<TrackFormFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("Start at")
         .formLabel()
@@ -206,7 +206,7 @@ struct AddTrackView: View {
     }
   }
 
-  private func serviceEndAt(_ viewStore: ViewStoreOf<AddTrackFeature>) -> some View {
+  private func serviceEndAt(_ viewStore: ViewStoreOf<TrackFormFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("End at")
         .formLabel()
@@ -240,7 +240,7 @@ struct AddTrackView: View {
     }
   }
 
-  private func serviceCategory(_ viewStore: ViewStoreOf<AddTrackFeature>) -> some View {
+  private func serviceCategory(_ viewStore: ViewStoreOf<TrackFormFeature>) -> some View {
     VStack(alignment: .leading) {
       Text("Category")
         .formLabel()
@@ -269,7 +269,7 @@ struct PriceTextField: View {
   let keyboardType: UIKeyboardType
 
   @Binding var text: String
-  var focusState: FocusState<AddTrackFeature.State.Field?>.Binding
+  var focusState: FocusState<TrackFormFeature.State.Field?>.Binding
 
   var body: some View {
     HStack(alignment: .firstTextBaseline, spacing: Theme.spacing.sm) {

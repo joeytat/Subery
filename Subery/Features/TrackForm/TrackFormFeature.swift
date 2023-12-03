@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-struct AddTrackFeature: Reducer {
+struct TrackFormFeature: Reducer {
   struct State: Equatable {
     var placeholderService: SubscriptionServicePreset = State.popularSubscriptions.randomElement()!
     var serviceSuggestions: IdentifiedArrayOf<SubscriptionServicePreset> = []
@@ -62,7 +62,7 @@ struct AddTrackFeature: Reducer {
       case .setName(let name):
         state.track.name = name
         if !name.isEmpty {
-          let suggestionsResult: IdentifiedArrayOf<AddTrackFeature.State.SubscriptionServicePreset> = IdentifiedArray(
+          let suggestionsResult: IdentifiedArrayOf<TrackFormFeature.State.SubscriptionServicePreset> = IdentifiedArray(
             uniqueElements: State.popularSubscriptions
               .filter { $0.name.lowercased().starts(with: name.lowercased()) }
           )
@@ -166,7 +166,7 @@ struct AddTrackFeature: Reducer {
   }
 }
 
-extension AddTrackFeature.State {
+extension TrackFormFeature.State {
   struct SubscriptionServicePreset: Identifiable, Equatable, CustomStringConvertible  {
     let name: String
     let category: SubscriptionCategory
