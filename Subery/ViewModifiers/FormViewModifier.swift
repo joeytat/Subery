@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 extension View {
   func formLabel() -> some View {
     self.modifier(FormLabelModifier())
@@ -21,7 +20,7 @@ extension View {
     onSuggestionTapped: @escaping (String) -> Void = { _ in },
     prefix: Prefix? = nil,
     suffix: Suffix? = nil
-  ) -> some View  {
+  ) -> some View {
     HStack(spacing: 0) {
       prefix
       self.modifier(

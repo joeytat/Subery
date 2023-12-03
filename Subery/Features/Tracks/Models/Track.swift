@@ -20,9 +20,9 @@ struct Track: Equatable, Identifiable {
 
 extension Track {
   enum RenewalFrequency: String, CaseIterable {
-    case yearly = "Yearly"
-    case quarterly = "Quarterly"
     case monthly = "Monthly"
+    case quarterly = "Quarterly"
+    case yearly = "Yearly"
   }
 }
 

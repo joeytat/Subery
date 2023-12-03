@@ -16,32 +16,16 @@ struct Currency: Equatable, Identifiable, Hashable {
     "\(identifier)\(symbol)"
   }
 
-
   static var current: Currency {
     Currency(
       identifier: Locale.current.currency?.identifier ?? "USD",
       symbol: Locale.current.currencySymbol ?? "$"
     )
   }
-  
+
   static var all: [Currency] {
     [
-      "ar-SA",
-      "de-DE",
-      "en-GB",
       "en-US",
-      "es-ES",
-      "fr-FR",
-      "hi-IN",
-      "it-IT",
-      "ja-JP",
-      "ko-KR",
-      "nl-NL",
-      "pl-PL",
-      "pt-BR",
-      "ru-RU",
-      "sv-SE",
-      "tr-TR",
       "zh-CN"
     ]
       .map { identifier in

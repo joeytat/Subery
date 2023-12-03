@@ -10,9 +10,11 @@ import ComposableArchitecture
 
 struct TrackFormFeature: Reducer {
   struct State: Equatable {
-    var placeholderService: SubscriptionServicePreset = State.popularSubscriptions.randomElement()!
-    var serviceSuggestions: IdentifiedArrayOf<SubscriptionServicePreset> = []
-    var track: Track
+    var placeholderService: TrackPreset = TrackPreset.popularPresets.randomElement()!
+    var serviceSuggestions: IdentifiedArrayOf<TrackPreset> = []
+
+    @BindingState var track: Track
+    @BindingState var focus: Field?
 
     var serviceNameError: String?
     var serviceCategoryError: String?
@@ -23,10 +25,9 @@ struct TrackFormFeature: Reducer {
     var isServiceDateStartPickerPresented: Bool = false
     var isServiceDateEndPickerPresented: Bool = false
 
-    @BindingState var servicePricePerMonth: String = ""
-    @BindingState var serviceFocusedInput: Field?
+    @BindingState var priceDescription: String = ""
 
-    enum Field: String, Hashable {
+    enum Field: Hashable {
       case name
       case category
       case price
@@ -43,13 +44,6 @@ struct TrackFormFeature: Reducer {
     case binding(BindingAction<State>)
     case onCancelButtonTapped
     case onSaveButtonTapped
-    case setName(String)
-    case setCategory(String)
-    case setPrice(String)
-    case setCurrency(Currency)
-    case setStartAt(Date)
-    case setEndAt(Date)
-    case setRenewalFrequency(Track.RenewalFrequency)
     case setServiceDateStartPickerPresented(isPresented: Bool)
     case setServiceDateEndPickerPresented(isPresented: Bool)
   }
@@ -59,67 +53,6 @@ struct TrackFormFeature: Reducer {
     BindingReducer()
     Reduce { state, action in
       switch action {
-      case .setName(let name):
-        state.track.name = name
-        if !name.isEmpty {
-          let suggestionsResult: IdentifiedArrayOf<TrackFormFeature.State.SubscriptionServicePreset> = IdentifiedArray(
-            uniqueElements: State.popularSubscriptions
-              .filter { $0.name.lowercased().starts(with: name.lowercased()) }
-          )
-          if suggestionsResult.count == 1,
-             let firstPreset = suggestionsResult.first,
-             firstPreset.name == name {
-            state.serviceSuggestions = []
-            state.track.category = firstPreset.category.rawValue
-          } else {
-            state.serviceSuggestions = suggestionsResult
-          }
-          state.serviceNameError = nil
-        } else {
-          state.serviceSuggestions = []
-        }
-        return .none
-      case .setCategory(let category):
-        state.track.category = category
-        return .none
-      case .setStartAt(let date):
-        state.track.startAtDate = date
-        return .none
-      case .setEndAt(let date):
-        state.track.endAtDate = date
-        return .none
-      case .setCurrency(let currency):
-        state.track.currency = currency
-        return .none
-      case .setPrice(let priceStr):
-        let numberStr = priceStr.filter { $0.isNumber }
-        if let deformattedPriceValue = Float(numberStr)?.roundedToDecimalPlaces(), deformattedPriceValue > 0 {
-          state.track.price = deformattedPriceValue.formatted()
-          switch state.track.renewalFrequency {
-          case .monthly:
-            state.servicePricePerMonth = ""
-          case .quarterly:
-            state.servicePricePerMonth = "\((deformattedPriceValue / 4).roundedToDecimalPlaces())/month"
-          case .yearly:
-            state.servicePricePerMonth = "\((deformattedPriceValue / 12).roundedToDecimalPlaces())/month"
-          }
-          state.servicePriceError = nil
-        }
-        return .none
-      case .setRenewalFrequency(let renewalFrequency):
-        state.track.renewalFrequency = renewalFrequency
-        let numberStr = state.track.price.filter { $0.isNumber }
-        if let deformattedPriceValue = Float(numberStr) {
-          switch renewalFrequency {
-          case .monthly:
-            state.servicePricePerMonth = ""
-          case .quarterly:
-            state.servicePricePerMonth = "\((deformattedPriceValue / 4).roundedToDecimalPlaces())/month"
-          case .yearly:
-            state.servicePricePerMonth = "\((deformattedPriceValue / 12).roundedToDecimalPlaces())/month"
-          }
-        }
-        return .none
       case .onSaveButtonTapped:
         if state.track.name.isEmpty {
           state.serviceNameError = "Service name is required"
@@ -163,96 +96,5 @@ struct TrackFormFeature: Reducer {
         return .none
       }
     }._printChanges()
-  }
-}
-
-extension TrackFormFeature.State {
-  struct SubscriptionServicePreset: Identifiable, Equatable, CustomStringConvertible  {
-    let name: String
-    let category: SubscriptionCategory
-
-    var id: String { name }
-    var description: String { name }
-  }
-
-  enum SubscriptionCategory: String, CaseIterable {
-    case videoStreaming = "Video Streaming"
-    case musicStreaming = "Music Streaming"
-    case news = "News"
-    case magazines = "Magazines"
-    case productivity = "Productivity"
-    case cloudStorage = "Cloud Storage"
-    case fitness = "Fitness"
-    case gaming = "Gaming"
-    case education = "Education"
-    case socialMedia = "Social Media"
-    case dating = "Dating"
-    case finance = "Finance"
-    case software = "Software"
-    case developerTools = "Developer Tools"
-    case security = "Security"
-    case vpn = "VPN"
-    case webHosting = "Web Hosting"
-    case ecommerce = "eCommerce"
-  }
-
-  static var popularSubscriptions: [SubscriptionServicePreset] {
-    let raw: [String: SubscriptionCategory] = [
-      "Netflix": .videoStreaming,
-      "Hulu": .videoStreaming,
-      "Disney+": .videoStreaming,
-      "Spotify": .musicStreaming,
-      "Apple Music": .musicStreaming,
-      "Tidal": .musicStreaming,
-      "New York Times": .news,
-      "The Wall Street Journal": .news,
-      "The Guardian": .news,
-      "National Geographic": .magazines,
-      "The Economist": .magazines,
-      "Time Magazine": .magazines,
-      "Evernote": .productivity,
-      "Notion": .productivity,
-      "Todoist": .productivity,
-      "Dropbox": .cloudStorage,
-      "Google Drive": .cloudStorage,
-      "Microsoft OneDrive": .cloudStorage,
-      "Peloton": .fitness,
-      "MyFitnessPal": .fitness,
-      "Strava": .fitness,
-      "Xbox Game Pass": .gaming,
-      "PlayStation Now": .gaming,
-      "Nintendo Switch Online": .gaming,
-      "Udemy": .education,
-      "Coursera": .education,
-      "Skillshare": .education,
-      "Facebook": .socialMedia,
-      "Twitter": .socialMedia,
-      "Instagram": .socialMedia,
-      "Tinder": .dating,
-      "Bumble": .dating,
-      "Hinge": .dating,
-      "Mint": .finance,
-      "QuickBooks": .finance,
-      "Personal Capital": .finance,
-      "Microsoft 365": .software,
-      "Adobe Creative Cloud": .software,
-      "AutoCAD": .software,
-      "GitHub": .developerTools,
-      "GitLab": .developerTools,
-      "Bitbucket": .developerTools,
-      "Norton": .security,
-      "McAfee": .security,
-      "Malwarebytes": .security,
-      "NordVPN": .vpn,
-      "ExpressVPN": .vpn,
-      "Surfshark": .vpn,
-      "Bluehost": .webHosting,
-      "HostGator": .webHosting,
-      "SiteGround": .webHosting,
-      "Shopify": .ecommerce,
-      "BigCommerce": .ecommerce,
-      "WooCommerce": .ecommerce
-    ]
-    return raw.map { SubscriptionServicePreset(name: $0.key, category: $0.value) }
   }
 }

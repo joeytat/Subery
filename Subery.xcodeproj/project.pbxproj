@@ -32,6 +32,7 @@
 		763B35EB2A00FA57005B3A56 /* TrackFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35EA2A00FA57005B3A56 /* TrackFormView.swift */; };
 		7684AD062A3EB1C500C01747 /* TracksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7684AD052A3EB1C500C01747 /* TracksListView.swift */; };
 		768F8BC52B1C91E00023905C /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F8BC42B1C91E00023905C /* Track.swift */; };
+		768F8BC82B1C959F0023905C /* TrackPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F8BC72B1C959F0023905C /* TrackPresets.swift */; };
 		7692E15E2A11037A005AEA7D /* Number+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7692E15D2A11037A005AEA7D /* Number+.swift */; };
 		7692E1612A110E25005AEA7D /* FormViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7692E1602A110E25005AEA7D /* FormViewModifier.swift */; };
 		76A75F832A0113A50076DB70 /* GradientNoiseBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */; };
@@ -86,6 +87,7 @@
 		763B35EA2A00FA57005B3A56 /* TrackFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackFormView.swift; sourceTree = "<group>"; };
 		7684AD052A3EB1C500C01747 /* TracksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksListView.swift; sourceTree = "<group>"; };
 		768F8BC42B1C91E00023905C /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		768F8BC72B1C959F0023905C /* TrackPresets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPresets.swift; sourceTree = "<group>"; };
 		7692E15D2A11037A005AEA7D /* Number+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+.swift"; sourceTree = "<group>"; };
 		7692E1602A110E25005AEA7D /* FormViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModifier.swift; sourceTree = "<group>"; };
 		76A75F822A0113A50076DB70 /* GradientNoiseBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientNoiseBackground.swift; sourceTree = "<group>"; };
@@ -246,6 +248,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		768F8BC62B1C95870023905C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				768F8BC72B1C959F0023905C /* TrackPresets.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		7692E15F2A110E16005AEA7D /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +291,7 @@
 		76E78D6B2A3EAECF00C9414D /* TrackForm */ = {
 			isa = PBXGroup;
 			children = (
+				768F8BC62B1C95870023905C /* Models */,
 				763B35DF29FF4B8B005B3A56 /* TrackFormFeature.swift */,
 				763B35EA2A00FA57005B3A56 /* TrackFormView.swift */,
 			);
@@ -477,6 +488,7 @@
 				762203152A03CEAA0078CAE3 /* DatePickerView.swift in Sources */,
 				763B35DE29FF4B12005B3A56 /* Theme.swift in Sources */,
 				763B357B29FE4A6C005B3A56 /* ContentView.swift in Sources */,
+				768F8BC82B1C959F0023905C /* TrackPresets.swift in Sources */,
 				76A75F832A0113A50076DB70 /* GradientNoiseBackground.swift in Sources */,
 				763B357929FE4A6C005B3A56 /* SuberyApp.swift in Sources */,
 				7622031C2A04B7D20078CAE3 /* Dropdown.swift in Sources */,
