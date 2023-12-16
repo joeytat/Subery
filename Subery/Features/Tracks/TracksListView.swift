@@ -34,7 +34,6 @@ struct TracksListView: View {
           }
           .listStyle(.plain)
         }
-        .navigationTitle("Subery")
         .sheet(
           store: self.store.scope(
             state: \.$addTrack,
@@ -43,19 +42,20 @@ struct TracksListView: View {
         ) { store in
           NavigationStack {
             TrackFormView(store: store)
-            .navigationTitle("New track")
-            .toolbar {
-              ToolbarItem {
-                Button("Save") {
-                  viewStore.send(.saveTrackButtonTapped)
+              .toolbar {
+                ToolbarItem {
+                  Button("Save") {
+                    viewStore.send(.saveTrackButtonTapped)
+                  }
+                  .foregroundColor(Color.daisy.neutralContent)
+                }
+                ToolbarItem(placement: .cancellationAction) {
+                  Button("Cancel") {
+                    viewStore.send(.cancelTrackButtonTapped)
+                  }
+                  .foregroundColor(Color.daisy.neutralContent)
                 }
               }
-              ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel") {
-                  viewStore.send(.cancelTrackButtonTapped)
-                }
-              }
-            }
           }
         }
         Button(action: {
