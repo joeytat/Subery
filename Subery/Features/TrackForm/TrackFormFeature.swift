@@ -44,7 +44,6 @@ struct TrackFormFeature: Reducer {
     case delegate(Delegate)
     case binding(BindingAction<State>)
     case onCancelButtonTapped
-    case onSaveButtonTapped
     case setServiceDateStartPickerPresented(isPresented: Bool)
     case setServiceDateEndPickerPresented(isPresented: Bool)
   }
@@ -54,37 +53,6 @@ struct TrackFormFeature: Reducer {
     BindingReducer()
     Reduce { state, action in
       switch action {
-      case .onSaveButtonTapped:
-        if state.track.name.isEmpty {
-          state.serviceNameError = "Service name is required"
-          return .none
-        }
-
-        if state.track.category.isEmpty {
-          state.serviceCategoryError = "Service category is required"
-          return .none
-        }
-
-        if state.track.price.isEmpty {
-          state.servicePriceError = "Service price is required"
-          return .none
-        }
-
-        if let price = Float(state.track.price.filter { $0.isNumber }),
-           price <= 0 {
-          state.servicePriceError = "Service price should be greater than 0"
-          return .none
-        }
-
-        if state.track.startAtDate > state.track.endAtDate {
-          state.serviceEndAtError = "Service end date should be after start date"
-          return .none
-        }
-
-        return .run { [state] send in
-          await send(.delegate(.saveTrack(state.track)))
-          await self.dismiss()
-        }
       case .onCancelButtonTapped:
         return .run { _ in await self.dismiss() }
       case .binding:

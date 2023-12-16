@@ -34,6 +34,30 @@ struct TracksListView: View {
           }
           .listStyle(.plain)
         }
+        .navigationTitle("Subery")
+        .sheet(
+          store: self.store.scope(
+            state: \.$addTrack,
+            action: { .addTrack($0) }
+          )
+        ) { store in
+          NavigationStack {
+            TrackFormView(store: store)
+            .navigationTitle("New track")
+            .toolbar {
+              ToolbarItem {
+                Button("Save") {
+                  viewStore.send(.saveTrackButtonTapped)
+                }
+              }
+              ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") {
+                  viewStore.send(.cancelTrackButtonTapped)
+                }
+              }
+            }
+          }
+        }
         Button(action: {
           viewStore.send(.addButtonTapped)
         }) {

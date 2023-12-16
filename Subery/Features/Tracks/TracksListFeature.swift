@@ -11,9 +11,8 @@ import ComposableArchitecture
 struct TracksListFeature: Reducer {
   struct State: Equatable {
     @PresentationState var destination: Destination.State?
-
+    @PresentationState var addTrack: TrackFormFeature.State?
     var tracks: IdentifiedArrayOf<Track> = []
-    var isAddTrackPresneted: Bool = false
     var totalAmount: String {
       let total = tracks.reduce(into: Float(0.0)) { acc, next in
         if let price = Float(next.price) {
@@ -33,7 +32,10 @@ struct TracksListFeature: Reducer {
 
     case addButtonTapped
     case deleteButtonTapped(id: Track.ID)
+    case addTrack(PresentationAction<TrackFormFeature.Action>)
     case destination(PresentationAction<Destination.Action>)
+    case cancelTrackButtonTapped
+    case saveTrackButtonTapped
   }
   @Dependency(\.uuid) var uuid
 
@@ -41,7 +43,7 @@ struct TracksListFeature: Reducer {
     Reduce { state, action in
       switch action {
       case .addButtonTapped:
-        state.tracks.append(.mock)
+        state.addTrack = TrackFormFeature.State(track: Track.init(id: UUID()))
         return .none
       case .destination(.presented(.alert(.confirmDeletion(let id)))):
         state.tracks.remove(id: id)
@@ -59,10 +61,23 @@ struct TracksListFeature: Reducer {
         return .none
       case .destination:
         return .none
+      case .addTrack:
+        return .none
+      case .cancelTrackButtonTapped:
+        state.addTrack = nil
+        return .none
+      case .saveTrackButtonTapped:
+        guard let track = state.addTrack?.track else { return .none }
+        state.tracks.append(track)
+        state.addTrack = nil
+        return .none
       }
     }
     .ifLet(\.$destination, action: /Action.destination) {
       Destination()
+    }
+    .ifLet(\.$addTrack, action: /Action.addTrack) {
+      TrackFormFeature()
     }
   }
 }

@@ -14,7 +14,9 @@ struct ContentView: View {
   var body: some View {
     WithViewStore(store, observe: { $0 }) { _ in
       GradientBackgroundView().overlay {
-        TracksListView(store: store)
+        NavigationStack {
+          TracksListView(store: store)
+        }
       }
     }
     .preferredColorScheme(.light)
