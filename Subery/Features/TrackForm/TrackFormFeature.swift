@@ -13,17 +13,10 @@ struct TrackFormFeature: Reducer {
   @Dependency(\.date) var date
 
   struct State: Equatable {
-    @BindingState var name: String
-    @BindingState var category: String
-    @BindingState var price: String
-    @BindingState var startAtDate: Date
-    @BindingState var endAtDate: Date
-    @BindingState var renewalFrequency: Track.RenewalFrequency = .monthly
-    @BindingState var currency: Currency = .current
-
     var placeholderService: TrackPreset = TrackPreset.popularPresets.randomElement()!
     var serviceSuggestions: IdentifiedArrayOf<TrackPreset> = []
 
+    @BindingState var track: Track
     @BindingState var focus: Field?
 
     var serviceNameError: String?
@@ -34,8 +27,6 @@ struct TrackFormFeature: Reducer {
 
     var isServiceDateStartPickerPresented: Bool = false
     var isServiceDateEndPickerPresented: Bool = false
-
-    @BindingState var priceDescription: String = ""
 
     enum Field: Hashable {
       case name
@@ -64,47 +55,34 @@ struct TrackFormFeature: Reducer {
     Reduce { state, action in
       switch action {
       case .onSaveButtonTapped:
-        if state.name.isEmpty {
+        if state.track.name.isEmpty {
           state.serviceNameError = "Service name is required"
           return .none
         }
 
-        if state.category.isEmpty {
+        if state.track.category.isEmpty {
           state.serviceCategoryError = "Service category is required"
           return .none
         }
 
-        if state.price.isEmpty {
+        if state.track.price.isEmpty {
           state.servicePriceError = "Service price is required"
           return .none
         }
 
-        if let price = Float(state.price.filter { $0.isNumber }),
+        if let price = Float(state.track.price.filter { $0.isNumber }),
            price <= 0 {
           state.servicePriceError = "Service price should be greater than 0"
           return .none
         }
 
-        if state.startAtDate > state.endAtDate {
+        if state.track.startAtDate > state.track.endAtDate {
           state.serviceEndAtError = "Service end date should be after start date"
           return .none
         }
 
         return .run { [state] send in
-          await send(
-            .delegate(
-              .saveTrack(
-                .init(
-                  id: self.uuid(),
-                  name: state.name,
-                  category: state.category,
-                  price: state.price,
-                  startAtDate: state.startAtDate,
-                  endAtDate: state.endAtDate
-                )
-              )
-            )
-          )
+          await send(.delegate(.saveTrack(state.track)))
           await self.dismiss()
         }
       case .onCancelButtonTapped:

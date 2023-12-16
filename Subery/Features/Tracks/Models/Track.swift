@@ -9,13 +9,27 @@ import Foundation
 
 struct Track: Equatable, Identifiable {
   let id: UUID
-  var name: String
-  var category: String
-  var price: String
-  var startAtDate: Date
-  var endAtDate: Date
+  var name: String = ""
+  var category: String = ""
+  var price: String = ""
+  var startAtDate: Date = Date()
+  var endAtDate: Date = Date().nextMonth()
   var renewalFrequency: RenewalFrequency = .monthly
   var currency: Currency = .current
+
+  var priceDescription: String? {
+    guard let deformattedPriceValue = Float(price)?.roundedToDecimalPlaces(), deformattedPriceValue > 0 else {
+      return nil
+    }
+    switch renewalFrequency {
+    case .monthly:
+      return nil
+    case .quarterly:
+      return "\((deformattedPriceValue / 4).roundedToDecimalPlaces())/month"
+    case .yearly:
+      return "\((deformattedPriceValue / 12).roundedToDecimalPlaces())/month"
+    }
+  }
 }
 
 extension Track {

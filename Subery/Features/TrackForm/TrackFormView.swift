@@ -16,70 +16,76 @@ struct TrackFormView: View {
   var body: some View {
     WithViewStore(self.store, observe: { $0 }) { viewStore in
       Form {
-        VStack(alignment: .leading) {
-          Text("App / Service Name")
-            .formLabel()
+        Section {
+          VStack(alignment: .leading) {
+            Text("App / Service Name")
+              .formLabel()
 
-          TextField("App / Service Name", text: viewStore.$name)
-            .focused($focus, equals: .name)
-            .formInput(
-              placeholder: viewStore.placeholderService.name,
-              isEmpty: viewStore.name.isEmpty,
-              isFocused: focus == .name,
-              suggestions: viewStore.state.serviceSuggestions.map { $0.name },
-              onSuggestionTapped: { _ in
-                //          viewStore.send(.setName(suggestion))
-              }
-            )
-            .padding(
-              .bottom, viewStore.state.serviceSuggestions.isEmpty ? 0 : Theme.spacing.sm
-            )
+            TextField("App / Service Name", text: viewStore.$track.name)
+              .focused($focus, equals: .name)
+              .formInput(
+                placeholder: viewStore.placeholderService.name,
+                isEmpty: viewStore.track.name.isEmpty,
+                isFocused: focus == .name,
+                suggestions: viewStore.serviceSuggestions.map { $0.name },
+                onSuggestionTapped: { _ in
+                  //          viewStore.send(.setName(suggestion))
+                }
+              )
+              .padding(
+                .bottom, viewStore.serviceSuggestions.isEmpty ? 0 : Theme.spacing.sm
+              )
 
-          if let error = viewStore.serviceNameError {
-            Text(error)
-              .formError()
-              .padding(.leading)
+            if let error = viewStore.serviceNameError {
+              Text(error)
+                .formError()
+                .padding(.leading)
+            }
           }
         }
 
-        VStack(alignment: .leading) {
-          Text("Category")
-            .formLabel()
+        Section {
+          VStack(alignment: .leading) {
+            Text("Category")
+              .formLabel()
 
-          TextField("", text: viewStore.$category)
-            .focused($focus, equals: .category)
-            .formInput(
-              placeholder: viewStore.placeholderService.category.rawValue,
-              isEmpty: viewStore.category.isEmpty,
-              isFocused: focus == .category
-            )
+            TextField("", text: viewStore.$track.category)
+              .focused($focus, equals: .category)
+              .formInput(
+                placeholder: viewStore.placeholderService.category.rawValue,
+                isEmpty: viewStore.track.category.isEmpty,
+                isFocused: focus == .category
+              )
+          }
         }
 
-        VStack(alignment: .leading) {
-          Text("Price")
-            .formLabel()
+        Section {
+          VStack(alignment: .leading) {
+            Text("Price")
+              .formLabel()
 
-          TextField("", text: viewStore.$price)
-            .keyboardType(.numberPad)
-            .focused($focus, equals: .price)
-            .formInput(
-              isEmpty: viewStore.price.isEmpty,
-              isFocused: focus == .price,
-              prefix: currencyDropdown(viewStore.$currency),
-              suffix: renewalFrequencyDropdown(viewStore.$renewalFrequency)
-            )
+            TextField("", text: viewStore.$track.price)
+              .keyboardType(.numberPad)
+              .focused($focus, equals: .price)
+              .formInput(
+                isEmpty: viewStore.track.price.isEmpty,
+                isFocused: focus == .price,
+                prefix: currencyDropdown(viewStore.$track.currency),
+                suffix: renewalFrequencyDropdown(viewStore.$track.renewalFrequency)
+              )
 
-          if !viewStore.priceDescription.isEmpty {
-            Text(viewStore.priceDescription)
-              .font(.callout)
-              .foregroundColor(Color.daisy.infoContent)
-              .padding(.leading)
-          }
+            if let priceDescription = viewStore.track.priceDescription {
+              Text(priceDescription)
+                .font(.callout)
+                .foregroundColor(Color.daisy.infoContent)
+                .padding(.leading)
+            }
 
-          if let error = viewStore.servicePriceError {
-            Text(error)
-              .formError()
-              .padding(.leading)
+            if let error = viewStore.servicePriceError {
+              Text(error)
+                .formError()
+                .padding(.leading)
+            }
           }
         }
 
@@ -90,7 +96,7 @@ struct TrackFormView: View {
                 .formLabel()
 
               HStack {
-                Text(viewStore.startAtDate.format())
+                Text(viewStore.track.startAtDate.format())
                 Spacer()
               }
               .formInput(
@@ -107,7 +113,7 @@ struct TrackFormView: View {
                   send: { .setServiceDateStartPickerPresented(isPresented: $0) }),
                 content: {
                   DatePickerView(
-                    date: viewStore.$startAtDate,
+                    date: viewStore.$track.startAtDate,
                     setDatePicker: { viewStore.send(.setServiceDateStartPickerPresented(isPresented: $0)) }
                   )
                 }
@@ -119,7 +125,7 @@ struct TrackFormView: View {
                 .formLabel()
 
               HStack {
-                Text(viewStore.endAtDate.format())
+                Text(viewStore.track.endAtDate.format())
                 Spacer()
               }
               .formInput(
@@ -136,7 +142,7 @@ struct TrackFormView: View {
                   send: { .setServiceDateEndPickerPresented(isPresented: $0) }),
                 content: {
                   DatePickerView(
-                    date: viewStore.$endAtDate,
+                    date: viewStore.$track.endAtDate,
                     setDatePicker: { viewStore.send(.setServiceDateEndPickerPresented(isPresented: $0)) }
                   )
                 }
@@ -145,7 +151,6 @@ struct TrackFormView: View {
           }
         }
         .padding(.top, Theme.spacing.sm)
-
         Spacer()
       }
       .formStyle(.columns)
@@ -271,20 +276,14 @@ extension View {
 }
 
 #Preview {
-  NavigationView {
-    TrackFormView(
-      store: .init(
-        initialState: TrackFormFeature.State(
-          name: "",
-          category: "",
-          price: "",
-          startAtDate: .now,
-          endAtDate: .now.nextMonth()
-        ),
-        reducer: {
-          TrackFormFeature()
-        }
-      )
+  TrackFormView(
+    store: .init(
+      initialState: TrackFormFeature.State(
+        track: .init(id: UUID())
+      ),
+      reducer: {
+        TrackFormFeature()
+      }
     )
-  }
+  )
 }
