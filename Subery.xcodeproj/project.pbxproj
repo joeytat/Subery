@@ -47,13 +47,6 @@
 			remoteGlobalIDString = 763B357429FE4A6C005B3A56;
 			remoteInfo = Subery;
 		};
-		763B359029FE4A6D005B3A56 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 763B356D29FE4A6C005B3A56 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 763B357429FE4A6C005B3A56;
-			remoteInfo = Subery;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -67,7 +60,6 @@
 		763B357C29FE4A6D005B3A56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		763B357F29FE4A6D005B3A56 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		763B358529FE4A6D005B3A56 /* SuberyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuberyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		763B358F29FE4A6D005B3A56 /* SuberyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuberyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		763B35CE29FF4B12005B3A56 /* RGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGB.swift; sourceTree = "<group>"; };
 		763B35D029FF4B12005B3A56 /* NeuButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeuButtonStyle.swift; sourceTree = "<group>"; };
 		763B35D129FF4B12005B3A56 /* ColorCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCircle.swift; sourceTree = "<group>"; };
@@ -107,13 +99,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		763B358C29FE4A6D005B3A56 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -131,7 +116,6 @@
 			children = (
 				763B357729FE4A6C005B3A56 /* Subery */,
 				763B358829FE4A6D005B3A56 /* SuberyTests */,
-				763B359229FE4A6D005B3A56 /* SuberyUITests */,
 				763B357629FE4A6C005B3A56 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -141,7 +125,6 @@
 			children = (
 				763B357529FE4A6C005B3A56 /* Subery.app */,
 				763B358529FE4A6D005B3A56 /* SuberyTests.xctest */,
-				763B358F29FE4A6D005B3A56 /* SuberyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -175,13 +158,6 @@
 				768F8BC92B1CC77B0023905C /* TrackFormTests.swift */,
 			);
 			path = SuberyTests;
-			sourceTree = "<group>";
-		};
-		763B359229FE4A6D005B3A56 /* SuberyUITests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SuberyUITests;
 			sourceTree = "<group>";
 		};
 		763B35CC29FF4B12005B3A56 /* Design */ = {
@@ -333,24 +309,6 @@
 			productReference = 763B358529FE4A6D005B3A56 /* SuberyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		763B358E29FE4A6D005B3A56 /* SuberyUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 763B359F29FE4A6D005B3A56 /* Build configuration list for PBXNativeTarget "SuberyUITests" */;
-			buildPhases = (
-				763B358B29FE4A6D005B3A56 /* Sources */,
-				763B358C29FE4A6D005B3A56 /* Frameworks */,
-				763B358D29FE4A6D005B3A56 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				763B359129FE4A6D005B3A56 /* PBXTargetDependency */,
-			);
-			name = SuberyUITests;
-			productName = SuberyUITests;
-			productReference = 763B358F29FE4A6D005B3A56 /* SuberyUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -365,10 +323,6 @@
 						CreatedOnToolsVersion = 14.1;
 					};
 					763B358429FE4A6D005B3A56 = {
-						CreatedOnToolsVersion = 14.1;
-						TestTargetID = 763B357429FE4A6C005B3A56;
-					};
-					763B358E29FE4A6D005B3A56 = {
 						CreatedOnToolsVersion = 14.1;
 						TestTargetID = 763B357429FE4A6C005B3A56;
 					};
@@ -392,7 +346,6 @@
 			targets = (
 				763B357429FE4A6C005B3A56 /* Subery */,
 				763B358429FE4A6D005B3A56 /* SuberyTests */,
-				763B358E29FE4A6D005B3A56 /* SuberyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -408,13 +361,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		763B358329FE4A6D005B3A56 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		763B358D29FE4A6D005B3A56 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -487,13 +433,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		763B358B29FE4A6D005B3A56 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -501,11 +440,6 @@
 			isa = PBXTargetDependency;
 			target = 763B357429FE4A6C005B3A56 /* Subery */;
 			targetProxy = 763B358629FE4A6D005B3A56 /* PBXContainerItemProxy */;
-		};
-		763B359129FE4A6D005B3A56 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 763B357429FE4A6C005B3A56 /* Subery */;
-			targetProxy = 763B359029FE4A6D005B3A56 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -724,40 +658,6 @@
 			};
 			name = Release;
 		};
-		763B35A029FE4A6D005B3A56 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joeytat.SuberyUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Subery;
-			};
-			name = Debug;
-		};
-		763B35A129FE4A6D005B3A56 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joeytat.SuberyUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Subery;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -784,15 +684,6 @@
 			buildConfigurations = (
 				763B359D29FE4A6D005B3A56 /* Debug */,
 				763B359E29FE4A6D005B3A56 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		763B359F29FE4A6D005B3A56 /* Build configuration list for PBXNativeTarget "SuberyUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				763B35A029FE4A6D005B3A56 /* Debug */,
-				763B35A129FE4A6D005B3A56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
