@@ -25,18 +25,18 @@ struct Track: Equatable, Identifiable {
     case .monthly:
       return nil
     case .quarterly:
-      return "\((deformattedPriceValue / 4).roundedToDecimalPlaces())/month"
+      return "\((deformattedPriceValue / 4).roundedToDecimalPlaces())"
     case .yearly:
-      return "\((deformattedPriceValue / 12).roundedToDecimalPlaces())/month"
+      return "\((deformattedPriceValue / 12).roundedToDecimalPlaces())"
     }
   }
 }
 
 extension Track {
   enum RenewalFrequency: String, CaseIterable {
-    case monthly = "Monthly"
-    case quarterly = "Quarterly"
-    case yearly = "Yearly"
+    case monthly = "form.cycle.monthly"
+    case quarterly = "form.cycle.quarterly"
+    case yearly = "form.cycle.yearly"
   }
 }
 

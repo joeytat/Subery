@@ -18,10 +18,10 @@ struct TrackFormView: View {
       Form {
         Section {
           VStack(alignment: .leading) {
-            Text("App / Service Name")
+            Text("form.name")
               .formLabel()
 
-            TextField("App / Service Name", text: viewStore.$track.name)
+            TextField("form.name", text: viewStore.$track.name)
               .focused($focus, equals: .name)
               .formInput(
                 placeholder: viewStore.placeholderService.name,
@@ -46,7 +46,7 @@ struct TrackFormView: View {
 
         Section {
           VStack(alignment: .leading) {
-            Text("Category")
+            Text("form.category")
               .formLabel()
 
             TextField("", text: viewStore.$track.category)
@@ -61,7 +61,7 @@ struct TrackFormView: View {
 
         Section {
           VStack(alignment: .leading) {
-            Text("Price")
+            Text("form.price")
               .formLabel()
 
             TextField("", text: viewStore.$track.price)
@@ -74,25 +74,27 @@ struct TrackFormView: View {
                 suffix: renewalFrequencyDropdown(viewStore.$track.renewalFrequency)
               )
 
-            if let priceDescription = viewStore.track.priceDescription {
-              Text(priceDescription)
+              if let priceDescription = viewStore.track.priceDescription {
+              HStack(spacing: Theme.spacing.none) { Text(LocalizedStringKey("form.cycle.monthly"))
+                    Text(priceDescription)
+                }
                 .font(.callout)
                 .foregroundColor(Color.daisy.infoContent)
                 .padding(.leading)
-            }
+              }
 
-            if let error = viewStore.servicePriceError {
-              Text(error)
-                .formError()
-                .padding(.leading)
-            }
+              if let error = viewStore.servicePriceError {
+                Text(error)
+                  .formError()
+                  .padding(.leading)
+              }
           }
         }
 
         Section {
           HStack(spacing: Theme.spacing.lg) {
             VStack(alignment: .leading) {
-              Text("Start at")
+              Text("form.startAt")
                 .formLabel()
 
               HStack {
@@ -121,7 +123,7 @@ struct TrackFormView: View {
             }
 
             VStack(alignment: .leading) {
-              Text("End at")
+              Text("form.endAt")
                 .formLabel()
 
               HStack {
@@ -193,7 +195,7 @@ struct TrackFormView: View {
     Dropdown(
       label: {
         HStack {
-          Text(selectedFrequency.wrappedValue.rawValue)
+          Text(LocalizedStringKey(selectedFrequency.wrappedValue.rawValue))
             .foregroundColor(Color.daisy.neutralContent)
           Image(systemName: "chevron.down")
             .foregroundColor(Color.daisy.neutralContent)
@@ -204,7 +206,7 @@ struct TrackFormView: View {
             selectedFrequency.wrappedValue = option
           }) {
             HStack {
-              Text(option.rawValue)
+                Text(LocalizedStringKey(option.rawValue))
                 .formLabel()
 
               if option == selectedFrequency.wrappedValue {

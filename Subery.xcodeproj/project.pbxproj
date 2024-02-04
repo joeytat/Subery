@@ -12,7 +12,7 @@
 		762203182A03D3B10078CAE3 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762203172A03D3B10078CAE3 /* Date+.swift */; };
 		7622031C2A04B7D20078CAE3 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622031B2A04B7D20078CAE3 /* Dropdown.swift */; };
 		763B357929FE4A6C005B3A56 /* SuberyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B357829FE4A6C005B3A56 /* SuberyApp.swift */; };
-		763B357B29FE4A6C005B3A56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B357A29FE4A6C005B3A56 /* ContentView.swift */; };
+		763B357B29FE4A6C005B3A56 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B357A29FE4A6C005B3A56 /* AppView.swift */; };
 		763B357D29FE4A6D005B3A56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 763B357C29FE4A6D005B3A56 /* Assets.xcassets */; };
 		763B358029FE4A6D005B3A56 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 763B357F29FE4A6D005B3A56 /* Preview Assets.xcassets */; };
 		763B35C129FF47F8005B3A56 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 763B35C029FF47F8005B3A56 /* ComposableArchitecture */; };
@@ -26,6 +26,7 @@
 		763B35DE29FF4B12005B3A56 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35D629FF4B12005B3A56 /* Theme.swift */; };
 		763B35E029FF4B8B005B3A56 /* TrackFormFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35DF29FF4B8B005B3A56 /* TrackFormFeature.swift */; };
 		763B35EB2A00FA57005B3A56 /* TrackFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B35EA2A00FA57005B3A56 /* TrackFormView.swift */; };
+		7677F4FC2B6FCE4700F27C3F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7677F4FB2B6FCE4700F27C3F /* Localizable.xcstrings */; };
 		7684AD062A3EB1C500C01747 /* TracksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7684AD052A3EB1C500C01747 /* TracksListView.swift */; };
 		768F8BC52B1C91E00023905C /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F8BC42B1C91E00023905C /* Track.swift */; };
 		768F8BC82B1C959F0023905C /* TrackPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F8BC72B1C959F0023905C /* TrackPresets.swift */; };
@@ -56,7 +57,7 @@
 		7622031B2A04B7D20078CAE3 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		763B357529FE4A6C005B3A56 /* Subery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Subery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		763B357829FE4A6C005B3A56 /* SuberyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuberyApp.swift; sourceTree = "<group>"; };
-		763B357A29FE4A6C005B3A56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		763B357A29FE4A6C005B3A56 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		763B357C29FE4A6D005B3A56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		763B357F29FE4A6D005B3A56 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		763B358529FE4A6D005B3A56 /* SuberyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuberyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +71,7 @@
 		763B35D629FF4B12005B3A56 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		763B35DF29FF4B8B005B3A56 /* TrackFormFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackFormFeature.swift; sourceTree = "<group>"; };
 		763B35EA2A00FA57005B3A56 /* TrackFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackFormView.swift; sourceTree = "<group>"; };
+		7677F4FB2B6FCE4700F27C3F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		7684AD052A3EB1C500C01747 /* TracksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksListView.swift; sourceTree = "<group>"; };
 		768F8BC42B1C91E00023905C /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		768F8BC72B1C959F0023905C /* TrackPresets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPresets.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		763B356C29FE4A6C005B3A56 = {
 			isa = PBXGroup;
 			children = (
+				7677F4FB2B6FCE4700F27C3F /* Localizable.xcstrings */,
 				763B357729FE4A6C005B3A56 /* Subery */,
 				763B358829FE4A6D005B3A56 /* SuberyTests */,
 				763B357629FE4A6C005B3A56 /* Products */,
@@ -240,7 +243,7 @@
 		76E78D6A2A3EAEC400C9414D /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				763B357A29FE4A6C005B3A56 /* ContentView.swift */,
+				763B357A29FE4A6C005B3A56 /* AppView.swift */,
 				76E78D6B2A3EAECF00C9414D /* TrackForm */,
 				76E78D6E2A3EAFC300C9414D /* Tracks */,
 			);
@@ -335,6 +338,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 763B356C29FE4A6C005B3A56;
 			packageReferences = (
@@ -357,6 +361,7 @@
 			files = (
 				763B358029FE4A6D005B3A56 /* Preview Assets.xcassets in Resources */,
 				763B357D29FE4A6D005B3A56 /* Assets.xcassets in Resources */,
+				7677F4FC2B6FCE4700F27C3F /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,7 +420,7 @@
 				762203182A03D3B10078CAE3 /* Date+.swift in Sources */,
 				762203152A03CEAA0078CAE3 /* DatePickerView.swift in Sources */,
 				763B35DE29FF4B12005B3A56 /* Theme.swift in Sources */,
-				763B357B29FE4A6C005B3A56 /* ContentView.swift in Sources */,
+				763B357B29FE4A6C005B3A56 /* AppView.swift in Sources */,
 				768F8BC82B1C959F0023905C /* TrackPresets.swift in Sources */,
 				76A75F832A0113A50076DB70 /* GradientNoiseBackground.swift in Sources */,
 				763B357929FE4A6C005B3A56 /* SuberyApp.swift in Sources */,

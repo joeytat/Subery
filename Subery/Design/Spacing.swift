@@ -8,6 +8,7 @@
 import Foundation
 
 struct Spacing {
+  let none: CGFloat = 0.0
   let ssm: CGFloat = 4.0
   /// 8px
   let sm: CGFloat = 8.0

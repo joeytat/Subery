@@ -28,7 +28,7 @@ struct BevelText_Previews: PreviewProvider {
   static var previews: some View {
     ZStack {
       Color.neumorphism.element
-      Text("Test").bevelStyle()
+      Text("preview.content").bevelStyle()
     }
     .previewLayout(.sizeThatFits)
   }

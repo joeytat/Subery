@@ -16,7 +16,7 @@ struct DatePickerView: View {
     NavigationView {
       VStack {
         DatePicker(
-          "Select a date",
+          "form.datePicker",
           selection: $date,
           displayedComponents: [.date]
         )

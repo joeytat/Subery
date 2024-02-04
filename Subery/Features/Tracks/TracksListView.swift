@@ -44,13 +44,13 @@ struct TracksListView: View {
             TrackFormView(store: store)
               .toolbar {
                 ToolbarItem {
-                  Button("Save") {
+                  Button("form.save") {
                     viewStore.send(.saveTrackButtonTapped)
                   }
                   .foregroundColor(Color.daisy.neutralContent)
                 }
                 ToolbarItem(placement: .cancellationAction) {
-                  Button("Cancel") {
+                  Button("form.cancel") {
                     viewStore.send(.cancelTrackButtonTapped)
                   }
                   .foregroundColor(Color.daisy.neutralContent)
@@ -61,7 +61,7 @@ struct TracksListView: View {
         Button(action: {
           viewStore.send(.addButtonTapped)
         }) {
-          Text("Track Subscription")
+          Text("list.track")
             .modifier(FormCTAButtonModifier())
         }
       }
@@ -73,7 +73,7 @@ struct TracksListView: View {
     WithViewStore(store, observe: { $0 }) { viewStore in
       HStack {
         VStack(alignment: .leading, spacing: Theme.spacing.lg) {
-          Text("What you've paid")
+          Text("list.total.month")
             .font(.body)
             .fontWeight(.medium)
             .foregroundColor(Color.daisy.neutralContent)
@@ -95,13 +95,13 @@ struct TracksListView: View {
         .background(Color.daisy.neutralContent)
 
       HStack {
-        Text("Service")
+        Text("list.item.title")
           .font(.headline)
           .foregroundColor(Color.white)
 
         Spacer()
 
-        Text("Price")
+        Text("list.item.price")
           .font(.headline)
           .foregroundColor(Color.white)
       }

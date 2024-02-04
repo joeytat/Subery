@@ -154,6 +154,7 @@ struct FormCTAButtonModifier: ViewModifier {
       .font(.headline)
       .padding(.horizontal, Theme.spacing.lg)
       .padding(.vertical, Theme.spacing.md)
+      .frame(minWidth: 100)
       .foregroundColor(Color.daisy.accentContent)
       .background(Color.daisy.accent)
       .cornerRadius(10)

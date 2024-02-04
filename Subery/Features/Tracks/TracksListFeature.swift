@@ -51,10 +51,10 @@ struct TracksListFeature: Reducer {
       case .deleteButtonTapped(let id):
         state.destination = .alert(
           AlertState {
-            TextState("Are you sure")
+            TextState("form.confirm")
           } actions: {
             ButtonState(role: .destructive, action: .confirmDeletion(id: id)) {
-              TextState("Delete")
+              TextState("form.delete")
             }
           }
         )

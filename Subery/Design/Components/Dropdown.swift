@@ -28,9 +28,9 @@ struct Dropdown<Label: View, Content: View>: View {
 struct Dropdown_Previews: PreviewProvider {
   static var previews: some View {
     Dropdown(label: {
-      Text("Label")
+      Text("preview.label")
     }, content: {
-      Text("Content")
+      Text("preview.content")
     })
   }
 }
