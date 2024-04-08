@@ -8,29 +8,29 @@
 import SwiftUI
 
 struct Dropdown<Label: View, Content: View>: View {
-  let label: Label
-  let content: Content
-
-  init(@ViewBuilder label: () -> Label, @ViewBuilder content: () -> Content) {
-    self.label = label()
-    self.content = content()
-  }
-
-  var body: some View {
-    Menu {
-      content
-    } label: {
-      label
+    let label: Label
+    let content: Content
+    
+    init(@ViewBuilder label: () -> Label, @ViewBuilder content: () -> Content) {
+        self.label = label()
+        self.content = content()
     }
-  }
+    
+    var body: some View {
+        Menu {
+            content
+        } label: {
+            label
+        }
+    }
 }
 
 struct Dropdown_Previews: PreviewProvider {
-  static var previews: some View {
-    Dropdown(label: {
-      Text("preview.label")
-    }, content: {
-      Text("preview.content")
-    })
-  }
+    static var previews: some View {
+        Dropdown(label: {
+            Text("preview.label")
+        }, content: {
+            Text("preview.content")
+        })
+    }
 }

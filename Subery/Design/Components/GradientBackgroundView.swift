@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct GradientBackgroundView: View {
-  var body: some View {
-    LinearGradient(
-      gradient: Gradient(
-        colors: [
-          Color.daisy.neutral,
-        ]),
-      startPoint: .topLeading,
-      endPoint: .bottomTrailing
-    )
-    .ignoresSafeArea()
-  }
+    var body: some View {
+        LinearGradient(
+            gradient: Gradient(
+                colors: [
+                    Color.daisy.neutral,
+                ]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .ignoresSafeArea()
+    }
 }
 
 struct LinearBackgroundView_Previews: PreviewProvider {
-  static var previews: some View {
-    GradientBackgroundView()
-  }
+    static var previews: some View {
+        GradientBackgroundView()
+    }
 }

@@ -9,17 +9,17 @@ import SwiftUI
 import ComposableArchitecture
 @main
 struct Subery: App {
-  var body: some Scene {
-    WindowGroup {
-      NavigationStack {
-        TracksListView(
-          store: Store(
-            initialState: TracksListFeature.State()
-          ) {
-            TracksListFeature()
-          }
-        )
-      }
+    var body: some Scene {
+        WindowGroup {
+            NavigationStack {
+                TracksListView(
+                    store: Store(
+                        initialState: TracksListFeature.State()
+                    ) {
+                        TracksListFeature()
+                    }
+                )
+            }
+        }
     }
-  }
 }

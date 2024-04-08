@@ -9,39 +9,39 @@ import SwiftUI
 import ComposableArchitecture
 
 struct AppFeature: Reducer {
-  struct State {
-    var trackList = TracksListFeature.State()
-  }
-  enum Action {
-    case trackList(TracksListFeature.Action)
-  }
-  var body: some ReducerOf<Self> {
-    Reduce { state, action in
-      switch action {
-      case .trackList:
-        return .none
-      }
+    struct State {
+        var trackList = TracksListFeature.State()
     }
-  }
+    enum Action {
+        case trackList(TracksListFeature.Action)
+    }
+    var body: some ReducerOf<Self> {
+        Reduce { state, action in
+            switch action {
+            case .trackList:
+                return .none
+            }
+        }
+    }
 }
 
 struct AppView: View {
-  let store: StoreOf<AppFeature>
+    let store: StoreOf<AppFeature>
 
-  var body: some View {
-    NavigationStack {
-      TracksListView(
-        store: self.store.scope(state: \.trackList, action: { .trackList($0) })
-      )
+    var body: some View {
+        NavigationStack {
+            TracksListView(
+                store: self.store.scope(state: \.trackList, action: { .trackList($0) })
+            )
+        }
+        .preferredColorScheme(.light)
     }
-    .preferredColorScheme(.light)
-  }
 }
 
 #Preview {
-  AppView(
-    store: Store(initialState: AppFeature.State()) {
-      AppFeature()
-    }
-  )
+    AppView(
+        store: Store(initialState: AppFeature.State()) {
+            AppFeature()
+        }
+    )
 }

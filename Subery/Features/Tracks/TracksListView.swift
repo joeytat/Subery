@@ -30,7 +30,9 @@ struct TracksListView: View {
                   )
                 )
                 .listRowBackground(GradientBackgroundView())
-            }
+            }.onDelete(perform: { indexSet in
+                
+            })
           }
           .listStyle(.plain)
         }

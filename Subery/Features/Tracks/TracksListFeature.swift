@@ -21,7 +21,7 @@ struct TracksListFeature: Reducer {
       }
       .roundedToDecimalPlaces()
 
-      return "$\(total)"
+      return "¥\(total)"
     }
   }
 

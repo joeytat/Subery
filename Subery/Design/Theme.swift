@@ -8,5 +8,5 @@
 import Foundation
 
 struct Theme {
-  static let spacing = Spacing()
+    static let spacing = Spacing()
 }
