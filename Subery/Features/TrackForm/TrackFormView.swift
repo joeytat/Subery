@@ -21,7 +21,7 @@ struct TrackFormView: View {
                         Text("form.name")
                             .formLabel()
 
-                        TextField("form.name", text: viewStore.$track.name)
+                        TextField("", text: viewStore.$track.name)
                             .focused($focus, equals: .name)
                             .formInput(
                                 placeholder: viewStore.placeholderService.name,

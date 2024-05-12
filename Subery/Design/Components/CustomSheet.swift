@@ -10,13 +10,13 @@ import SwiftUI
 struct CustomSheet<Content: View>: View {
     @Binding var isPresented: Bool
     let content: () -> Content
-    
+
     var body: some View {
         ZStack {
             if isPresented {
                 GradientNoiseBackground()
                     .edgesIgnoringSafeArea(.all)
-                
+
                 content()
             }
         }

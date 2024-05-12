@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "Accent" : {
+
+    },
     "Cancel" : {
       "localizations" : {
         "zh-Hans" : {
@@ -23,6 +26,9 @@
           }
         }
       }
+    },
+    "Focus" : {
+
     },
     "form.cancel" : {
       "extractionState" : "manual",
@@ -242,6 +248,9 @@
         }
       }
     },
+    "Info" : {
+
+    },
     "list.item.price" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -341,6 +350,18 @@
           }
         }
       }
+    },
+    "Primary" : {
+
+    },
+    "Secondary" : {
+
+    },
+    "Success" : {
+
+    },
+    "Warning" : {
+
     }
   },
   "version" : "1.0"

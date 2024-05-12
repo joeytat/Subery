@@ -24,9 +24,11 @@ struct DatePickerView: View {
                 .labelsHidden()
                 .padding()
                 .tint(Color.daisy.accentInvert)
-                .colorInvert()
                 Spacer()
             }
+            .tint(Color.daisy.neutralContent)
+            .colorInvert()
+            .background(Color.daisy.neutral)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
@@ -41,7 +43,6 @@ struct DatePickerView: View {
                     .foregroundColor(Color.daisy.neutralContent)
                 }
             }
-            .background(Color.daisy.neutral)
         }
     }
 }

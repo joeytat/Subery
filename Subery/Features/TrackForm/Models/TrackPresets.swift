@@ -10,7 +10,7 @@ import Foundation
 struct TrackPreset: Identifiable, Equatable, CustomStringConvertible {
     let name: String
     let category: Category
-    
+
     var id: String { name }
     var description: String { name }
 }
