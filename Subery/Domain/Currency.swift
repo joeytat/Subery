@@ -11,18 +11,18 @@ struct Currency: Equatable, Identifiable, Hashable {
     var id: String { identifier }
     let identifier: String
     let symbol: String
-    
+
     var display: String {
         "\(identifier)\(symbol)"
     }
-    
+
     static var current: Currency {
         Currency(
             identifier: Locale.current.currency?.identifier ?? "USD",
             symbol: Locale.current.currencySymbol ?? "$"
         )
     }
-    
+
     static var all: [Currency] {
         [
             "en-US",

@@ -16,7 +16,7 @@ struct Track: Equatable, Identifiable {
     var endAtDate: Date = Date().nextMonth()
     var renewalFrequency: RenewalFrequency = .monthly
     var currency: Currency = .current
-    
+
     var priceDescription: String? {
         guard let deformattedPriceValue = Float(price)?.roundedToDecimalPlaces(), deformattedPriceValue > 0 else {
             return nil

@@ -116,7 +116,9 @@ struct TrackFormView: View {
                                 content: {
                                     DatePickerView(
                                         date: viewStore.$track.startAtDate,
-                                        setDatePicker: { viewStore.send(.setServiceDateStartPickerPresented(isPresented: $0)) }
+                                        setDatePicker: {
+                                            viewStore.send(.setServiceDateStartPickerPresented(isPresented: $0))
+                                        }
                                     )
                                 }
                             )
@@ -145,7 +147,9 @@ struct TrackFormView: View {
                                 content: {
                                     DatePickerView(
                                         date: viewStore.$track.endAtDate,
-                                        setDatePicker: { viewStore.send(.setServiceDateEndPickerPresented(isPresented: $0)) }
+                                        setDatePicker: {
+                                            viewStore.send(.setServiceDateEndPickerPresented(isPresented: $0))
+                                        }
                                     )
                                 }
                             )

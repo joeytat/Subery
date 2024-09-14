@@ -11,7 +11,7 @@ import SwiftUI
 struct GradientNoiseBackground: View {
     let noiseSize: CGFloat = 4
     let noiseSpacing: CGFloat = 30
-    
+
     var body: some View {
         ZStack {
             LinearGradient(
@@ -24,7 +24,7 @@ struct GradientNoiseBackground: View {
                 endPoint: .bottomTrailing
             )
             .ignoresSafeArea()
-            
+
             GeometryReader { geometry in
                 ForEach(0..<Int(geometry.size.width / noiseSpacing), id: \.self) { x in
                     ForEach(0..<Int(geometry.size.height / noiseSpacing), id: \.self) { y in
@@ -43,7 +43,7 @@ struct GradientNoiseBackground: View {
 struct NoiseRectangle: View {
     let delay: Double
     @State private var opacity: Double = 0
-    
+
     var body: some View {
         Rectangle()
             .fill(Color.gray.opacity(opacity))

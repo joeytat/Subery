@@ -16,7 +16,7 @@ struct AppFeature: Reducer {
         case trackList(TracksListFeature.Action)
     }
     var body: some ReducerOf<Self> {
-        Reduce { state, action in
+        Reduce { _, action in
             switch action {
             case .trackList:
                 return .none

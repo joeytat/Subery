@@ -11,7 +11,7 @@ import ComposableArchitecture
 struct DatePickerView: View {
     @Binding var date: Date
     var setDatePicker: (Bool) -> Void
-    
+
     var body: some View {
         NavigationView {
             VStack {
